@@ -5,10 +5,10 @@ import { OrdersProps } from "@/data/types/orders";
 
 import { transformStatus } from "@/utils/transform-status";
 
-import { StatusSteps } from "./StatusSteps";
+import { StatusSteps } from "./status-steps";
 
-import { ArrowIcon } from "./icons/ArrowIcon";
-import { PackageIcon } from "./icons/PackageIcon";
+import { ArrowIcon } from "../icons/arrow-icon";
+import { PackageIcon } from "../icons/package-icon";
 
 export function Card({ id, title, createdAt, status }: OrdersProps) {
   const createAtOnData = dayjs(createdAt).format("DD/MM/YYYY");

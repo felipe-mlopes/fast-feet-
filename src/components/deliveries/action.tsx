@@ -1,8 +1,8 @@
 "use client";
 
 import { HTMLAttributes, useState } from "react";
-import { Button } from "./Button";
-import { Modal } from "./Modal";
+import { Button } from "../global/button";
+import { Modal } from "../global/modal";
 
 interface ActionProps extends HTMLAttributes<HTMLDivElement> {
   buttonContent: string;
