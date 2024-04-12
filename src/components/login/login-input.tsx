@@ -7,11 +7,11 @@ import React, {
   forwardRef,
 } from "react";
 
-import { PadlockIcon } from "./icons/PadlockIcon";
-import { ProfileIcon } from "./icons/ProfileIcon";
-import { PasswordHiddenIcon } from "./icons/PasswordHiddenIcon";
-import { PasswordShowIcon } from "./icons/PasswordShowIcon";
-import { cpfMask } from "@/utils/cpfMask";
+import { PadlockIcon } from "../icons/padlock-icon";
+import { ProfileIcon } from "../icons/profile-icon";
+import { PasswordHiddenIcon } from "../icons/password-hidden-icon";
+import { PasswordShowIcon } from "../icons/password-show-icon";
+import { cpfMask } from "@/utils/cpf-mask";
 
 interface LoginInputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputType: "text" | "password";

@@ -10,8 +10,8 @@ import { useFormState } from "react-dom";
 
 import { FormStateTypes } from "@/types";
 
-import LoginInput from "./LoginInput";
-import { Modal } from "./Modal";
+import LoginInput from "./login-input";
+import { Modal } from "../global/modal";
 
 type HTMLFormProps = DetailedHTMLProps<
   FormHTMLAttributes<HTMLFormElement>,
