@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { api } from "../api"
 import { getAuthData, getSession, setAuthData } from "./auth"
 
-import { formSchemaLogin } from "@/utils/validation"
+import { formSchemaLogin } from "@/utils/zod-validations"
 import { FormStateTypes } from "@/types"
 
 export async function loginAction(
