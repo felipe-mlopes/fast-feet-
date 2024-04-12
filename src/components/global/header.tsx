@@ -1,5 +1,5 @@
-import { Logo } from "./Logo";
-import { LogoIcon } from "./icons/LogoIcon";
+import { Logo } from "./logo";
+import { LogoIcon } from "../icons/logo-icon";
 
 export function Header() {
   return (

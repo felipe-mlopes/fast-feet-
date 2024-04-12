@@ -1,7 +1,7 @@
 "use client";
 
-import { ErrorIcon } from "./icons/ErrorIcon";
-import { PackagePickedIcon } from "./icons/PackagePickedIcon";
+import { ErrorIcon } from "../icons/error-icon";
+import { PackagePickedIcon } from "../icons/package-picked-icon";
 
 interface ModalProps {
   type: "error" | "package";
