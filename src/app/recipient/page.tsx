@@ -1,8 +1,8 @@
 import { registerRecipient } from "@/data/actions/recipients";
 
-import { Header } from "@/components/Header";
-import { FormRecipient } from "@/components/recipient/FormRecipient";
-import { Button } from "@/components/Button";
+import { Button } from "@/components/global/button";
+import { Header } from "@/components/global/header";
+import { FormRecipient } from "@/components/recipient/form-recipient";
 
 export default function Recipient() {
   return (

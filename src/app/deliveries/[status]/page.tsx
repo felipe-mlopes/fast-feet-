@@ -3,12 +3,12 @@ import { logoutAction } from "@/data/actions/login";
 
 import { OrdersProps } from "@/data/types/orders";
 
-import { Card } from "@/components/Card";
-import { ButtonStatus } from "@/components/ButtonStatus";
+import { Card } from "@/components/deliveries/card";
+import { ButtonStatus } from "@/components/deliveries/button-status";
 
-import { ExistIcon } from "@/components/icons/ExistIcon";
-import { PinIcon } from "@/components/icons/PinIcon";
-import { SearchIcon } from "@/components/icons/SearchIcon";
+import { ExistIcon } from "@/components/icons/exist-icon";
+import { PinIcon } from "@/components/icons/pin-icon";
+import { SearchIcon } from "@/components/icons/search-icon";
 
 export default async function Deliveries({
   params,

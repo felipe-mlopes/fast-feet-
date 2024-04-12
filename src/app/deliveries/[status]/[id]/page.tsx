@@ -9,11 +9,11 @@ import { RecipientsProps } from "@/data/types/recipients";
 import { statusEdit } from "@/utils/transform-status";
 import { zipcodeMask } from "@/utils/zipcode-mask";
 
-import { Action } from "@/components/Action";
+import { Action } from "@/components/deliveries/action";
 
-import { ArrowIcon } from "@/components/icons/ArrowIcon";
-import { FolderIcon } from "@/components/icons/FolderIcon";
-import { InfoIcon } from "@/components/icons/InfoIcon";
+import { ArrowIcon } from "@/components/icons/arrow-icon";
+import { FolderIcon } from "@/components/icons/folder-icon";
+import { InfoIcon } from "@/components/icons/info-icon";
 
 export default async function DeliveryDetails({
   params,
