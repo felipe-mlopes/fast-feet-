@@ -51,7 +51,27 @@ export async function getOrderByDetails(orderId: string) {
     const data = await response.json()
 
     return {
-        order: data.order,
-        recipient: data.recipient
+        order: data.order
+    }
+}
+
+export async function getOrderByTrackingCode(trackingCode: string) {
+    const response = await api(`/recipient-query?trackingCode=${trackingCode}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    if (!response.ok) {
+        return {
+            order: null
+        }
+    }
+
+    const data = await response.json()
+
+    return {
+        order: data.order
     }
 }
