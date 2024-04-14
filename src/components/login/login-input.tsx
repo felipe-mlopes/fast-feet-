@@ -1,14 +1,13 @@
 "use client";
 
-import React, {
+import {
+  ForwardRefRenderFunction,
+  useState,
   ChangeEvent,
   InputHTMLAttributes,
-  KeyboardEvent,
   forwardRef,
 } from "react";
 
-import { PadlockIcon } from "../icons/padlock-icon";
-import { ProfileIcon } from "../icons/profile-icon";
 import { PasswordHiddenIcon } from "../icons/password-hidden-icon";
 import { PasswordShowIcon } from "../icons/password-show-icon";
 import { cpfMask } from "@/utils/cpf-mask";
@@ -16,17 +15,15 @@ import { cpfMask } from "@/utils/cpf-mask";
 interface LoginInputProps extends InputHTMLAttributes<HTMLInputElement> {
   inputType: "text" | "password";
   error?: string | undefined;
+  onFilled: (filled: boolean) => void;
 }
 
-const LoginInput: React.ForwardRefRenderFunction<
+const LoginInput: ForwardRefRenderFunction<
   HTMLInputElement,
   LoginInputProps
-> = ({ inputType, error, ...props }, ref) => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [isProfileIconChangeColor, setIsProfileIconChangeColor] =
-    React.useState(false);
-  const [isPadlockIconChangeColor, setIsPadlockIconChangeColor] =
-    React.useState(false);
+> = ({ inputType, error, onFilled, children, ...props }, ref) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [inputFilled, setInputFilled] = useState(false);
 
   function toggleShowPassword() {
     setShowPassword(!showPassword);
@@ -36,46 +33,40 @@ const LoginInput: React.ForwardRefRenderFunction<
     currentTarget.setCustomValidity(error ?? "");
     const { value, name } = currentTarget;
 
+    if (name === "name") {
+      const nameValue = currentTarget.value.toString();
+      setInputFilled(nameValue.length >= props.minLength! - 1);
+    }
+
+    if (name === "email") {
+      const emailValue = currentTarget.value.toString();
+      setInputFilled(emailValue.length >= props.minLength! - 1);
+    }
+
     if (name === "cpf") {
       const formattedValue = cpfMask(value);
       currentTarget.value = formattedValue;
-
-      const charMaxLength = props.maxLength ?? 0;
-      value.length >= charMaxLength
-        ? setIsProfileIconChangeColor(true)
-        : setIsProfileIconChangeColor(false);
+      setInputFilled(formattedValue.length === props.maxLength! - 1);
     }
 
-    currentTarget.value;
-    const charMinLength = props.minLength ?? 0;
-    value.length >= charMinLength && name !== "cpf"
-      ? setIsPadlockIconChangeColor(true)
-      : setIsPadlockIconChangeColor(false);
-  }
-
-  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
-      e.preventDefault();
+    if (name === "password" || name === "passwordConfirm") {
+      const passwordValue = currentTarget.value;
+      setInputFilled(passwordValue.length >= props.minLength!);
     }
+
+    onFilled(inputFilled);
   }
 
   return (
     <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
       <div className="flex gap-4 items-center justify-start">
-        <span>
-          {inputType === "text" ? (
-            <ProfileIcon isActived={isProfileIconChangeColor} />
-          ) : (
-            <PadlockIcon isActived={isPadlockIconChangeColor} />
-          )}
-        </span>
+        <span>{children}</span>
         <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
         <input
           ref={ref}
           type={showPassword ? "text" : "password"}
           required={true}
           onChange={handleChangeValue}
-          onKeyDown={handleKeyDown}
           className="outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
           {...props}
         />
