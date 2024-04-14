@@ -2,11 +2,15 @@ export interface OrdersProps {
     id: string
     trackingCode?: string
     title: string
-    recipientId?: string
     status: string
     isReturn?: boolean
-    city?: string
-    neighborhood?: string
+    recipientId?: string
+    recipientName?: string
+    recipientAddress?: string
+    recipientZipcode: number
+    recipientState?: string
+    recipientCity: string
+    recipientNeighborhood: string
     deliverymanId?: string
     createdAt: string
     picknUpAt?: string | null
