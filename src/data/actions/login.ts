@@ -5,17 +5,17 @@ import { redirect } from "next/navigation"
 import { api } from "../api"
 import { getAuthData, getSession, setAuthData } from "./auth"
 
-import { formSchemaLogin } from "@/utils/zod-validations"
+import { formSchemaSignIn, formSchemaSignUp } from "@/utils/zod-validations"
 import { FormStateTypes } from "@/types"
 
-export async function loginAction(
+export async function signInAction(
     prevState: FormStateTypes,
     formData: FormData,
 ): Promise<FormStateTypes> {
     const session = await getSession()
 
     const rawFormData = Object.fromEntries(formData.entries())
-    const result = formSchemaLogin.safeParse(rawFormData)
+    const result = formSchemaSignIn.safeParse(rawFormData)
     
     if (!result.success) {
         return { error: result.error.issues }
@@ -63,7 +63,42 @@ export async function logoutAction() {
     const session = await getSession()
 
     session.destroy()
-    redirect('/login')
+    redirect('/')
 }
 
+export async function signUpAction(
+    prevState: FormStateTypes,
+    formData: FormData,
+): Promise<FormStateTypes> {
+    const rawFormData = Object.fromEntries(formData.entries())
+    const result = formSchemaSignUp.safeParse(rawFormData)
+    
+    if (!result.success) {
+        return { error: result.error.issues }
+    }
+    
+    const { name, email, cpf, password } = result.data
+
+    const response = await api('/deliveryman', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({
+            name,
+            email,
+            cpf,
+            password
+        })
+     })     
+
+     if (response.ok) {
+        redirect("/signin")
+
+     } else {
+        const data = await response.json()
+
+        return { error: data.error }
+     }
+}
 
