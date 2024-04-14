@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto_Condensed({
   subsets: ["latin"],
   weight: ["700"],
@@ -21,8 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className="bg-indigo-blue">
-      <body className={(inter.variable, roboto.variable)}>{children}</body>
+    <html lang="pt-br" className={(inter.className, roboto.variable)}>
+      <body className="flex flex-col justify-between gap-24 mx-8 mt-20 bg-indigo-blue">
+        {children}
+      </body>
     </html>
   );
 }
