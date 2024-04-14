@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import { getOrderByDetails } from "@/data/actions/orders";
 
 import { OrdersProps } from "@/data/types/orders";
-import { RecipientsProps } from "@/data/types/recipients";
 
 import { statusEdit } from "@/utils/transform-status";
 import { zipcodeMask } from "@/utils/zipcode-mask";
@@ -20,14 +19,23 @@ export default async function DeliveryDetails({
 }: {
   params: { status: string; id: string };
 }) {
-  const { order, recipient } = await getOrderByDetails(params.id);
+  const { order } = await getOrderByDetails(params.id);
 
-  const { status, city, createdAt, picknUpAt, deliveryAt } =
-    order as OrdersProps;
-  const { name, address, zipcode } = recipient as RecipientsProps;
+  const {
+    status,
+    recipientName,
+    recipientZipcode,
+    recipientAddress,
+    recipientState,
+    recipientCity,
+    recipientNeighborhood,
+    createdAt,
+    picknUpAt,
+    deliveryAt,
+  } = order as OrdersProps;
 
   const transformedStatus = statusEdit(status);
-  const transformedZipcode = zipcodeMask(zipcode);
+  const transformedZipcode = zipcodeMask(recipientZipcode);
   const createAtOnData = dayjs(createdAt).format("DD/MM/YYYY");
   const picknUpAtOnData = !!picknUpAt
     ? dayjs(picknUpAt).format("DD/MM/YYYY")
@@ -55,15 +63,19 @@ export default async function DeliveryDetails({
               <strong className="uppercase text-[0.625rem] text-purple-darki">
                 Destinatátio
               </strong>
-              <p className="text-lavender-gray capitalize">{name}</p>
+              <p className="text-lavender-gray capitalize">{recipientName}</p>
             </div>
             <div className="space-y-2">
               <strong className="uppercase text-[0.625rem] text-purple-darki">
                 Endereço
               </strong>
               <div>
-                <p className="text-lavender-gray capitalize">{address}</p>
-                <p className="text-lavender-gray capitalize">{city}, SC</p>
+                <p className="text-lavender-gray capitalize">
+                  {recipientAddress} - {recipientNeighborhood}
+                </p>
+                <p className="text-lavender-gray capitalize">
+                  {recipientCity}, {recipientState}
+                </p>
                 <p className="text-lavender-gray">{transformedZipcode}</p>
               </div>
             </div>
