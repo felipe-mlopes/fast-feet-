@@ -5,7 +5,7 @@ import { Cover } from "@/components/global/cover";
 
 export default function LoginLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex flex-col justify-between items-center gap-24 mx-8 mt-20 md:grid md:grid-col-2 md:grid-row-3 md:justify-normal md:max-h-[860px]">
+    <div className="flex flex-col items-center gap-16 mx-8 mt-4 md:grid md:grid-col-2 md:grid-row-3 md:justify-normal md:max-h-[860px]">
       <Header />
       <Cover />
       {children}
