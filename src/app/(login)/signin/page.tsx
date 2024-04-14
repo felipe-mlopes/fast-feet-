@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { loginAction } from "@/data/actions/login";
+import { signInAction } from "@/data/actions/login";
 
-import { LoginForm } from "@/components/login/login-form";
+import { SignInForm } from "@/components/login/signin-form";
 import { Button } from "@/components/global/button";
 
 export default function Login() {
@@ -17,8 +17,8 @@ export default function Login() {
           Faça seu login para começar suas entregas.
         </p>
       </div>
-      <LoginForm
-        action={loginAction}
+      <SignInForm
+        action={signInAction}
         className="flex flex-col gap-[1.625rem] pb-24 md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-2 md:flex md:flex-col md:items-center md:mb-0 md:pb-0"
       >
         <div className="flex justify-between items-center">
@@ -39,7 +39,7 @@ export default function Login() {
           </Link>
         </div>
         <Button content="Entrar" type="submit" />
-      </LoginForm>
+      </SignInForm>
     </main>
   );
 }
