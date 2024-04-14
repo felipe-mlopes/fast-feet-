@@ -13,6 +13,9 @@ import { FormStateTypes } from "@/types";
 import LoginInput from "./login-input";
 import { Modal } from "../global/modal";
 
+import { ProfileIcon } from "../icons/profile-icon";
+import { PadlockIcon } from "../icons/padlock-icon";
+
 type HTMLFormProps = DetailedHTMLProps<
   FormHTMLAttributes<HTMLFormElement>,
   HTMLFormElement
@@ -25,17 +28,19 @@ interface FormProps extends PropsWithChildren<Omit<HTMLFormProps, "action">> {
   ) => Promise<FormStateTypes>;
 }
 
-export function LoginForm({ children, action, ...props }: FormProps) {
+export function SignInForm({ action, children, ...props }: FormProps) {
   const [state, formAction] = useFormState(action, {
     data: null,
     error: null,
   });
 
   const [isOpen, setIsOpen] = useState(true);
+  const [isCpfFilled, setIsCpfFilled] = useState(false);
+  const [isPasswordFilled, setIsPasswordFilled] = useState(false);
 
-  const handleClose = () => {
+  function handleClose() {
     setIsOpen(!isOpen);
-  };
+  }
 
   return (
     <form
@@ -51,7 +56,10 @@ export function LoginForm({ children, action, ...props }: FormProps) {
           name="cpf"
           maxLength={14}
           placeholder="CPF"
-        />
+          onFilled={setIsCpfFilled}
+        >
+          <ProfileIcon inputFilled={isCpfFilled} />
+        </LoginInput>
         {!!state.error && state.error.length == 2 ? (
           <span className="pt-1 text-xs text-red-400">
             O CPF deve conter 11 números válidos.
@@ -63,7 +71,10 @@ export function LoginForm({ children, action, ...props }: FormProps) {
           name="password"
           minLength={6}
           placeholder="Senha"
-        />
+          onFilled={setIsPasswordFilled}
+        >
+          <PadlockIcon inputFilled={isPasswordFilled} />
+        </LoginInput>
       </div>
       {state.error && state.error === "Unauthorized" && (
         <Modal
