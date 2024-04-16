@@ -12,6 +12,7 @@ import { FormStateTypes } from "@/types";
 
 import LoginInput from "./login-input";
 import { Modal } from "../global/modal";
+import { Button } from "../global/button";
 
 import { ProfileIcon } from "../icons/profile-icon";
 import { PadlockIcon } from "../icons/padlock-icon";
@@ -34,12 +35,13 @@ export function SignInForm({ action, children, ...props }: FormProps) {
     error: null,
   });
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
   const [isCpfFilled, setIsCpfFilled] = useState(false);
   const [isPasswordFilled, setIsPasswordFilled] = useState(false);
 
-  function handleClose() {
-    setIsOpen(!isOpen);
+  function handleModal() {
+    setShowModal(!showModal);
   }
 
   return (
@@ -76,15 +78,16 @@ export function SignInForm({ action, children, ...props }: FormProps) {
           <PadlockIcon inputFilled={isPasswordFilled} />
         </LoginInput>
       </div>
-      {state.error && state.error === "Unauthorized" && (
+      {!!state.error && (
         <Modal
           type="error"
           content="Senha ou CPF incorretos."
-          isOpen={isOpen}
-          onClose={handleClose}
+          isOpen={!showModal}
+          onClose={handleModal}
         />
       )}
       {children}
+      <Button content="Entrar" type="submit" />
     </form>
   );
 }
