@@ -3,7 +3,6 @@ import Link from "next/link";
 import { signInAction } from "@/data/actions/login";
 
 import { SignInForm } from "@/components/login/signin-form";
-import { Button } from "@/components/global/button";
 
 export default function Login() {
   return (
@@ -38,7 +37,6 @@ export default function Login() {
             Esqueci minha senha
           </Link>
         </div>
-        <Button content="Entrar" type="submit" />
       </SignInForm>
     </main>
   );
