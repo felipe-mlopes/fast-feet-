@@ -6,7 +6,7 @@ import { SignUpForm } from "@/components/login/signup-form";
 
 export default function SignUp() {
   return (
-    <main className="block lg:flex lg:justify-around lg:items-start lg:gap-8">
+    <main className="flex justify-center pb-4 lg:justify-around lg:items-start lg:gap-8">
       <Image
         src={"/img/deliveryman2.jpg"}
         alt=""
