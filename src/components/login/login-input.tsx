@@ -29,7 +29,9 @@ const LoginInput: ForwardRefRenderFunction<
     setShowPassword(!showPassword);
   }
 
-  function handleChangeValue({ currentTarget }: ChangeEvent<HTMLInputElement>) {
+  async function handleChangeValue({
+    currentTarget,
+  }: ChangeEvent<HTMLInputElement>) {
     currentTarget.setCustomValidity(error ?? "");
     const { value, name } = currentTarget;
 
@@ -59,7 +61,7 @@ const LoginInput: ForwardRefRenderFunction<
 
   return (
     <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-      <div className="flex gap-4 items-center justify-start">
+      <div className="flex gap-4 items-center w-full">
         <span>{children}</span>
         <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
         <input
@@ -67,7 +69,7 @@ const LoginInput: ForwardRefRenderFunction<
           type={showPassword ? "text" : "password"}
           required={true}
           onChange={handleChangeValue}
-          className="outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
+          className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
           {...props}
         />
       </div>
