@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { api } from "../api";
 import { getSession } from "./auth";
 
-import { formSchemaRegisterRecipient } from "@/utils/zod-validations";
+import { formSchemaOutputRegisterRecipient, formSchemaRegisterRecipient } from "@/utils/zod-validations";
 import { FormStateTypes } from "@/types";
 
 export async function registerRecipient(
@@ -14,8 +14,7 @@ export async function registerRecipient(
     ): Promise<FormStateTypes> {
     const { token } = await getSession()
 
-    const rawFormData = Object.fromEntries(formData.entries())
-    const result = formSchemaRegisterRecipient.safeParse(rawFormData)
+    const result = formSchemaOutputRegisterRecipient.safeParse(formData)
     
     if (!result.success) {
         console.error(result.error.issues)
