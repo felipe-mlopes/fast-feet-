@@ -49,7 +49,7 @@ export function SignUpForm({ action }: FormProps) {
   }
 
   return (
-    <form action={formAction} className="space-y-10">
+    <form action={formAction} className="flex flex-col gap-10">
       <div className="space-y-4 text-gray-light">
         <div className="space-y-2 w-full">
           <label>Nome Completo</label>
