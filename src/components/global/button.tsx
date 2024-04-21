@@ -12,7 +12,7 @@ export function Button({ content, ...props }: ButtonProps) {
 
   return (
     <button
-      className="w-full px-[8.25rem] py-[1.125rem] rounded whitespace-nowrap bg-orange-light text-purple-dark hover:bg-orange-300 font-medium disabled:opacity-50"
+      className="w-full md:px-[8.25rem] py-[1.125rem] rounded whitespace-nowrap text-center bg-orange-light text-purple-dark hover:bg-orange-300 font-medium disabled:opacity-50"
       disabled={pending}
       {...props}
     >
