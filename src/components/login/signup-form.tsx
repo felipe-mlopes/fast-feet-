@@ -4,20 +4,22 @@ import {
   DetailedHTMLProps,
   FormHTMLAttributes,
   PropsWithChildren,
+  useRef,
   useState,
 } from "react";
 import { useFormState } from "react-dom";
 
-import { FormStateTypes } from "@/types";
+import { UseFormSignUp } from "@/hooks/use-form-sign-up";
+import { Color, FormStateTypes } from "@/types";
 
-import LoginInput from "@/components/login/login-input";
-
+import Input from "../global/input";
 import { Button } from "@/components/global/button";
+import { Modal } from "../global/modal";
+
 import { MailIcon } from "@/components/icons/mail-icon";
 import { PadlockIcon } from "@/components/icons/padlock-icon";
 import { ProfileIcon } from "@/components/icons/profile-icon";
 import { IdIcon } from "@/components/icons/id-icon";
-import { Modal } from "../global/modal";
 
 type HTMLFormProps = DetailedHTMLProps<
   FormHTMLAttributes<HTMLFormElement>,
@@ -37,88 +39,141 @@ export function SignUpForm({ action }: FormProps) {
     error: null,
   });
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isNameFilled, setIsNameFilled] = useState(false);
-  const [isEmailFilled, setIsEmailFilled] = useState(false);
-  const [isCpfFilled, setIsCpfFilled] = useState(false);
-  const [isPasswordFilled, setIsPasswordFilled] = useState(false);
-  const [isConfirmPasswordFilled, setIsConfirmPasswordFilled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const {
+    handleSubmit,
+    register,
+    errors,
+    isSubmitting,
+    nameWatch,
+    cpfWatch,
+    emailWatch,
+    passwordWatch,
+    confirmPasswordWatch,
+  } = UseFormSignUp();
+  const formRef = useRef<HTMLFormElement>(null);
 
-  function handleClose() {
-    setIsOpen(!isOpen);
+  function handleModal() {
+    setShowModal(!showModal);
+  }
+
+  function handleFormSubmit(formData: FormData) {
+    formAction(formData);
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-10">
+    <form
+      ref={formRef}
+      action={formAction}
+      onSubmit={handleSubmit(() =>
+        handleFormSubmit(new FormData(formRef.current!))
+      )}
+      className="flex flex-col gap-10"
+    >
       <div className="space-y-4 text-gray-light">
         <div className="space-y-2 w-full">
           <label>Nome Completo</label>
-          <LoginInput
-            inputType="text"
-            type="text"
-            name="name"
-            minLength={3}
-            onFilled={setIsNameFilled}
-          >
-            <ProfileIcon inputFilled={isNameFilled} />
-          </LoginInput>
+          <Input type="text" {...register("name")}>
+            <ProfileIcon
+              color={
+                !!nameWatch
+                  ? errors.name
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
+          {errors.name && (
+            <span className="pt-1 text-xs font-bold text-red-400">
+              {errors.name?.message}
+            </span>
+          )}
         </div>
         <div className="space-y-2 w-full">
           <label>E-mail</label>
-          <LoginInput
-            inputType="text"
-            type="email"
-            id="email"
-            name="email"
-            minLength={5}
-            onFilled={setIsEmailFilled}
-          >
-            <MailIcon inputFilled={isEmailFilled} />
-          </LoginInput>
+          <Input type="email" {...register("email")}>
+            <MailIcon
+              color={
+                !!emailWatch
+                  ? errors.email
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
+          {errors.email && (
+            <span className="pt-1 text-xs font-bold text-red-400">
+              {errors.email?.message}
+            </span>
+          )}
         </div>
         <div className="space-y-2 w-full">
           <label>CPF</label>
-          <LoginInput
-            inputType="text"
-            type="text"
-            id="cpf"
-            name="cpf"
-            maxLength={14}
-            onFilled={setIsCpfFilled}
-          >
-            <IdIcon inputFilled={isCpfFilled} />
-          </LoginInput>
+          <Input type="text" {...register("cpf")}>
+            <IdIcon
+              color={
+                !!cpfWatch
+                  ? errors.cpf
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
+          {errors.cpf && (
+            <span className="pt-1 text-xs font-bold text-red-400">
+              {errors.cpf?.message}
+            </span>
+          )}
         </div>
         <div className="space-y-2 w-full">
           <label>Senha</label>
-          <LoginInput
-            inputType="password"
-            name="password"
-            minLength={6}
-            onFilled={setIsPasswordFilled}
-          >
-            <PadlockIcon inputFilled={isPasswordFilled} />
-          </LoginInput>
+          <Input type="password" {...register("password")}>
+            <PadlockIcon
+              color={
+                !!passwordWatch
+                  ? errors.password
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
+          {errors.password && (
+            <span className="pt-1 text-xs font-bold text-red-400">
+              {errors.password?.message}
+            </span>
+          )}
         </div>
         <div className="space-y-2 w-full">
           <label>Confirme sua Senha</label>
-          <LoginInput
-            inputType="password"
-            name="passwordConfirm"
-            minLength={6}
-            onFilled={setIsConfirmPasswordFilled}
-          >
-            <PadlockIcon inputFilled={isConfirmPasswordFilled} />
-          </LoginInput>
+          <Input type="password" {...register("confirmPassword")}>
+            <PadlockIcon
+              color={
+                !!confirmPasswordWatch
+                  ? errors.confirmPassword
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
+          {errors.confirmPassword && (
+            <span className="pt-1 text-xs font-bold text-red-400">
+              {errors.confirmPassword?.message}
+            </span>
+          )}
         </div>
       </div>
-      <Button content="Cadastrar" />
+      <Button content="Cadastrar" disabled={isSubmitting} />
       {state.error && (
         <Modal
           type="error"
           content="O usuário já possui cadastro."
-          isOpen={isOpen}
-          onClose={handleClose}
+          isOpen={!showModal}
+          onClose={handleModal}
         />
       )}
     </form>
