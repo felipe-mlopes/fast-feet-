@@ -1,8 +1,8 @@
 interface SvgProps {
-  inputFilled?: boolean;
+  color?: string;
 }
 
-export function IdIcon({ inputFilled }: SvgProps) {
+export function IdIcon({ color }: SvgProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@ export function IdIcon({ inputFilled }: SvgProps) {
     >
       <g
         fill="none"
-        stroke={inputFilled ? "#4C33CC" : "#FFC042"}
+        stroke={color}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
