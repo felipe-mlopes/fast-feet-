@@ -3,17 +3,17 @@
 import { useRef } from "react";
 import { useFormState } from "react-dom";
 
+import { registerRecipient } from "@/data/actions/recipients";
+import { prepareFormData } from "@/utils/prepare-form-data";
+import { useFormRegisterRecipient } from "@/hooks/use-form-register-recipient";
 import { Color } from "@/types";
 
-import { registerRecipient } from "@/data/actions/recipients";
-
+import Input from "../global/input";
 import { Button } from "../global/button";
 
 import { ProfileIcon } from "../icons/profile-icon";
 import { MailIcon } from "../icons/mail-icon";
 import { AddressIcon } from "../icons/address-icon";
-import { prepareFormData } from "@/utils/prepare-form-data";
-import { useFormRegisterRecipient } from "@/hooks/use-form-register-recipient";
 
 export function RecipientForm() {
   const [state, formAction] = useFormState(registerRecipient, {
@@ -36,33 +36,25 @@ export function RecipientForm() {
     <form
       ref={formRef}
       action={formAction}
-      onSubmit={handleSubmit((data) =>
+      onSubmit={handleSubmit(() =>
         handleFormSubmit(new FormData(formRef.current!))
       )}
       className="flex flex-col gap-10"
     >
       <div className="space-y-4 text-gray-light">
         <div className="space-y-2 w-full">
-          <label htmlFor="">Nome Completo</label>
-          <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-            <div className="flex gap-4 items-center w-full">
-              <ProfileIcon
-                color={
-                  !!values.clientName
-                    ? errors.clientName && values.clientName
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
-                }
-              />
-              <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
-              <input
-                type="text"
-                className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                {...register("clientName")}
-              />
-            </div>
-          </div>
+          <label htmlFor="clientName">Nome Completo</label>
+          <Input type="text" {...register("clientName")}>
+            <ProfileIcon
+              color={
+                !!values.clientName
+                  ? errors.clientName && values.clientName
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
           {errors.clientName && (
             <span className="pt-1 text-xs font-bold text-red-400">
               {errors.clientName?.message}
@@ -70,26 +62,18 @@ export function RecipientForm() {
           )}
         </div>
         <div className="space-y-2 w-full">
-          <label htmlFor="">E-mail</label>
-          <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-            <div className="flex gap-4 items-center w-full">
-              <MailIcon
-                color={
-                  !!values.clientEmail
-                    ? errors.clientEmail && values.clientEmail
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
-                }
-              />
-              <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
-              <input
-                type="text"
-                className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                {...register("clientEmail")}
-              />
-            </div>
-          </div>
+          <label htmlFor="clientEmail">E-mail</label>
+          <Input type="email" {...register("clientEmail")}>
+            <MailIcon
+              color={
+                !!values.clientEmail
+                  ? errors.clientEmail && values.clientEmail
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
           {errors.clientEmail && (
             <span className="pt-1 text-xs font-bold text-red-400">
               {errors.clientEmail?.message}
@@ -97,26 +81,18 @@ export function RecipientForm() {
           )}
         </div>
         <div className="space-y-2 w-full">
-          <label htmlFor="">CEP</label>
-          <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-            <div className="flex gap-4 items-center w-full">
-              <AddressIcon
-                color={
-                  !!values.zipcode
-                    ? errors.zipcode && values.zipcode
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
-                }
-              />
-              <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
-              <input
-                type="text"
-                className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                {...register("zipcode")}
-              />
-            </div>
-          </div>
+          <label htmlFor="zipcode">CEP</label>
+          <Input {...register("zipcode")}>
+            <AddressIcon
+              color={
+                !!values.zipcode
+                  ? errors.zipcode && values.zipcode
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
           {errors.zipcode && (
             <span className="pt-1 text-xs font-bold text-red-400">
               {errors.zipcode?.message}
@@ -124,26 +100,18 @@ export function RecipientForm() {
           )}
         </div>
         <div className="space-y-2 w-full">
-          <label htmlFor="">Endereço</label>
-          <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-            <div className="flex gap-4 items-center w-full">
-              <AddressIcon
-                color={
-                  !!values.address
-                    ? errors.address?.street && values.address.street
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
-                }
-              />
-              <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
-              <input
-                type="text"
-                className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                {...register("address.street")}
-              />
-            </div>
-          </div>
+          <label htmlFor="address-street">Endereço</label>
+          <Input type="text" {...register("address.street")}>
+            <AddressIcon
+              color={
+                !!values.address
+                  ? errors.address?.street && values.address.street
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
           {errors.address?.street && (
             <span className="pt-1 text-xs font-bold text-red-400">
               {errors.address?.street?.message}
@@ -152,28 +120,20 @@ export function RecipientForm() {
         </div>
         <div className="flex gap-4 md:gap-6">
           <div className="space-y-2 grow-0 max-w-24">
-            <label htmlFor="">Número</label>
-            <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-              <div className="flex gap-4 items-center w-full">
-                <input
-                  type="text"
-                  className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                  {...register("address.number")}
-                />
-              </div>
-            </div>
+            <label htmlFor="address-number">Número</label>
+            <Input
+              type="number"
+              hasIcon={false}
+              {...register("address.number")}
+            />
           </div>
           <div className="space-y-2 grow min-w-40">
-            <label htmlFor="">Complemento</label>
-            <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-              <div className="flex gap-4 items-center w-full">
-                <input
-                  type="text"
-                  className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                  {...register("address.complement")}
-                />
-              </div>
-            </div>
+            <label htmlFor="address-complement">Complemento</label>
+            <Input
+              type="text"
+              hasIcon={false}
+              {...register("address.complement")}
+            />
           </div>
         </div>
         {errors.address?.number && (
@@ -182,26 +142,18 @@ export function RecipientForm() {
           </span>
         )}
         <div className="space-y-2 w-full">
-          <label htmlFor="">Bairro</label>
-          <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-            <div className="flex gap-4 items-center w-full">
-              <AddressIcon
-                color={
-                  !!values.neighborhood
-                    ? errors.neighborhood && values.neighborhood
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
-                }
-              />
-              <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
-              <input
-                type="text"
-                className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                {...register("neighborhood")}
-              />
-            </div>
-          </div>
+          <label htmlFor="neighborhood">Bairro</label>
+          <Input type="text" {...register("neighborhood")}>
+            <AddressIcon
+              color={
+                !!values.neighborhood
+                  ? errors.neighborhood && values.neighborhood
+                    ? Color.Error
+                    : Color.Ok
+                  : Color.Default
+              }
+            />
+          </Input>
           {errors.neighborhood && (
             <span className="pt-1 text-xs font-bold text-red-400">
               {errors.neighborhood?.message}
@@ -210,26 +162,18 @@ export function RecipientForm() {
         </div>
         <div className="flex gap-4 md:gap-6">
           <div className="space-y-2 grow min-w-40">
-            <label htmlFor="">Cidade</label>
-            <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-              <div className="flex gap-4 items-center w-full">
-                <AddressIcon
-                  color={
-                    !!values.city
-                      ? errors.city && values.city
-                        ? Color.Error
-                        : Color.Ok
-                      : Color.Default
-                  }
-                />
-                <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />
-                <input
-                  type="text"
-                  className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                  {...register("city")}
-                />
-              </div>
-            </div>
+            <label htmlFor="city">Cidade</label>
+            <Input type="text" {...register("city")}>
+              <AddressIcon
+                color={
+                  !!values.city
+                    ? errors.city && values.city
+                      ? Color.Error
+                      : Color.Ok
+                    : Color.Default
+                }
+              />
+            </Input>
             {errors.city && (
               <span className="pt-1 text-xs font-bold text-red-400">
                 {errors.city?.message}
@@ -237,16 +181,13 @@ export function RecipientForm() {
             )}
           </div>
           <div className="space-y-2 grow-0 max-w-24">
-            <label htmlFor="">UF</label>
-            <div className="flex justify-between gap-4 w-full p-4 rounded bg-gray-light">
-              <div className="flex gap-4 items-center w-full">
-                <input
-                  type="text"
-                  className="grow min-w-5 outline-none text-base font-normal text-purple-dark bg-gray-light appearance-none"
-                  {...register("state")}
-                />
-              </div>
-            </div>
+            <label htmlFor="name">UF</label>
+            <Input
+              type="text"
+              maxLength={2}
+              hasIcon={false}
+              {...register("state")}
+            />
             {errors.state && (
               <span className="pt-1 text-xs font-bold text-red-400">
                 {errors.state?.message}
