@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaRegisterRecipient } from "@/utils/zod-validations";
 import { getAddressByZipcode } from "@/utils/get-address-by-zipcode";
 
-type FormProps = z.infer<typeof formSchemaRegisterRecipient>;
+type FormRegisterRecipientProps = z.infer<typeof formSchemaRegisterRecipient>;
 type AddressProps = {
   bairro: string;
   cep: string;
@@ -24,7 +24,7 @@ export function useFormRegisterRecipient() {
         getValues,
         setValue,
         watch,
-      } = useForm<FormProps>({
+      } = useForm<FormRegisterRecipientProps>({
         criteriaMode: "all",
         mode: "onBlur",
         resolver: zodResolver(formSchemaRegisterRecipient),
