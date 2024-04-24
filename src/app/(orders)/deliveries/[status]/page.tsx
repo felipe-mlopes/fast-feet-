@@ -8,15 +8,15 @@ import { ButtonStatus } from "@/components/deliveries/button-status";
 import { SearchInput } from "@/components/global/search-input";
 
 import { ExistIcon } from "@/components/icons/exist-icon";
-import { PinIcon } from "@/components/icons/pin-icon";
+import { DeliverymanInfo } from "@/components/order/deliveryman-info";
 
 export default async function Deliveries({
   params,
 }: {
   params: { status: "pending" | "done" };
 }) {
-  const { ordersPending } = await getOrdersPending("somewhere");
-  const { ordersDone } = await getOrdersDone("somewhere");
+  const { ordersPending } = await getOrdersPending("rio de janeiro");
+  const { ordersDone } = await getOrdersDone("rio de janeiro");
 
   return (
     <div className="flex flex-col justify-between items-center mt-20 relative min-h-screen lg:grid lg:grid-col-2 lg:grid-row-3 lg:justify-normal">
@@ -24,7 +24,7 @@ export default async function Deliveries({
         <div className="flex justify-between items-center">
           <div className="flex flex-col text-lilac-smooth">
             <p>Bem vindo,</p>
-            <p>Tiago Luchtenberg</p>
+            <p>Name</p>
           </div>
           <form action={logoutAction}>
             <button type="submit">
@@ -32,13 +32,7 @@ export default async function Deliveries({
             </button>
           </form>
         </div>
-        <div className="flex justify-between items-center">
-          <h3 className="text-[2rem] text-white">Entregas</h3>
-          <div className="flex items-center gap-2">
-            <PinIcon />
-            <p className="text-lilac-smooth">Rio do Sul</p>
-          </div>
-        </div>
+        <DeliverymanInfo />
       </header>
       <section className="flex justify-center px-6 w-full absolute top-40 z-10">
         <SearchInput placeholder="Filtrar por bairro" />
