@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { api } from "../api";
 import { getSession } from "./auth";
 
-import { formSchemaOutputRegisterRecipient, formSchemaRegisterRecipient } from "@/utils/zod-validations";
+import { formSchemaOutputRegisterRecipient, formSchemaRegisterRecipient, recipientSchema } from "@/utils/zod-validations";
 import { FormStateTypes } from "@/types";
 
 export async function registerRecipient(
@@ -48,4 +48,47 @@ export async function registerRecipient(
 
         return { error: data.error }
      }
+}
+
+export async function getRecipientByEmail(email: string) {
+    const { token } = await getSession()
+
+    const response = await api(`/recipient/${email}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    if (!response.ok) {
+        return {
+            recipient: null
+        }
+    }
+
+    const data = await response.json()
+
+    return {
+        recipient: data.recipient
+    }
+}
+
+export async function fetchRecipientEmailsBySearch(search: string) {
+    const { token } = await getSession()
+
+    const response = await api(`/recipient-email?search=${search}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    const data = await response.json()
+    console.log(data)
+
+    return {
+        recipients: data.recipient
+    }
 }
