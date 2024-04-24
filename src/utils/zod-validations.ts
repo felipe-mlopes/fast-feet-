@@ -56,3 +56,12 @@ export const formSchemaOutputRegisterRecipient = z.object({
     city: formSchemaRegisterRecipient.shape.city,
     state: formSchemaRegisterRecipient.shape.state
 })
+
+export const formSchemaCreateOrder = z.object({
+    title: z.string().trim().min(4, 'O título deve conter pelo menos 4 dígitos.'),
+    email: z.string().email({ message: 'Favor informar um e-mail válido.' })
+})
+
+export const recipientSchema = z.object({
+    email: z.string().email()
+})
