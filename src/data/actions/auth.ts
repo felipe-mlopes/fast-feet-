@@ -6,6 +6,7 @@ import { env } from "@/env"
 export interface SessionData {
     token?: string
     sub?: string
+    name?: string
     role?: 'ADMIN' | 'DELIVERYMAN'
     isLoggedIn: boolean
 }
