@@ -15,7 +15,9 @@ export function useLocation() {
   
       const coordinates = await getCityByCoordinates(latitude, longitude);
   
-      setLocation(coordinates?.city);
+      if (coordinates) {
+        setLocation(coordinates.city);
+      }
     }, []);
   
     useEffect(() => {
