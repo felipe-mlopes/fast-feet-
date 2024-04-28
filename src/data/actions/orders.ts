@@ -1,13 +1,15 @@
 'use server'
 
 import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
 
 import { api } from "../api"
 import { getSession } from "./auth"
+import { getRecipientByEmail } from "./recipients"
 
 import { formSchemaCreateOrder } from "@/utils/zod-validations"
+
 import { FormStateTypes } from "@/types"
-import { getRecipientByEmail } from "./recipients"
 
 export async function getOrdersPending(city: string) {
     const { token } = await getSession()
@@ -100,7 +102,7 @@ export async function createOrder(prevState: FormStateTypes, formData: FormData)
     const { recipient } = await getRecipientByEmail(email)
 
     if (!recipient) {
-        redirect('/')
+        throw new Error('Destinatário não encontrado!')
     }
 
     const response = await api('/orders', {
@@ -116,11 +118,33 @@ export async function createOrder(prevState: FormStateTypes, formData: FormData)
     })
 
     if (response.ok) {
-        redirect("/")
+        redirect("/admin")
 
     } else {
         const data = await response.json()
 
         return { error: data.error }
-        }
+    }
 }
+
+export async function editOrderStatusToPicknUp(orderId: string) {
+    const { token } = await getSession()
+
+    const response = await api(`/orders/${orderId}/picknup`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+
+    if (!response.ok) return
+
+    revalidatePath(`/orders/${orderId}/picknup`)
+
+    return {
+        id: orderId
+    }
+}
+
+export async function editOrderStatusToDone() {}
