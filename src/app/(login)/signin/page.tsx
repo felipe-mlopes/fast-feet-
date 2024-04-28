@@ -1,10 +1,22 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
+import { getSession } from "@/data/actions/auth";
 import { signInAction } from "@/data/actions/login";
 
 import { SignInForm } from "@/components/login/signin-form";
 
-export default function Login() {
+export default async function SignIn() {
+  const { role } = await getSession();
+
+  if (role === "ADMIN") {
+    return redirect("/admin");
+  }
+
+  if (role === "DELIVERYMAN") {
+    return redirect("/deliveries/pending");
+  }
+
   return (
     <main className="flex flex-col gap-16 md:flex-row md:justify-between md:items-center md:pt-40 xl:justify-evenly">
       <div className="flex flex-col gap-4">
