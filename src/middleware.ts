@@ -10,9 +10,9 @@ export async function middleware(request: NextRequest) {
         cookies(),
         sessionOptions
     )
-
+    
     if (session.isLoggedIn === undefined) {
-        return NextResponse.redirect(new URL('/login', request.url))
+        return NextResponse.redirect(new URL('/', request.url))
     }
 }
 
