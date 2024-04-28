@@ -1,10 +1,22 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
+import { getSession } from "@/data/actions/auth";
 import { signUpAction } from "@/data/actions/login";
 
 import { SignUpForm } from "@/components/login/signup-form";
 
-export default function SignUp() {
+export default async function SignUp() {
+  const { role } = await getSession();
+
+  if (role === "ADMIN") {
+    return redirect("/admin");
+  }
+
+  if (role === "DELIVERYMAN") {
+    return redirect("/deliveries/pending");
+  }
+
   return (
     <main className="flex justify-center pb-4 lg:justify-around lg:items-start lg:gap-8">
       <Image
