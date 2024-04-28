@@ -8,3 +8,9 @@ export interface RecipientsProps {
     city: string,
     state: string
 }
+
+export interface RecipientEmailProps {
+    recipient: {
+        email: string
+    }
+}
