@@ -5,8 +5,10 @@ import { redirect } from "next/navigation"
 import { api } from "../api";
 import { getSession } from "./auth";
 
-import { formSchemaOutputRegisterRecipient, formSchemaRegisterRecipient, recipientSchema } from "@/utils/zod-validations";
+import { formSchemaOutputRegisterRecipient } from "@/utils/zod-validations";
+
 import { FormStateTypes } from "@/types";
+import { RecipientEmailProps, RecipientsProps } from "../types/recipients";
 
 export async function registerRecipient(
     prevState: FormStateTypes,
@@ -41,7 +43,7 @@ export async function registerRecipient(
     })
 
     if (response.ok) {
-        redirect("/")
+        redirect("/admin")
 
     } else {
         const data = await response.json()
@@ -53,7 +55,7 @@ export async function registerRecipient(
 export async function getRecipientByEmail(email: string) {
     const { token } = await getSession()
 
-    const response = await api(`/recipient/${email}`, {
+    const response = await api(`/recipient?recipientEmail=${email}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -86,9 +88,8 @@ export async function fetchRecipientEmailsBySearch(search: string) {
     })
 
     const data = await response.json()
-    console.log(data)
 
     return {
-        recipients: data.recipient
+        recipients: data.recipientEmails
     }
 }
