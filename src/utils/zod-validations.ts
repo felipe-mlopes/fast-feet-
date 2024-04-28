@@ -12,6 +12,14 @@ export const formSchemaSignIn = z.object({
         .min(6, { message: "A senha deve conter no mínimo 6 caracteres." })
 })
 
+export const formSchemaLogin = z.object({
+    email: z.string().trim().email({ message: "Deve conter o formato de um e-mail válido." }),
+    password: z
+        .string()
+        .trim()
+        .min(6, { message: "A senha deve conter no mínimo 6 caracteres." })
+})
+
 export const formSchemaSignUp = z.object({
     name: z.string().trim(),
     email: z.string().trim().email({ message: "Deve conter o formato de um e-mail válido." }),
