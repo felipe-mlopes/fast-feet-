@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { api } from "../api"
 import { getAuthData, getSession, setAuthData } from "./auth"
 
-import { formSchemaSignIn, formSchemaSignUp } from "@/utils/zod-validations"
+import { formSchemaLogin, formSchemaSignIn, formSchemaSignUp } from "@/utils/zod-validations"
 import { FormStateTypes } from "@/types"
 
 export async function signInAction(
@@ -51,6 +51,57 @@ export async function signInAction(
 
         await session.save()
         redirect("/deliveries/pending")
+
+     } else {
+        const data = await response.json()
+
+        return { error: data.error }
+     }
+}
+
+export async function loginAction(
+    prevState: FormStateTypes,
+    formData: FormData,
+): Promise<FormStateTypes> {
+    const session = await getSession()
+
+    const rawFormData = Object.fromEntries(formData.entries())
+    const result = formSchemaLogin.safeParse(rawFormData)
+    
+    if (!result.success) {
+        return { error: result.error.issues }
+    }
+    
+    const { email, password } = result.data
+
+    const response = await api('/account/sessions', { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({
+            email,
+            password
+        })
+     })
+
+     if (response.ok) {
+        const data = await response.json()
+        await setAuthData(data.access_token)
+
+        const { payload } = await getAuthData()
+
+        if (payload.role === 'DELIVERYMAN') {
+            redirect("/home")
+        }
+
+        session.token = data.access_token
+        session.sub = payload.sub
+        session.role = payload.role
+        session.isLoggedIn = true
+
+        await session.save()
+        redirect("/admin")
 
      } else {
         const data = await response.json()
