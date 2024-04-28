@@ -1,5 +1,6 @@
 import { getOrdersDone, getOrdersPending } from "@/data/actions/orders";
 import { logoutAction } from "@/data/actions/login";
+import { getSession } from "@/data/actions/auth";
 
 import { OrdersProps } from "@/data/types/orders";
 
@@ -15,6 +16,11 @@ export default async function Deliveries({
 }: {
   params: { status: "pending" | "done" };
 }) {
+  const { token } = await getSession();
+
+  const arrayToken = token?.split(".")!;
+  const tokenPayload = JSON.parse(atob(arrayToken[1]));
+
   const { ordersPending } = await getOrdersPending("rio de janeiro");
   const { ordersDone } = await getOrdersDone("rio de janeiro");
 
@@ -24,7 +30,7 @@ export default async function Deliveries({
         <div className="flex justify-between items-center">
           <div className="flex flex-col text-lilac-smooth">
             <p>Bem vindo,</p>
-            <p>Name</p>
+            <p className="capitalize">{token ? tokenPayload.name : ""}</p>
           </div>
           <form action={logoutAction}>
             <button type="submit">
