@@ -1,6 +1,9 @@
 "use client";
 
 import { HTMLAttributes, useState } from "react";
+
+import { editOrderStatusToPicknUp } from "@/data/actions/orders";
+
 import { Button } from "../global/button";
 import { Modal } from "../global/modal";
 
@@ -9,6 +12,7 @@ interface ActionProps extends HTMLAttributes<HTMLDivElement> {
   modalContent: string;
   isDisable?: boolean;
   isDone: boolean;
+  orderId: string;
 }
 
 export function Action({
@@ -16,24 +20,41 @@ export function Action({
   modalContent,
   isDisable,
   isDone,
+  orderId,
   ...props
 }: ActionProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
+  const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
   const handleModalClose = () => {
-    setIsModalOpen(!isModalOpen);
+    setIsModalErrorOpen(false);
+    setIsModalSuccessOpen(false);
   };
+
+  async function handleSetChangeOrderStatus() {
+    const response = await editOrderStatusToPicknUp(orderId);
+
+    if (!response) {
+      return setIsModalErrorOpen(!isModalErrorOpen);
+    }
+
+    setIsModalSuccessOpen(!isModalSuccessOpen);
+  }
 
   return (
     <>
       {!isDone && (
         <div {...props}>
-          <Button content={buttonContent} disabled={isDisable} />
+          <Button
+            content={buttonContent}
+            disabled={isDisable}
+            onClick={handleSetChangeOrderStatus}
+          />
           <Modal
-            type="package"
+            type={isModalSuccessOpen ? "package" : "error"}
             content={modalContent}
             isDone={isDone}
-            isOpen={isModalOpen}
+            isOpen={isModalErrorOpen || isModalSuccessOpen}
             onClose={handleModalClose}
           />
         </div>
