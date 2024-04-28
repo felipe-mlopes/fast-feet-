@@ -127,6 +127,7 @@ export default async function DeliveryDetails({
           }
           isDone={status === "DONE"}
           modalContent="Pacote retirado."
+          orderId={params.id}
         />
       </main>
     </div>
