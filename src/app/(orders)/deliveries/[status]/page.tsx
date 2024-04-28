@@ -1,28 +1,32 @@
+import { getSession } from "@/data/actions/auth";
 import { getOrdersDone, getOrdersPending } from "@/data/actions/orders";
 import { logoutAction } from "@/data/actions/login";
-import { getSession } from "@/data/actions/auth";
 
 import { OrdersProps } from "@/data/types/orders";
 
+import { DeliverymanInfo } from "@/components/order/deliveryman-info";
 import { Card } from "@/components/deliveries/card";
 import { ButtonStatus } from "@/components/deliveries/button-status";
 import { SearchInput } from "@/components/global/search-input";
 
 import { ExistIcon } from "@/components/icons/exist-icon";
-import { DeliverymanInfo } from "@/components/order/deliveryman-info";
 
 export default async function Deliveries({
   params,
+  searchParams,
 }: {
   params: { status: "pending" | "done" };
+  searchParams: { city: string };
 }) {
   const { token } = await getSession();
 
   const arrayToken = token?.split(".")!;
   const tokenPayload = JSON.parse(atob(arrayToken[1]));
 
-  const { ordersPending } = await getOrdersPending("rio de janeiro");
-  const { ordersDone } = await getOrdersDone("rio de janeiro");
+  const deliverymanCity = searchParams.city.toLowerCase();
+
+  const { ordersPending } = await getOrdersPending(deliverymanCity);
+  const { ordersDone } = await getOrdersDone(deliverymanCity);
 
   return (
     <div className="flex flex-col justify-between items-center mt-20 relative min-h-screen lg:grid lg:grid-col-2 lg:grid-row-3 lg:justify-normal">
