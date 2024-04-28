@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { formSchemaCreateOrder } from "@/utils/zod-validations";
 import { fetchRecipientEmailsBySearch } from "@/data/actions/recipients";
+
+import { formSchemaCreateOrder } from "@/utils/zod-validations";
 
 type FormCreateOrderProps = z.infer<typeof formSchemaCreateOrder>;
 type RecipientProps = {
@@ -16,6 +17,7 @@ export function useFormCreateOrder() {
         handleSubmit,
         register,
         formState: { isSubmitSuccessful, isSubmitting, errors },
+        setValue,
         watch,
       } = useForm<FormCreateOrderProps>({
         criteriaMode: "all",
@@ -23,28 +25,23 @@ export function useFormCreateOrder() {
         resolver: zodResolver(formSchemaCreateOrder),
       });
 
-      // const [emailsSearched, setEmailsSearched] = useState<RecipientProps[]>([])
+      const [emailsSearched, setEmailsSearched] = useState<RecipientProps[]>([])
     
       const titleWatch = watch('title')
       const emailWatch = watch('email')
     
       const emailSearched = String(emailWatch)
-    
-/*       const handleSetData = useCallback(
-        (data: RecipientProps) => {
-          setEmailsSearched(data)
-        },
-        []
-      ); */
-    
-       const handleFetchRecipientEmails = useCallback(
+      
+      const handleFetchRecipientEmails = useCallback(
         async (search: string) => {
           const { recipients } = await fetchRecipientEmailsBySearch(search)
 
-          console.log(recipients)
+          if (!recipients) return
+
+          setEmailsSearched(recipients)
         },
         []
-       );
+      );
    
       useEffect(() => {
         if (emailWatch !== undefined && emailSearched.length > 3) {
@@ -57,7 +54,9 @@ export function useFormCreateOrder() {
         register,
         errors,
         isSubmitting,
+        setValue,
         titleWatch,
-        emailWatch
+        emailWatch,
+        emailsSearched
       }
 }
