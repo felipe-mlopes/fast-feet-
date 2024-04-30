@@ -23,7 +23,9 @@ export default async function Deliveries({
   const arrayToken = token?.split(".")!;
   const tokenPayload = JSON.parse(atob(arrayToken[1]));
 
-  const deliverymanCity = searchParams.city.toLowerCase();
+  const deliverymanCity = !searchParams.city
+    ? ""
+    : searchParams.city.toLowerCase();
 
   const { ordersPending } = await getOrdersPending(deliverymanCity);
   const { ordersDone } = await getOrdersDone(deliverymanCity);
