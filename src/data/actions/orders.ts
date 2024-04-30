@@ -7,7 +7,7 @@ import { api } from "../api"
 import { getSession } from "./auth"
 import { getRecipientByEmail } from "./recipients"
 
-import { formSchemaCreateOrder } from "@/utils/zod-validations"
+import { formSchemaCreateOrder, formSchemaUploadAttachment } from "@/utils/zod-validations"
 
 import { FormStateTypes } from "@/types"
 
@@ -141,10 +141,71 @@ export async function editOrderStatusToPicknUp(orderId: string) {
     if (!response.ok) return
 
     revalidatePath(`/orders/${orderId}/picknup`)
+    redirect('/deliveries/pending')
 
     return {
         id: orderId
     }
 }
 
-export async function editOrderStatusToDone() {}
+export async function editOrderStatusToDone(orderId: string) {
+    const { token } = await getSession()
+
+    const response = await api(`/orders/${orderId}/done`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    })
+
+    if (!response.ok) return
+
+    revalidatePath(`/orders/${orderId}/done`)
+    redirect('/deliveries/done')
+
+    return {
+        id: orderId
+    }
+}
+
+export async function uploadAttachment(prevState: FormStateTypes, formData: FormData): Promise<FormStateTypes> {
+    const { token } = await getSession()
+
+    const rawFormData = Object.fromEntries(formData.entries())
+    const result = formSchemaUploadAttachment.safeParse(rawFormData)
+
+    if (!result.success) {
+        console.error(result.error.issues)
+        return { error: result.error.issues }
+    }
+
+    const { file, orderId } = result.data
+
+    if (!file) {
+        throw new Error('A foto não foi incluída.')
+    }
+
+/*     const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes) */
+
+    const response = await api(`orders/${orderId}/attachment`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            file
+        })
+    })
+
+    if (response.ok) {
+        redirect("/")
+
+    } else {
+        const data = await response.json()
+
+        return { error: data.error }
+    }
+}
