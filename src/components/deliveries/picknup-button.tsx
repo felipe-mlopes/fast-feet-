@@ -7,22 +7,20 @@ import { editOrderStatusToPicknUp } from "@/data/actions/orders";
 import { Button } from "../global/button";
 import { Modal } from "../global/modal";
 
-interface ActionProps extends HTMLAttributes<HTMLDivElement> {
+interface PicknUpButtonProps extends HTMLAttributes<HTMLDivElement> {
   buttonContent: string;
   modalContent: string;
   isDisable?: boolean;
-  isDone: boolean;
   orderId: string;
 }
 
-export function Action({
+export function PicknUpButton({
   buttonContent,
   modalContent,
   isDisable,
-  isDone,
   orderId,
   ...props
-}: ActionProps) {
+}: PicknUpButtonProps) {
   const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
   const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
 
@@ -42,23 +40,18 @@ export function Action({
   }
 
   return (
-    <>
-      {!isDone && (
-        <div {...props}>
-          <Button
-            content={buttonContent}
-            disabled={isDisable}
-            onClick={handleSetChangeOrderStatus}
-          />
-          <Modal
-            type={isModalSuccessOpen ? "package" : "error"}
-            content={modalContent}
-            isDone={isDone}
-            isOpen={isModalErrorOpen || isModalSuccessOpen}
-            onClose={handleModalClose}
-          />
-        </div>
-      )}
-    </>
+    <div {...props}>
+      <Button
+        content={buttonContent}
+        disabled={isDisable}
+        onClick={handleSetChangeOrderStatus}
+      />
+      <Modal
+        type={isModalSuccessOpen ? "package" : "error"}
+        content={modalContent}
+        isOpen={isModalErrorOpen || isModalSuccessOpen}
+        onClose={handleModalClose}
+      />
+    </div>
   );
 }
