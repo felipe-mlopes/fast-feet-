@@ -8,7 +8,8 @@ import { OrdersProps } from "@/data/types/orders";
 import { statusEdit } from "@/utils/transform-status";
 import { zipcodeMask } from "@/utils/zipcode-mask";
 
-import { Action } from "@/components/deliveries/action";
+import { PicknUpButton } from "@/components/deliveries/picknup-button";
+import { Button } from "@/components/global/button";
 
 import { ArrowIcon } from "@/components/icons/arrow-icon";
 import { FolderIcon } from "@/components/icons/folder-icon";
@@ -120,15 +121,19 @@ export default async function DeliveryDetails({
           </section>
         </div>
         <span />
-        <Action
-          className="pt-40"
-          buttonContent={
-            status === "WAITING" ? "Retirar pacote" : "Confirmar entrega"
-          }
-          isDone={status === "DONE"}
-          modalContent="Pacote retirado."
-          orderId={params.id}
-        />
+        {status === "WAITING" && (
+          <PicknUpButton
+            className="pt-40"
+            buttonContent="Retirar pacote"
+            modalContent="Pacote retirado."
+            orderId={params.id}
+          />
+        )}
+        {status === "PICKN_UP" && (
+          <Link href={`/deliveries/pending/${params.id}/upload`}>
+            <Button content="Confirmar entrega" />
+          </Link>
+        )}
       </main>
     </div>
   );
