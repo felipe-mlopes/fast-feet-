@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { Action } from "@/components/Action";
+import { UploadForm } from "@/components/deliveries/upload-form";
 
-import { ArrowIcon } from "@/components/icons/ArrowIcon";
-import { CameraIcon } from "@/components/icons/CameraIcon";
-import { RepicIcon } from "@/components/icons/RepicIcon";
+import { ArrowIcon } from "@/components/icons/arrow-icon";
+import { CameraIcon } from "@/components/icons/camera-icon";
+import { RepicIcon } from "@/components/icons/repic-icon";
 
 export default function Upload({ params }: { params: { orderId: string } }) {
   const isUpload = true;
@@ -28,12 +28,7 @@ export default function Upload({ params }: { params: { orderId: string } }) {
           <p className="px-24 z-10 text-center font-normal text-[0.625rem] text-lavender-gray">
             Tire uma foto do pacote com a assinatura do destinatário.
           </p>
-          <Action
-            buttonContent="Enviar foto"
-            modalContent="Foto enviada!"
-            isDisable={isUpload}
-            isDone={false}
-          />
+          <UploadForm />
         </div>
       </main>
     </div>
