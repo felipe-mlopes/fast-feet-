@@ -1,10 +1,15 @@
 "use client";
 
-export async function UploadForm() {
+import { CameraIcon } from "../icons/camera-icon";
+
+export function UploadForm() {
   return (
     <form action="">
-      <input type="file" name="file" id="file" />
-      <input type="submit" value="upload" />
+      <label htmlFor="myFile" className="w-full h-full cursor-pointer">
+        <CameraIcon />
+      </label>
+      <input type="file" name="file" id="myFile" className="hidden" />
+      {/* <input type="submit" value="upload" /> */}
     </form>
   );
 }
