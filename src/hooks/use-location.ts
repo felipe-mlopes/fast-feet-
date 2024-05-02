@@ -22,7 +22,7 @@ export function useLocation() {
   
     useEffect(() => {
       handleGetLocation();
-    });
+    }, [handleGetLocation]);
 
     return {
         location
