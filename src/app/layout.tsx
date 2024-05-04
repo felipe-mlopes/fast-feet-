@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" className={(inter.className, roboto.variable)}>
-      <body className="flex flex-col justify-between gap-24 mx-8 mt-12 bg-indigo-blue">
+      <body className="flex flex-col justify-between gap-24 mt-12 bg-indigo-blue">
         {children}
       </body>
     </html>
