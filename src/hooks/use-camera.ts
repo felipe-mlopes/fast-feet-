@@ -6,8 +6,6 @@ export function UseCamera() {
 const [mediaStream, setMediaStream] = useState<MediaStream | null>();
 const path = usePathname()
 
-console.log(path.includes('/upload'))
-
   const handleMedia = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ 
       video: { 
