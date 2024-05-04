@@ -6,15 +6,11 @@ import { LoginForm } from "@/components/login/login-form";
 
 export default function Login() {
   return (
-    <main className="flex flex-col gap-16 md:flex-row md:justify-between md:items-center md:pt-40 xl:justify-evenly">
+    <main className="flex flex-col gap-16 w-full pt-16 md:flex-row md:justify-between md:items-center md:pt-40 md:w-auto xl:justify-evenly">
       <div className="flex flex-col gap-4">
-        {/*  <h2 className="flex flex-col text-5xl font-bold text-white italic">
-          <span className="text-orange-light">Entregador,</span>
-          <span>você é nosso maior valor</span>
-        </h2>
         <p className="text-base font-normal text-lilac-smooth mr-28">
-          Faça seu login para começar suas entregas.
-        </p> */}
+          Faça seu login para acessar o painel administrativo.
+        </p>
       </div>
       <LoginForm
         action={loginAction}
