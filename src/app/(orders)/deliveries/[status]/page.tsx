@@ -52,7 +52,7 @@ export default async function Deliveries({
       <main className="px-6 pt-[3.25rem] pb-8 w-full min-h-screen bg-gray-light">
         {params.status === "pending" && (
           <>
-            <div className="flex items-center gap-5 text-ligth-slate-gray">
+            <div className="flex items-center justify-center gap-5 text-ligth-slate-gray">
               <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
               <p className="text-nowrap">
                 {ordersPending.length > 1
@@ -61,7 +61,7 @@ export default async function Deliveries({
               </p>
               <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
             </div>
-            <div className="space-y-4 pt-4">
+            <div className="flex flex-col items-center justify-center gap-4 pt-4 md:flex-row md:flex-wrap md:gap-6">
               {ordersPending.map((order: OrdersProps) => {
                 return (
                   <Card
@@ -81,7 +81,7 @@ export default async function Deliveries({
         )}
         {params.status === "done" && (
           <>
-            <div className="flex items-center gap-5 text-ligth-slate-gray">
+            <div className="flex items-center justify-center gap-5 text-ligth-slate-gray">
               <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
               <p className="text-nowrap">
                 {ordersDone.length > 1
@@ -90,7 +90,7 @@ export default async function Deliveries({
               </p>
               <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
             </div>
-            <div className="space-y-4 pt-4">
+            <div className="flex flex-col items-center justify-center gap-4 pt-4 md:flex-row md:flex-wrap md:gap-6">
               {ordersDone.map((order: OrdersProps) => {
                 return (
                   <Card
