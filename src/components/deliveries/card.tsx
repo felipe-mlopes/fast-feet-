@@ -16,7 +16,7 @@ export function Card({ id, title, createdAt, status }: OrdersProps) {
   const statusParams = transformStatus(status);
 
   return (
-    <div className="space-y-6 bg-white rounded shadow-card">
+    <div className="space-y-6 bg-white rounded shadow-card max-w-[24rem]">
       <div className="space-y-8 px-4 pt-6">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
