@@ -27,7 +27,7 @@ export default function ForgotPassword() {
         <Link href={"/login"}>
           <LongArrowIcon />
         </Link>
-        <Link href={"/login"} className="font-medium text-white">
+        <Link href={"/signin"} className="font-medium text-white">
           Voltar para o login
         </Link>
       </footer>
