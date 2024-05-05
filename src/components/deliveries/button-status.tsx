@@ -6,10 +6,10 @@ interface ButtonStatusProps {
 
 export function ButtonStatus({ status }: ButtonStatusProps) {
   return (
-    <footer className="flex w-full sticky bottom-0 z-10">
+    <footer className="flex justify-center w-full sticky bottom-0 z-10">
       <Link
         href={"/deliveries/pending"}
-        className={`px-[4.5rem] pt-5 pb-[2.125rem] bg-gray-light font-medium text-lavender-gray 
+        className={`w-full px-[4.5rem] pt-5 pb-[2.125rem] bg-gray-light font-medium text-center text-lavender-gray 
         ${
           status === "pending" &&
           "bg-white border-t-4 border-t-orange-light text-indigo-blue"
@@ -20,7 +20,7 @@ export function ButtonStatus({ status }: ButtonStatusProps) {
       </Link>
       <Link
         href={"/deliveries/done"}
-        className={`px-[4.5rem] pt-5 pb-[2.125rem] bg-gray-light font-medium text-lavender-gray 
+        className={`w-full px-[4.5rem] pt-5 pb-[2.125rem] bg-gray-light font-medium text-center text-lavender-gray 
         ${
           status === "done" &&
           "bg-white border-t-4 border-t-orange-light text-indigo-blue"
