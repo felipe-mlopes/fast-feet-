@@ -2,24 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Logo } from "@/components/global/logo";
+import { Track } from "@/components/home/track";
 
 import { LogoIcon } from "@/components/icons/logo-icon";
-import { HamburguerIcon } from "@/components/icons/hamburguer-icon";
-import { Track } from "@/components/home/track";
+import { Menu } from "@/components/home/menu";
 
 export default function Home() {
   return (
-    <div className="space-y-8">
-      <header className="flex items-end justify-between w-full lg:row-start-1 lg:row-end-1 lg:col-start-1 lg:col-end-2 lg:w-auto lg:justify-start lg:gap-4">
+    <div className="space-y-8 px-8">
+      <header className="flex items-end justify-between w-full lg:row-start-1 lg:row-end-1 lg:col-start-1 lg:col-end-2 lg:w-auto lg:gap-4">
         <span className="flex items-end gap-2">
           <LogoIcon />
           <Logo />
         </span>
-        <HamburguerIcon className="md:hidden" />
+        <Menu />
       </header>
       <main className="space-y-4">
         <Track />
-        <section className="border-t-[1px] border-gray-light pt-4 md:border-0">
+        <section
+          id="home"
+          className="border-t-[1px] border-gray-light pt-4 md:border-0"
+        >
           <Link href="#" className="relative">
             <Image
               src={"/img/deliveryman.jpg"}
@@ -43,7 +46,10 @@ export default function Home() {
             </div>
           </Link>
         </section>
-        <section className="space-y-2 border-t-[1px] border-gray-light pt-4 md:border-0">
+        <section
+          id="solutions"
+          className="space-y-2 border-t-[1px] border-gray-light pt-4 md:border-0"
+        >
           <h2 className="text-lg text-gray-light">
             Por que ser um parceiro da Fast Feet?
           </h2>
@@ -80,6 +86,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section id="contact"></section>
       </main>
       <footer className="flex flex-col gap-4 border-t-[1px] border-gray-light md:border-0 pt-5 text-center text-sm text-gray-light">
         <div className="md:flex md:justify-center md:gap-2 w-full">
