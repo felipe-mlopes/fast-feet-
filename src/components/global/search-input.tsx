@@ -1,11 +1,19 @@
+"use client";
+
 import { InputHTMLAttributes } from "react";
+
+import { UseSearchInput } from "@/hooks/use-search-input";
+
 import { SearchIcon } from "../icons/search-icon";
 
 interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isHome?: boolean;
+  content: string;
 }
 
-export function SearchInput({ isHome, ...props }: SearchInputProps) {
+export function SearchInput({ isHome, content }: SearchInputProps) {
+  const { register } = UseSearchInput();
+
   return (
     <div
       className={`flex items-center gap-4 w-full bg-white border rounded shadow-card 
@@ -13,10 +21,10 @@ export function SearchInput({ isHome, ...props }: SearchInputProps) {
     >
       <input
         type="search"
-        name=""
-        id=""
+        id="search"
+        placeholder={content}
         className="outline-none appearance-none bg-white w-full"
-        {...props}
+        {...register("search")}
       />
       <button>
         <SearchIcon />
