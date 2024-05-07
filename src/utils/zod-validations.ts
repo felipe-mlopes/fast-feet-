@@ -89,3 +89,7 @@ function checkFileType(file: File) {
     }
     return false;
 }
+
+export const searchInputSchema = z.object({
+    search: z.string()
+})
