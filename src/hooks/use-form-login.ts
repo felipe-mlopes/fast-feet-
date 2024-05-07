@@ -7,7 +7,7 @@ import { formSchemaLogin } from "@/utils/zod-validations";
 type FormLoginProps = z.infer<typeof formSchemaLogin>
 
 export function UseFormLogin() {
-    const { handleSubmit, register, formState: { isSubmitting, errors }, watch, setValue } = useForm<FormLoginProps>({
+    const { handleSubmit, register, formState: { isSubmitting, errors }, watch } = useForm<FormLoginProps>({
         criteriaMode: 'all',
         mode: 'onBlur',
         resolver: zodResolver(formSchemaLogin)
