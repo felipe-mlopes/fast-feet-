@@ -18,7 +18,7 @@ export function DeliveriesMain() {
 
   return (
     <main className="px-6 pt-[3.25rem] pb-8 w-full min-h-screen bg-gray-light">
-      <section className="flex justify-center px-6 w-full absolute top-40 z-10">
+      <section className="flex justify-center px-6 w-full absolute top-40 right-1/2 translate-x-1/2 z-10">
         <SearchInput placeholder="Filtrar por bairro" {...register("search")} />
       </section>
       {params.status === "pending" && (
