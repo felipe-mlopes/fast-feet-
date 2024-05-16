@@ -8,6 +8,7 @@ import { OrdersProps } from "@/data/types/orders";
 import { statusEdit } from "@/utils/transform-status";
 import { zipcodeMask } from "@/utils/zipcode-mask";
 
+import { DeliveryStatusHeader } from "@/components/deliveries/delivery-status-header";
 import { PicknUpButton } from "@/components/deliveries/picknup-button";
 import { Button } from "@/components/global/button";
 
@@ -46,14 +47,13 @@ export default async function DeliveryDetails({
     : "--/--/----";
 
   return (
-    <div className="min-h-screen overflow-hidden bg-gray-light">
-      <header className="flex items-center justify-start gap-24 pl-5 pt-14 pb-12 relative bg-indigo-blue">
+    <>
+      <DeliveryStatusHeader content="Detalhes">
         <Link href={`/deliveries/${params.status}`}>
           <ArrowIcon side="left" className="fill-white" />
         </Link>
-        <h2 className="text-[1.625rem] text-white">Detalhes</h2>
-      </header>
-      <main className="flex flex-col justify-around px-6 min-h-screen relative">
+      </DeliveryStatusHeader>
+      <main className="flex flex-col px-6 min-h-screen relative">
         <div className="flex flex-col justify-center gap-4 w-[23rem] absolute -top-8 right-1/2 translate-x-1/2">
           <section className="px-4 py-6 rounded bg-white">
             <div className="flex items-center gap-3">
@@ -120,7 +120,6 @@ export default async function DeliveryDetails({
             </div>
           </section>
         </div>
-        <span />
         {status === "WAITING" && (
           <PicknUpButton
             className="pt-40"
@@ -131,10 +130,13 @@ export default async function DeliveryDetails({
         )}
         {status === "PICKN_UP" && (
           <Link href={`/deliveries/pending/${params.id}/upload`}>
-            <Button content="Confirmar entrega" />
+            <Button
+              content="Confirmar entrega"
+              className="w-[23rem] absolute bottom-80 right-1/2 translate-x-1/2 md:px-[8.25rem] py-[1.125rem] rounded whitespace-nowrap text-center bg-orange-light text-purple-dark hover:bg-orange-300 font-medium disabled:opacity-50"
+            />
           </Link>
         )}
       </main>
-    </div>
+    </>
   );
 }
