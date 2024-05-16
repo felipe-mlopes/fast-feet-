@@ -9,7 +9,6 @@ import { DeliveriesMain } from "@/components/deliveries/deliveries-main";
 
 export default async function Deliveries({
   params,
-  searchParams,
 }: {
   params: { status: "pending" | "done" };
   searchParams: { city: string };
@@ -20,7 +19,7 @@ export default async function Deliveries({
   const tokenPayload = JSON.parse(atob(arrayToken[1]));
 
   return (
-    <div className="flex flex-col justify-between items-center mt-20 relative min-h-screen lg:grid lg:grid-col-2 lg:grid-row-3 lg:justify-normal">
+    <div className="flex flex-col justify-between items-center relative min-h-screen lg:grid lg:grid-col-2 lg:grid-row-3 lg:justify-normal">
       <header className="space-y-8 w-full px-6 pb-16">
         <div className="flex justify-between items-center">
           <div className="flex flex-col text-lilac-smooth">
