@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 
-import { HomeIcon } from "../icons/home-icon";
-import { DeliveryIcon } from "../icons/delivery-icon";
-import { ProfileIcon } from "../icons/profile-icon";
-import { IdIcon } from "../icons/id-icon";
+import { HomeIcon } from "../../icons/home-icon";
+import { DeliveryIcon } from "../../icons/delivery-icon";
+import { ProfileIcon } from "../../icons/profile-icon";
+import { IdIcon } from "../../icons/id-icon";
 
 interface MenuMainProps {
   onClose: () => void;
