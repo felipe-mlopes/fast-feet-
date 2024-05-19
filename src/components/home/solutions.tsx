@@ -6,7 +6,7 @@ export function Solutions() {
   return (
     <section
       id="solutions"
-      className="flex flex-col gap-8 border-t-[1px] border-gray-light pt-4 md:border-0"
+      className="flex flex-col gap-8 px-8 pt-20 pb-8 border-b-[1px] md:border-b-0 border-gray-light"
     >
       <div>
         <h2 className="text-3xl text-center text-gray-light">
