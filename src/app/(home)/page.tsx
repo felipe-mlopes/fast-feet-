@@ -1,5 +1,5 @@
 import { Logo } from "@/components/global/logo";
-import { Menu } from "@/components/home/menu";
+import { Menu } from "@/components/home/menu/menu";
 import { Main } from "@/components/home/main";
 import { Solutions } from "@/components/home/solutions";
 
@@ -9,21 +9,21 @@ import { Banner } from "@/components/home/banner";
 
 export default function Home() {
   return (
-    <div className="space-y-8 px-8">
-      <header className="flex items-end justify-between w-full lg:row-start-1 lg:row-end-1 lg:col-start-1 lg:col-end-2 lg:w-auto lg:gap-4">
+    <div>
+      <header className="flex items-end justify-between sticky top-0 z-[2] md:static px-8 py-8 w-full bg-indigo-blue border-b-[1px] border-gray-light lg:row-start-1 lg:row-end-1 lg:col-start-1 lg:col-end-2 lg:w-auto lg:gap-4">
         <span className="flex items-end gap-2">
           <LogoIcon />
           <Logo />
         </span>
         <Menu />
       </header>
-      <main className="space-y-16">
+      <main className="md:space-y-12">
         <Main />
         <Solutions />
         <Banner />
         <Contacts />
       </main>
-      <footer className="flex flex-col gap-4 border-t-[1px] border-gray-light md:border-0 pt-5 text-center text-sm text-gray-light">
+      <footer className="flex flex-col gap-4 py-5 text-center text-sm text-gray-light">
         <div className="md:flex md:justify-center md:gap-2 w-full">
           <p>© 2024 FastFeet</p>
           <span className="md:before:content-['|']" />
