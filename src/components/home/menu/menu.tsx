@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { MenuModal } from "@/components/home/menu-modal";
+import { MenuModal } from "@/components/home/menu/menu-modal";
 import { MenuMain } from "./menu-main";
 
 import { HamburguerIcon } from "@/components/icons/hamburguer-icon";
