@@ -30,6 +30,9 @@ const config: Config = {
         "yellow-slow": "#FFF1D6",
         "ligth-slate-gray": "#BEBCCC",
         "spring-green": "#00DA6D"
+      },
+      screens: {
+        'md2': '880px'
       }
     },
   },
