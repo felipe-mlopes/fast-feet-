@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import { searchInputSchema } from "@/utils/zod-validations";
-import { useState } from "react";
 
 type SearchInputSchema = z.infer<typeof searchInputSchema>;
 
