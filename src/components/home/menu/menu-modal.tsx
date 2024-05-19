@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 
-import { Logo } from "../global/logo";
+import { Logo } from "../../global/logo";
 
-import { LogoIcon } from "../icons/logo-icon";
-import { CloseIcon } from "../icons/close-icon";
+import { LogoIcon } from "../../icons/logo-icon";
+import { CloseIcon } from "../../icons/close-icon";
 import { MenuMain } from "./menu-main";
 
 interface MenuProps {
