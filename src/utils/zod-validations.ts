@@ -101,3 +101,9 @@ export const formSchemaTrackingCode = z.object({
         .max(12, { message: 'O código de rastreio deve conter 12 dígitos.' }),
     city: z.string().optional(),
 });
+
+export const formSchemaContact = z.object({
+    name: z.string().trim().min(4, 'Favor informar um nome válido.'),
+    email: z.string().trim().email({ message: 'Favor informar um e-mail válido.' }),
+    description: z.string().min(10, { message: 'A descrição deve conter pelo menos 10 caracteres.' })
+})
