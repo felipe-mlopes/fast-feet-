@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { TrackButton } from "./track-button";
-import { TrackInput } from "./track-input";
+import { TrackButton } from "./track/track-button";
+import { TrackInput } from "./track/track-input";
 
 export function Main() {
   return (
