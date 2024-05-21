@@ -1,6 +1,6 @@
 "use client";
 
-import { CloseIcon } from "../icons/close-icon";
+import { CloseIcon } from "../../icons/close-icon";
 import { TrackInput } from "./track-input";
 
 interface TrackModalProps {
