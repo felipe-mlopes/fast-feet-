@@ -61,6 +61,7 @@ export function ContactForm({ action }: FormProps) {
             </span>
           )}
         </div>
+
         <div className="w-full">
           <input
             type="email"
@@ -74,6 +75,39 @@ export function ContactForm({ action }: FormProps) {
             </span>
           )}
         </div>
+
+        <fieldset className="w-full" {...register("contact")}>
+          <div className="flex gap-8">
+            <div className="space-x-2">
+              <input
+                type="radio"
+                id="deliveryman"
+                name="contact"
+                value="Entregador"
+              />
+              <label htmlFor="deliveryman" className="text-gray-light">
+                Entregador
+              </label>
+            </div>
+            <div className="space-x-2">
+              <input
+                type="radio"
+                id="recipient"
+                name="contact"
+                value="Destinatário"
+              />
+              <label htmlFor="recipient" className="text-gray-light">
+                Destinatário
+              </label>
+            </div>
+          </div>
+          {errors.contact && (
+            <span className="pt-1 text-xs font-bold text-red-400">
+              {errors.contact?.message}
+            </span>
+          )}
+        </fieldset>
+
         <div className="w-full">
           <textarea
             placeholder="Descreva aqui sua dúvida, sugestão ou reclamação"
