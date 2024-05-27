@@ -6,7 +6,7 @@ import { searchInputSchema } from "@/utils/zod-validations";
 
 type SearchInputSchema = z.infer<typeof searchInputSchema>;
 
-export function UseSearchInput() {
+export function useSearchInput() {
     const { register, watch } = useForm<SearchInputSchema>({
         criteriaMode: 'all',
         mode: 'onChange',
