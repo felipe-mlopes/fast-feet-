@@ -18,7 +18,9 @@ export async function sendContactAction(
     
     const { name, email, description } = result.data
 
-    console.log('name:', name)
+    return {
+        
+    }
 
     /* const response = await api('/deliveryman/sessions', { 
         method: 'POST',
