@@ -8,15 +8,17 @@ import { formSchemaContact } from "@/utils/zod-validations"
 export async function sendContactAction(
     prevState: FormStateTypes,
     formData: FormData,
-): Promise<void> {
+): Promise<FormStateTypes> {
     const rawFormData = Object.fromEntries(formData.entries())
     const result = formSchemaContact.safeParse(rawFormData)
     
-    /* if (!result.success) {
+    if (!result.success) {
         return { error: result.error.issues }
-    } */
+    }
     
-   // const { name, email, description } = result.data
+    const { name, email, description } = result.data
+
+    console.log('name:', name)
 
     /* const response = await api('/deliveryman/sessions', { 
         method: 'POST',
