@@ -1,15 +1,16 @@
 "use client";
 
 import { useParams, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-import { UseSearchInput } from "@/hooks/use-search-input";
+import { useSearchInput } from "@/hooks/use-search-input";
 
 import SearchInput from "../global/search-input";
 import { OrdersPendingWrapper } from "./orders-pending-wrapper";
 import { OrdersDoneWrapper } from "./orders-done-wrapper";
 
 export function DeliveriesMain() {
-  const { register, searchWatch } = UseSearchInput();
+  const { register, searchWatch } = useSearchInput();
 
   const params = useParams();
 
@@ -22,7 +23,9 @@ export function DeliveriesMain() {
         <SearchInput placeholder="Filtrar por bairro" {...register("search")} />
       </section>
       {params.status === "pending" && (
-        <OrdersPendingWrapper city={deliverymanCity!} search={searchWatch} />
+        <Suspense fallback={<div className="animate-spin w-5 h-5" />}>
+          <OrdersPendingWrapper city={deliverymanCity!} search={searchWatch} />
+        </Suspense>
       )}
       {params.status === "done" && (
         <OrdersDoneWrapper city={deliverymanCity!} search={searchWatch} />
