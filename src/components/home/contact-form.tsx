@@ -1,47 +1,59 @@
 "use client";
 
-import {
-  DetailedHTMLProps,
-  FormHTMLAttributes,
-  PropsWithChildren,
-  useRef,
-} from "react";
-import { useFormState } from "react-dom";
+import { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
-import { FormStateTypes } from "@/types";
 import { useFormContact } from "@/hooks/use-form-contact";
+import { formSchemaContact } from "@/utils/zod-validations";
 
 import { Button } from "../global/button";
 
-type HTMLFormProps = DetailedHTMLProps<
-  FormHTMLAttributes<HTMLFormElement>,
-  HTMLFormElement
->;
-
-interface FormProps extends PropsWithChildren<Omit<HTMLFormProps, "action">> {
-  action: (
-    prevState: FormStateTypes,
-    formData: FormData
-  ) => Promise<FormStateTypes>;
-}
-
-export function ContactForm({ action }: FormProps) {
-  const [state, formAction] = useFormState(action, {
-    data: null,
-    error: null,
-  });
-  const { register, handleSubmit, errors } = useFormContact();
+export function ContactForm() {
+  const { register, handleSubmit, reset, errors } = useFormContact();
 
   const formRef = useRef<HTMLFormElement>(null);
 
   function handleFormSubmit(formData: FormData) {
-    formAction(formData);
+    const rawFormData = Object.fromEntries(formData.entries());
+    const result = formSchemaContact.safeParse(rawFormData);
+
+    if (!result.success) {
+      return { error: result.error.issues };
+    }
+
+    const { name, contact, email, description } = result.data;
+
+    const templateEmailParams = {
+      from_name: `${contact} | ${name}`,
+      email,
+      message: description,
+    };
+
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateEmailParams,
+        {
+          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+        }
+      )
+      .then(
+        () => {
+          alert("E-mail enviado com sucesso!");
+          reset();
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          alert(error.text);
+          reset();
+        }
+      );
   }
 
   return (
     <form
       ref={formRef}
-      action={formAction}
       onSubmit={handleSubmit(() =>
         handleFormSubmit(new FormData(formRef.current!))
       )}
@@ -76,14 +88,14 @@ export function ContactForm({ action }: FormProps) {
           )}
         </div>
 
-        <fieldset className="w-full" {...register("contact")}>
+        <fieldset className="w-full">
           <div className="flex gap-8">
             <div className="space-x-2">
               <input
                 type="radio"
                 id="deliveryman"
-                name="contact"
                 value="Entregador"
+                {...register("contact", { value: "Entregador" })}
               />
               <label htmlFor="deliveryman" className="text-gray-light">
                 Entregador
@@ -93,8 +105,8 @@ export function ContactForm({ action }: FormProps) {
               <input
                 type="radio"
                 id="recipient"
-                name="contact"
                 value="Destinatário"
+                {...register("contact", { value: "Destinatário" })}
               />
               <label htmlFor="recipient" className="text-gray-light">
                 Destinatário
