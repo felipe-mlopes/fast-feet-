@@ -1,5 +1,3 @@
-import { sendContactAction } from "@/data/actions/contact";
-
 import { ContactForm } from "./contact-form";
 
 export function Contacts() {
@@ -14,7 +12,7 @@ export function Contacts() {
           Encaminhe sua dúvida, sugestão ou reclamação
         </p>
       </div>
-      <ContactForm action={sendContactAction} />
+      <ContactForm />
     </section>
   );
 }
