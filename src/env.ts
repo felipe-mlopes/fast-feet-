@@ -1,8 +1,12 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  NEXT_PUBLIC_API_BASE_URL: z.string().url(),
-  NEXT_PUBLIC_SESSION_SECRET: z.string()
+  API_BASE_URL: z.string().url(),
+  SESSION_SECRET: z.string(),
+  OPENCAGE_API_KEY: z.string(),
+  EMAILJS_SERVICE_ID: z.string(),
+  EMAILJS_TEMPLATE_ID: z. string(),
+  EMAILJS_PUBLIC_KEY: z.string(),
 })
 
 const parsedEnv = envSchema.safeParse(process.env)
