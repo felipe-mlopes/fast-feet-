@@ -1,12 +1,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 
-import { formSchemaLogin } from "@/utils/zod-validations";
+import { FormLoginProps, formSchemaLogin } from "@/presenter/validations/login.validation";
 
-type FormLoginProps = z.infer<typeof formSchemaLogin>
-
-export function UseFormLogin() {
+export function useFormLogin() {
     const { handleSubmit, register, formState: { isSubmitting, errors }, watch } = useForm<FormLoginProps>({
         criteriaMode: 'all',
         mode: 'onBlur',

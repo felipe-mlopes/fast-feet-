@@ -1,16 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { fetchRecipientEmailsBySearch } from "@/data/actions/recipients";
+import { fetchRecipientEmailsBySearch } from "@/models/recipient/recipients";
+import { RecipientEmail } from "@/models/types/recipient-email";
 
-import { formSchemaCreateOrder } from "@/utils/zod-validations";
-
-type FormCreateOrderProps = z.infer<typeof formSchemaCreateOrder>;
-type RecipientProps = {
-  email: string
-}
+import { FormCreateOrderProps, formSchemaCreateOrder } from "@/presenter/validations/create-order.validation";
 
 export function useFormCreateOrder() {
     const {
@@ -25,7 +20,7 @@ export function useFormCreateOrder() {
         resolver: zodResolver(formSchemaCreateOrder),
       });
 
-      const [emailsSearched, setEmailsSearched] = useState<RecipientProps[]>([])
+      const [emailsSearched, setEmailsSearched] = useState<RecipientEmail[]>([])
     
       const titleWatch = watch('title')
       const emailWatch = watch('email')

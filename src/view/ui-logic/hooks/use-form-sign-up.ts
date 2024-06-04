@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 
-import { formSchemaSignUp } from "@/utils/zod-validations";
-import { cpfMask } from "@/utils/cpf-mask";
+import { FormSignUpProps, formSchemaSignUp } from "@/presenter/validations/sign-up.validation";
 
-type FormSignUpProps = z.infer<typeof formSchemaSignUp>
+import { cpfMask } from "@/view/ui-logic/utils/cpf-mask";
 
-export function UseFormSignUp() {
+export function useFormSignUp() {
     const { handleSubmit, register, formState: { isSubmitting, errors }, watch, setValue } = useForm<FormSignUpProps>({
         criteriaMode: 'all',
         mode: 'onBlur',

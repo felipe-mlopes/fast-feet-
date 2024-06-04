@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-import { formSchemaContact } from "@/utils/zod-validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-type ContactFormSchema = z.infer<typeof formSchemaContact>
+import { ContactFormSchema, formSchemaContact } from "@/presenter/validations/send-contact.validation";
 
 export function useFormContact() {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormSchema>({

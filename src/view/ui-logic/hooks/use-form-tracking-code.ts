@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 
-import { formSchemaTrackingCode } from "@/utils/zod-validations";
-
-type TrackFormSchema = z.infer<typeof formSchemaTrackingCode>;
+import { TrackFormSchema, formSchemaTrackingCode } from "@/presenter/validations/get-order-by-tracking-code.validation";
 
 export function useTrackingCode() {
     const { register, watch, handleSubmit, formState: { errors } } = useForm<TrackFormSchema>({

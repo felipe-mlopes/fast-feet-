@@ -1,5 +1,5 @@
-import { getCurrentPosition } from "@/utils/geolocation";
-import { getCityByCoordinates } from "@/utils/get-city-by-coordinates";
+import { getCurrentPosition } from "@/view/ui-logic/utils/geolocation";
+import { getCityByCoordinates } from "@/view/ui-logic/utils/get-city-by-coordinates";
 import { useCallback, useEffect, useState } from "react";
 
 export function useLocation() {

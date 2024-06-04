@@ -1,10 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 
-import { searchInputSchema } from "@/utils/zod-validations";
-
-type SearchInputSchema = z.infer<typeof searchInputSchema>;
+import { SearchInputSchema, searchInputSchema } from "@/presenter/validations/search-input.validation";
 
 export function useSearchInput() {
     const { register, watch } = useForm<SearchInputSchema>({

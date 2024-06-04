@@ -1,12 +1,11 @@
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { formSchemaRegisterRecipient } from "@/utils/zod-validations";
-import { getAddressByZipcode } from "@/utils/get-address-by-zipcode";
+import { FormRegisterRecipientProps, formSchemaRegisterRecipient } from "@/presenter/validations/register-recipient.validation";
 
-type FormRegisterRecipientProps = z.infer<typeof formSchemaRegisterRecipient>;
+import { getAddressByZipcode } from "@/view/ui-logic/utils/get-address-by-zipcode";
+
 type AddressProps = {
   bairro: string;
   cep: string;
