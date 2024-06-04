@@ -1,4 +1,4 @@
-export interface RecipientsProps {
+export interface Recipient {
     id: string
     name: string
     email: string
@@ -7,10 +7,4 @@ export interface RecipientsProps {
     neighborhood: string,
     city: string,
     state: string
-}
-
-export interface RecipientEmailProps {
-    recipient: {
-        email: string
-    }
 }
