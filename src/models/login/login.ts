@@ -3,10 +3,13 @@
 import { redirect } from "next/navigation"
 
 import { api } from "../api"
-import { getAuthData, getSession, setAuthData } from "./auth"
+import { getAuthData, getSession, setAuthData } from "../auth/auth"
 
-import { formSchemaLogin, formSchemaSignIn, formSchemaSignUp } from "@/utils/zod-validations"
-import { FormStateTypes } from "@/types"
+import { formSchemaSignIn } from "@/presenter/validations/sign-in.validation"
+import { formSchemaLogin } from "@/presenter/validations/login.validation"
+import { formSchemaSignUp } from "@/presenter/validations/sign-up.validation"
+
+import { FormStateTypes } from "@/view/ui-logic/types/form-state"
 
 export async function signInAction(
     prevState: FormStateTypes,

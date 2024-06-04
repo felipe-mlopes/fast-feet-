@@ -4,8 +4,8 @@ import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 
 import { api } from "../api"
-import { getSession } from "./auth"
-import { getRecipientByEmail } from "./recipients"
+import { getSession } from "../auth/auth"
+import { getRecipientByEmail } from "../recipient/recipients"
 
 import { formSchemaCreateOrder, formSchemaUploadAttachment } from "@/utils/zod-validations"
 

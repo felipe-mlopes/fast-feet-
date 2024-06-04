@@ -3,12 +3,11 @@
 import { redirect } from "next/navigation"
 
 import { api } from "../api";
-import { getSession } from "./auth";
+import { getSession } from "../auth/auth";
 
 import { formSchemaOutputRegisterRecipient } from "@/utils/zod-validations";
 
 import { FormStateTypes } from "@/types";
-import { RecipientEmailProps, RecipientsProps } from "../types/recipients";
 
 export async function registerRecipient(
     prevState: FormStateTypes,
