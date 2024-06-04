@@ -16,7 +16,7 @@ export const defaultSession: SessionData = {
 }
 
 export const sessionOptions: SessionOptions = {
-    password: env.NEXT_PUBLIC_SESSION_SECRET,
+    password: env.SESSION_SECRET,
     cookieName: 'auth',
     cookieOptions: {
         httpOnly: true,
