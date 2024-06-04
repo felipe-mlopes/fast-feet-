@@ -1,4 +1,4 @@
-export interface OrdersProps {
+export interface Order {
     id: string
     trackingCode?: string
     title: string
