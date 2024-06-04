@@ -1,20 +1,20 @@
 import Link from "next/link";
 import dayjs from "dayjs";
 
-import { getOrderByDetails } from "@/data/actions/orders";
+import { getOrderByDetails } from "@/models/order/orders";
 
-import { OrdersProps } from "@/data/types/orders";
+import { Order } from "@/models/types/order";
 
-import { statusEdit } from "@/utils/transform-status";
-import { zipcodeMask } from "@/utils/zipcode-mask";
+import { statusEdit } from "@/view/ui-logic/utils/transform-status";
+import { zipcodeMask } from "@/view/ui-logic/utils/zipcode-mask";
 
-import { DeliveryStatusHeader } from "@/components/deliveries/delivery-status-header";
-import { PicknUpButton } from "@/components/deliveries/picknup-button";
-import { Button } from "@/components/global/button";
+import { DeliveryStatusHeader } from "@/view/components/deliveries/delivery-status-header";
+import { PicknUpButton } from "@/view/components/deliveries/picknup-button";
+import { Button } from "@/view/components/global/button";
 
-import { ArrowIcon } from "@/components/icons/arrow-icon";
-import { FolderIcon } from "@/components/icons/folder-icon";
-import { InfoIcon } from "@/components/icons/info-icon";
+import { ArrowIcon } from "@/view/components/icons/arrow-icon";
+import { FolderIcon } from "@/view/components/icons/folder-icon";
+import { InfoIcon } from "@/view/components/icons/info-icon";
 
 export default async function DeliveryDetails({
   params,
@@ -34,7 +34,7 @@ export default async function DeliveryDetails({
     createdAt,
     picknUpAt,
     deliveryAt,
-  } = order as OrdersProps;
+  } = order as Order;
 
   const transformedStatus = statusEdit(status);
   const transformedZipcode = zipcodeMask(recipientZipcode);
