@@ -9,8 +9,9 @@ import {
 } from "react";
 import { useFormState } from "react-dom";
 
-import { UseFormSignIn } from "@/hooks/use-form-sign-in";
-import { Color, FormStateTypes } from "@/types";
+import { useFormLogin } from "@/view/ui-logic/hooks/use-form-login";
+import { FormStateTypes } from "@/view/ui-logic/types/form-state";
+import { Color } from "@/view/ui-logic/types/color-enum.type";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -33,7 +34,7 @@ interface FormProps extends PropsWithChildren<Omit<HTMLFormProps, "action">> {
   ) => Promise<FormStateTypes>;
 }
 
-export function SignInForm({ action, children, ...props }: FormProps) {
+export function LoginForm({ action, children, ...props }: FormProps) {
   const [state, formAction] = useFormState(action, {
     data: null,
     error: null,
@@ -46,9 +47,9 @@ export function SignInForm({ action, children, ...props }: FormProps) {
     register,
     errors,
     isSubmitting,
-    cpfWatch,
+    emailWatch,
     passwordWatch,
-  } = UseFormSignIn();
+  } = useFormLogin();
   const formRef = useRef<HTMLFormElement>(null);
 
   function handleModal() {
@@ -75,21 +76,24 @@ export function SignInForm({ action, children, ...props }: FormProps) {
     >
       <div className="space-y-2">
         <Input
-          type="text"
-          id="cpf"
-          maxLength={14}
-          placeholder="CPF"
-          {...register("cpf")}
+          type="email"
+          id="email"
+          placeholder="Digite seu e-mail cadastrado"
+          {...register("email")}
         >
           <ProfileIcon
             color={
-              !!cpfWatch ? (errors.cpf ? Color.Error : Color.Ok) : Color.Default
+              !!emailWatch
+                ? errors.email
+                  ? Color.Error
+                  : Color.Ok
+                : Color.Default
             }
           />
         </Input>
-        {errors.cpf && (
+        {errors.email && (
           <span className="pt-1 text-xs font-bold text-red-400">
-            {errors.cpf?.message}
+            {errors.email?.message}
           </span>
         )}
         <Input

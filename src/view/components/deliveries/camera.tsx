@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 
-import { UseCamera } from "@/hooks/use-camera";
+import { UseCamera } from "@/view/ui-logic/hooks/use-camera";
 
 export function Camera() {
   const videoRef = useRef<HTMLVideoElement>(null);

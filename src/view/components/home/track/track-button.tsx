@@ -1,6 +1,6 @@
 "use client";
 
-import { useWindowSize } from "@/hooks/useWindowSize";
+import { useWindowSize } from "@/view/ui-logic/hooks/useWindowSize";
 import { useState } from "react";
 import { TrackModal } from "./track-modal";
 

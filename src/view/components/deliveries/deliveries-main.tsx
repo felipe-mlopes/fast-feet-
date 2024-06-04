@@ -3,7 +3,7 @@
 import { useParams, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-import { useSearchInput } from "@/hooks/use-search-input";
+import { useSearchInput } from "@/view/ui-logic/hooks/use-search-input";
 
 import SearchInput from "../global/search-input";
 import { OrdersPendingWrapper } from "./orders-pending-wrapper";

@@ -1,16 +1,16 @@
 import Link from "next/link";
 import dayjs from "dayjs";
 
-import { OrdersProps } from "@/data/types/orders";
+import { Order } from "@/models/types/order";
 
-import { transformStatus } from "@/utils/transform-status";
+import { transformStatus } from "@/view/ui-logic/utils/transform-status";
 
 import { StatusSteps } from "./status-steps";
 
 import { ArrowIcon } from "../icons/arrow-icon";
 import { PackageIcon } from "../icons/package-icon";
 
-export function Card({ id, title, createdAt, status }: OrdersProps) {
+export function Card({ id, title, createdAt, status }: Order) {
   const createAtOnData = dayjs(createdAt).format("DD/MM/YYYY");
 
   const statusParams = transformStatus(status);

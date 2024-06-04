@@ -3,9 +3,9 @@
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-import { useLocation } from "@/hooks/use-location";
+import { useLocation } from "@/view/ui-logic/hooks/use-location";
 
-import { PinIcon } from "@/components/icons/pin-icon";
+import { PinIcon } from "@/view/components/icons/pin-icon";
 
 export function DeliverymanInfo() {
   const { location } = useLocation();

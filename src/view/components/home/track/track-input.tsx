@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { FormHTMLAttributes } from "react";
 
-import { useTrackingCode } from "@/hooks/use-form-tracking-code";
+import { useTrackingCode } from "@/view/ui-logic/hooks/use-form-tracking-code";
 
 interface TrackInputProps extends FormHTMLAttributes<HTMLFormElement> {}
 

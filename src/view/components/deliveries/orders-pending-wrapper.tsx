@@ -2,27 +2,30 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { OrdersProps } from "@/data/types/orders";
-import { getOrdersDone } from "@/data/actions/orders";
+import { Order } from "@/models/types/order";
+import { getOrdersPending } from "@/models/order/orders";
 
 import { Card } from "./card";
 
-interface OrdersDoneWrapperProps {
+interface OrdersPendingWrapperProps {
   city: string;
   search: string;
 }
 
-export function OrdersDoneWrapper({ city, search }: OrdersDoneWrapperProps) {
-  const [orders, setOrders] = useState<OrdersProps[]>([]);
+export function OrdersPendingWrapper({
+  city,
+  search,
+}: OrdersPendingWrapperProps) {
+  const [orders, setOrders] = useState<Order[]>([]);
 
   const deliverymanCity = city && city.toLowerCase();
 
   const handleFetchOrders = useCallback(async () => {
-    const { ordersDone } = await getOrdersDone(deliverymanCity);
+    const { ordersPending } = await getOrdersPending(deliverymanCity);
 
-    if (!ordersDone) return;
+    if (!ordersPending) return;
 
-    setOrders(ordersDone);
+    setOrders(ordersPending);
   }, [deliverymanCity]);
 
   useEffect(() => {
@@ -49,7 +52,7 @@ export function OrdersDoneWrapper({ city, search }: OrdersDoneWrapperProps) {
         <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
       </div>
       <div className="flex flex-col items-center justify-center gap-4 pt-4 md:flex-row md:flex-wrap md:gap-6">
-        {ordersFiltered.map((order: OrdersProps) => {
+        {ordersFiltered.map((order: Order) => {
           return (
             <Card
               key={order.id}

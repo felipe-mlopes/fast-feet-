@@ -2,7 +2,7 @@
 
 import { HTMLAttributes, useState } from "react";
 
-import { editOrderStatusToPicknUp } from "@/data/actions/orders";
+import { editOrderStatusToPicknUp } from "@/models/order/orders";
 
 import { Button } from "../global/button";
 import { Modal } from "../global/modal";

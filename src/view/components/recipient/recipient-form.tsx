@@ -3,10 +3,11 @@
 import { useRef } from "react";
 import { useFormState } from "react-dom";
 
-import { registerRecipient } from "@/data/actions/recipients";
-import { prepareFormData } from "@/utils/prepare-form-data";
-import { useFormRegisterRecipient } from "@/hooks/use-form-register-recipient";
-import { Color } from "@/types";
+import { registerRecipient } from "@/models/recipient/recipients";
+
+import { prepareFormData } from "@/view/ui-logic/utils/prepare-form-data";
+import { useFormRegisterRecipient } from "@/view/ui-logic/hooks/use-form-register-recipient";
+import { Color } from "@/view/ui-logic/types/color-enum.type";
 
 import Input from "../global/input";
 import { Button } from "../global/button";

@@ -9,17 +9,18 @@ import {
 } from "react";
 import { useFormState } from "react-dom";
 
-import { UseFormSignUp } from "@/hooks/use-form-sign-up";
-import { Color, FormStateTypes } from "@/types";
+import { useFormSignUp } from "@/view/ui-logic/hooks/use-form-sign-up";
+import { FormStateTypes } from "@/view/ui-logic/types/form-state";
+import { Color } from "@/view/ui-logic/types/color-enum.type";
 
 import Input from "../global/input";
-import { Button } from "@/components/global/button";
+import { Button } from "@/view/components/global/button";
 import { Modal } from "../global/modal";
 
-import { MailIcon } from "@/components/icons/mail-icon";
-import { PadlockIcon } from "@/components/icons/padlock-icon";
-import { ProfileIcon } from "@/components/icons/profile-icon";
-import { IdIcon } from "@/components/icons/id-icon";
+import { MailIcon } from "@/view/components/icons/mail-icon";
+import { PadlockIcon } from "@/view/components/icons/padlock-icon";
+import { ProfileIcon } from "@/view/components/icons/profile-icon";
+import { IdIcon } from "@/view/components/icons/id-icon";
 
 type HTMLFormProps = DetailedHTMLProps<
   FormHTMLAttributes<HTMLFormElement>,
@@ -50,7 +51,7 @@ export function SignUpForm({ action }: FormProps) {
     emailWatch,
     passwordWatch,
     confirmPasswordWatch,
-  } = UseFormSignUp();
+  } = useFormSignUp();
   const formRef = useRef<HTMLFormElement>(null);
 
   function handleModal() {

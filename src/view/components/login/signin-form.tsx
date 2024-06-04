@@ -4,14 +4,10 @@ import {
   DetailedHTMLProps,
   FormHTMLAttributes,
   PropsWithChildren,
-  useRef,
-  useState,
 } from "react";
-import { useFormState } from "react-dom";
 
-import { UseFormLogin } from "@/hooks/use-form-login";
-
-import { Color, FormStateTypes } from "@/types";
+import { useSignInForm } from "@/view/ui-logic/hooks/use-sign-in-form";
+import { Color } from "@/view/ui-logic/types/color-enum.type";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -27,73 +23,48 @@ type HTMLFormProps = DetailedHTMLProps<
   HTMLFormElement
 >;
 
-interface FormProps extends PropsWithChildren<Omit<HTMLFormProps, "action">> {
-  action: (
-    prevState: FormStateTypes,
-    formData: FormData
-  ) => Promise<FormStateTypes>;
-}
+interface SignInFormProps extends PropsWithChildren<HTMLFormProps> {}
 
-export function LoginForm({ action, children, ...props }: FormProps) {
-  const [state, formAction] = useFormState(action, {
-    data: null,
-    error: null,
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+export function SignInForm({ action, children, ...props }: SignInFormProps) {
   const {
-    handleSubmit,
+    formRef,
+    formAction,
+    state,
+    showPassword,
+    toggleShowPassword,
+    showModal,
+    handleModal,
     register,
     errors,
     isSubmitting,
-    emailWatch,
+    cpfWatch,
     passwordWatch,
-  } = UseFormLogin();
-  const formRef = useRef<HTMLFormElement>(null);
-
-  function handleModal() {
-    setShowModal(!showModal);
-  }
-
-  function toggleShowPassword() {
-    setShowPassword(!showPassword);
-  }
-
-  function handleFormSubmit(formData: FormData) {
-    formAction(formData);
-  }
+  } = useSignInForm();
 
   return (
     <form
       ref={formRef}
       action={formAction}
-      onSubmit={handleSubmit(() =>
-        handleFormSubmit(new FormData(formRef.current!))
-      )}
       className="flex flex-col gap-[1.625rem] pb-24 lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-2 lg:flex lg:flex-col lg:items-center lg:mb-0"
       {...props}
     >
       <div className="space-y-2">
         <Input
-          type="email"
-          id="email"
-          placeholder="Digite seu e-mail cadastrado"
-          {...register("email")}
+          type="text"
+          id="cpf"
+          maxLength={14}
+          placeholder="CPF"
+          {...register("cpf")}
         >
           <ProfileIcon
             color={
-              !!emailWatch
-                ? errors.email
-                  ? Color.Error
-                  : Color.Ok
-                : Color.Default
+              !!cpfWatch ? (errors.cpf ? Color.Error : Color.Ok) : Color.Default
             }
           />
         </Input>
-        {errors.email && (
+        {errors.cpf && (
           <span className="pt-1 text-xs font-bold text-red-400">
-            {errors.email?.message}
+            {errors.cpf?.message}
           </span>
         )}
         <Input

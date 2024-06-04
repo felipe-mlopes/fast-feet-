@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
-import { useFormContact } from "@/hooks/use-form-contact";
-import { formSchemaContact } from "@/utils/zod-validations";
+import { formSchemaContact } from "@/presenter/validations/send-contact.validation";
+
+import { useFormContact } from "@/view/ui-logic/hooks/use-form-contact";
 
 import { Button } from "../global/button";
 

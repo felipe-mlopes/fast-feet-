@@ -3,10 +3,10 @@
 import { useRef, useState } from "react";
 import { useFormState } from "react-dom";
 
-import { createOrder } from "@/data/actions/orders";
-import { useFormCreateOrder } from "@/hooks/use-form-create-order";
+import { createOrder } from "@/models/order/orders";
 
-import { Color } from "@/types";
+import { useFormCreateOrder } from "@/view/ui-logic/hooks/use-form-create-order";
+import { Color } from "@/view/ui-logic/types/color-enum.type";
 
 import Input from "../global/input";
 import { Button } from "../global/button";

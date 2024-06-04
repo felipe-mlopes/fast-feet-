@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-import { UseCamera } from "@/hooks/use-camera";
+import { UseCamera } from "@/view/ui-logic/hooks/use-camera";
 
 import { CameraIcon } from "../icons/camera-icon";
 import { RepicIcon } from "../icons/repic-icon";
