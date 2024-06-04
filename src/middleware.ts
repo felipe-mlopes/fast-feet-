@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getIronSession } from "iron-session";
 
-import { SessionData, sessionOptions } from "./data/actions/auth";
+import { SessionData, sessionOptions } from "./model/auth/auth";
 
 export async function middleware(request: NextRequest) {
 
