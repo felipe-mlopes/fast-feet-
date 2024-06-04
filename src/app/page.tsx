@@ -1,11 +1,11 @@
-import { Logo } from "@/components/global/logo";
-import { Menu } from "@/components/home/menu/menu";
-import { Main } from "@/components/home/main";
-import { Solutions } from "@/components/home/solutions";
+import { Logo } from "@/view/components/global/logo";
+import { Menu } from "@/view/components/home/menu/menu";
+import { Main } from "@/view/components/home/main";
+import { Solutions } from "@/view/components/home/solutions";
 
-import { LogoIcon } from "@/components/icons/logo-icon";
-import { Contacts } from "@/components/home/contacts";
-import { Banner } from "@/components/home/banner";
+import { LogoIcon } from "@/view/components/icons/logo-icon";
+import { Contacts } from "@/view/components/home/contacts";
+import { Banner } from "@/view/components/home/banner";
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { RecipientForm } from "@/components/recipient/recipient-form";
+import { RecipientForm } from "@/view/components/recipient/recipient-form";
 
 export default function Recipient() {
   return (

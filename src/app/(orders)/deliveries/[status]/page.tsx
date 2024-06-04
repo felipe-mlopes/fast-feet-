@@ -1,11 +1,11 @@
-import { getSession } from "@/data/actions/auth";
-import { logoutAction } from "@/data/actions/login";
+import { getSession } from "@/models/auth/auth";
+import { logoutAction } from "@/models/login/login";
 
-import { DeliverymanInfo } from "@/components/order/deliveryman-info";
-import { ButtonStatus } from "@/components/deliveries/button-status";
+import { DeliverymanInfo } from "@/view/components/order/deliveryman-info";
+import { ButtonStatus } from "@/view/components/deliveries/button-status";
 
-import { ExistIcon } from "@/components/icons/exist-icon";
-import { DeliveriesMain } from "@/components/deliveries/deliveries-main";
+import { ExistIcon } from "@/view/components/icons/exist-icon";
+import { DeliveriesMain } from "@/view/components/deliveries/deliveries-main";
 
 export default async function Deliveries({
   params,

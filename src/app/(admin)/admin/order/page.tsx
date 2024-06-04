@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { OrderForm } from "@/components/order/order-form";
+import { OrderForm } from "@/view/components/order/order-form";
 
 export default function Order() {
   return (

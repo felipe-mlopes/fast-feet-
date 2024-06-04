@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { UploadForm } from "@/components/deliveries/upload-form";
+import { UploadForm } from "@/view/components/deliveries/upload-form";
 
-import { ArrowIcon } from "@/components/icons/arrow-icon";
-import { Button } from "@/components/global/button";
-import { DeliveryStatusHeader } from "@/components/deliveries/delivery-status-header";
+import { ArrowIcon } from "@/view/components/icons/arrow-icon";
+import { Button } from "@/view/components/global/button";
+import { DeliveryStatusHeader } from "@/view/components/deliveries/delivery-status-header";
 
 export default function Upload({ params }: { params: { orderId: string } }) {
   return (

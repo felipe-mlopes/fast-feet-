@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { LongArrowIcon } from "@/components/icons/long-arrow-icon";
+import { LongArrowIcon } from "@/view/components/icons/long-arrow-icon";
 
 export default function ForgotPassword() {
   return (

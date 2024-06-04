@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
-import { Header } from "@/components/global/header";
-import { Cover } from "@/components/global/cover";
+import { Header } from "@/view/components/global/header";
+import { Cover } from "@/view/components/global/cover";
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (

@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { loginAction } from "@/data/actions/login";
+import { loginAction } from "@/models/login/login";
 
-import { LoginForm } from "@/components/login/login-form";
+import { LoginForm } from "@/view/components/login/login-form";
 
 export default function Login() {
   return (

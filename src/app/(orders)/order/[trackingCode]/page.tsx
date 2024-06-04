@@ -1,4 +1,4 @@
-import { getOrderByTrackingCode } from "@/data/actions/orders";
+import { getOrderByTrackingCode } from "@/models/order/orders";
 
 export default async function TrackingCode({
   params,

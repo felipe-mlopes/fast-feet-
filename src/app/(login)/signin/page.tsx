@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { getSession } from "@/data/actions/auth";
-import { signInAction } from "@/data/actions/login";
+import { getSession } from "@/models/auth/auth";
+import { signInAction } from "@/models/actions/sign-in.action";
 
-import { SignInForm } from "@/components/login/signin-form";
+import { SignInForm } from "@/view/components/login/signin-form";
 
 export default async function SignIn() {
   const { role } = await getSession();
