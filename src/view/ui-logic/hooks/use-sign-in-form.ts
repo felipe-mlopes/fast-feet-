@@ -10,7 +10,7 @@ import { FormSignInProps, formSchemaSignIn } from "@/presenter/validations/sign-
 import { cpfMask } from "@/view/ui-logic/utils/cpf-mask";
 
 export function useSignInForm() {   
-    const [state, formAction] = useFormState(
+    const [state, handleSignIn] = useFormState(
         signInAction, {
             data: null,
             error: null,
@@ -56,6 +56,6 @@ export function useSignInForm() {
         showModal,
         showPassword,
         state,
-        formAction,
+        handleSignIn,
     }
 }
