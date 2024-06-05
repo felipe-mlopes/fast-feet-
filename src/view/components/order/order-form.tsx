@@ -6,7 +6,7 @@ import { useFormState } from "react-dom";
 import { createOrder } from "@/models/order/orders";
 
 import { useFormCreateOrder } from "@/view/ui-logic/hooks/use-form-create-order";
-import { Color } from "@/view/ui-logic/types/color-enum.type";
+import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -107,10 +107,10 @@ export function OrderForm() {
                   return (
                     <li
                       key={idx}
-                      onClick={() => handleSelectClick(option.email)}
+                      onClick={() => handleSelectClick(option.recipient.email)}
                       className="p-1.5 hover:bg-orange-light hover:opacity-90 hover:rounded hover:cursor-pointer"
                     >
-                      {option.email}
+                      {option.recipient.email}
                     </li>
                   );
                 })}
