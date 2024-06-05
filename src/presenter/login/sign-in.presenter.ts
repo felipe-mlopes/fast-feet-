@@ -6,11 +6,11 @@ import { formSchemaSignIn } from "@/presenter/validations/sign-in.validation";
 
 import { FormStateTypes } from "@/view/ui-logic/types/form-state";
 
-export class SignInFormPresenter {
-    private signInFormModel: SignInModel;
+export class SignInPresenter {
+    private signInModel: SignInModel;
 
     constructor() {
-        this.signInFormModel = new SignInModel();
+        this.signInModel = new SignInModel();
     }
 
     async handleFormSubmit(formData: FormData): Promise<FormStateTypes> {
@@ -23,7 +23,7 @@ export class SignInFormPresenter {
 
         const { cpf, password } = result.data;
 
-        const isAuthenticated = await this.signInFormModel.handle({
+        const isAuthenticated = await this.signInModel.handle({
             cpf,
             password,
         });
