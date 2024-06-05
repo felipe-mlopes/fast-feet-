@@ -1,8 +1,7 @@
-import Image from "next/image";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 import { getSession } from "@/models/auth/auth";
-import { signUpAction } from "@/models/login/login";
 
 import { SignUpForm } from "@/view/components/login/signup-form";
 
@@ -28,7 +27,7 @@ export default async function SignUp() {
       />
       <div className="space-y-8 md:space-y-12 md:px-72 lg:px-0">
         <h2 className="text-xl text-gray-light">Faça seu cadastro abaixo:</h2>
-        <SignUpForm action={signUpAction} />
+        <SignUpForm />
       </div>
     </main>
   );
