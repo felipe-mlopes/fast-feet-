@@ -4,14 +4,10 @@ import {
   DetailedHTMLProps,
   FormHTMLAttributes,
   PropsWithChildren,
-  useRef,
-  useState,
 } from "react";
-import { useFormState } from "react-dom";
 
-import { useFormLogin } from "@/view/ui-logic/hooks/use-form-login";
-import { FormStateTypes } from "@/view/ui-logic/types/form-state";
-import { Color } from "@/view/ui-logic/types/color-enum.type";
+import { useLoginForm } from "@/view/ui-logic/hooks/use-login-form";
+import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -27,52 +23,29 @@ type HTMLFormProps = DetailedHTMLProps<
   HTMLFormElement
 >;
 
-interface FormProps extends PropsWithChildren<Omit<HTMLFormProps, "action">> {
-  action: (
-    prevState: FormStateTypes,
-    formData: FormData
-  ) => Promise<FormStateTypes>;
-}
+interface LoginFormProps extends PropsWithChildren<HTMLFormProps> {}
 
-export function LoginForm({ action, children, ...props }: FormProps) {
-  const [state, formAction] = useFormState(action, {
-    data: null,
-    error: null,
-  });
-
-  const [showPassword, setShowPassword] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+export function LoginForm({ children }: LoginFormProps) {
   const {
-    handleSubmit,
     register,
     errors,
     isSubmitting,
     emailWatch,
     passwordWatch,
-  } = useFormLogin();
-  const formRef = useRef<HTMLFormElement>(null);
-
-  function handleModal() {
-    setShowModal(!showModal);
-  }
-
-  function toggleShowPassword() {
-    setShowPassword(!showPassword);
-  }
-
-  function handleFormSubmit(formData: FormData) {
-    formAction(formData);
-  }
+    formRef,
+    showPassword,
+    toggleShowPassword,
+    showModal,
+    handleModal,
+    state,
+    handleLoginForm,
+  } = useLoginForm();
 
   return (
     <form
       ref={formRef}
-      action={formAction}
-      onSubmit={handleSubmit(() =>
-        handleFormSubmit(new FormData(formRef.current!))
-      )}
-      className="flex flex-col gap-[1.625rem] pb-24 lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-2 lg:flex lg:flex-col lg:items-center lg:mb-0"
-      {...props}
+      action={handleLoginForm}
+      className="flex flex-col gap-[1.625rem] pb-24 md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-2 md:flex md:flex-col md:items-center md:mb-0 md:pb-0"
     >
       <div className="space-y-2">
         <Input
