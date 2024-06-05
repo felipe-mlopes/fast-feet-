@@ -7,9 +7,10 @@ import { api } from "../api"
 import { getSession } from "../auth/auth"
 import { getRecipientByEmail } from "../recipient/recipients"
 
-import { formSchemaCreateOrder, formSchemaUploadAttachment } from "@/utils/zod-validations"
+import { formSchemaCreateOrder } from "@/presenter/validations/create-order.validation"
+import { formSchemaUploadAttachment } from "@/presenter/validations/upload-attachment.validation"
 
-import { FormStateTypes } from "@/types"
+import { FormStateTypes } from "@/view/ui-logic/types/form-state"
 
 export async function getOrdersPending(city: string) {
     const { token } = await getSession()

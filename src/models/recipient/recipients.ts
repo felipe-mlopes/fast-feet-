@@ -5,9 +5,8 @@ import { redirect } from "next/navigation"
 import { api } from "../api";
 import { getSession } from "../auth/auth";
 
-import { formSchemaOutputRegisterRecipient } from "@/utils/zod-validations";
-
-import { FormStateTypes } from "@/types";
+import { formSchemaOutputRegisterRecipient } from "@/presenter/validations/register-recipient.validation";
+import { FormStateTypes } from "@/view/ui-logic/types/form-state";
 
 export async function registerRecipient(
     prevState: FormStateTypes,
