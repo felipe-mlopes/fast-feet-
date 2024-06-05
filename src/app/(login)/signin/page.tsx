@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 import { getSession } from "@/models/auth/auth";
-import { signInAction } from "@/models/actions/sign-in.action";
 
 import { SignInForm } from "@/view/components/login/signin-form";
 
@@ -28,10 +27,7 @@ export default async function SignIn() {
           Faça seu login para começar suas entregas.
         </p>
       </div>
-      <SignInForm
-        action={signInAction}
-        className="flex flex-col gap-[1.625rem] pb-24 md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-2 md:flex md:flex-col md:items-center md:mb-0 md:pb-0"
-      >
+      <SignInForm>
         <div className="flex justify-between items-center">
           <label htmlFor="remember" className="flex gap-3 items-center">
             <input
