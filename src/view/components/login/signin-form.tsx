@@ -7,7 +7,7 @@ import {
 } from "react";
 
 import { useSignInForm } from "@/view/ui-logic/hooks/use-sign-in-form";
-import { Color } from "@/view/ui-logic/types/color-enum.type";
+import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -25,10 +25,10 @@ type HTMLFormProps = DetailedHTMLProps<
 
 interface SignInFormProps extends PropsWithChildren<HTMLFormProps> {}
 
-export function SignInForm({ action, children, ...props }: SignInFormProps) {
+export function SignInForm({ children }: SignInFormProps) {
   const {
     formRef,
-    formAction,
+    handleSignIn,
     state,
     showPassword,
     toggleShowPassword,
@@ -44,9 +44,8 @@ export function SignInForm({ action, children, ...props }: SignInFormProps) {
   return (
     <form
       ref={formRef}
-      action={formAction}
-      className="flex flex-col gap-[1.625rem] pb-24 lg:row-start-2 lg:row-end-3 lg:col-start-2 lg:col-end-2 lg:flex lg:flex-col lg:items-center lg:mb-0"
-      {...props}
+      action={handleSignIn}
+      className="flex flex-col gap-[1.625rem] pb-24 md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-2 md:flex md:flex-col md:items-center md:mb-0 md:pb-0"
     >
       <div className="space-y-2">
         <Input
