@@ -1,7 +1,5 @@
 import Link from "next/link";
 
-import { loginAction } from "@/models/login/login";
-
 import { LoginForm } from "@/view/components/login/login-form";
 
 export default function Login() {
@@ -12,10 +10,7 @@ export default function Login() {
           Faça seu login para acessar o painel administrativo.
         </p>
       </div>
-      <LoginForm
-        action={loginAction}
-        className="flex flex-col gap-[1.625rem] pb-24 md:row-start-2 md:row-end-3 md:col-start-2 md:col-end-2 md:flex md:flex-col md:items-center md:mb-0 md:pb-0"
-      >
+      <LoginForm>
         <div className="flex justify-between items-center">
           <label htmlFor="remember" className="flex gap-3 items-center">
             <input
