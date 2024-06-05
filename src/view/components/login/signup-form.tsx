@@ -1,17 +1,7 @@
 "use client";
 
-import {
-  DetailedHTMLProps,
-  FormHTMLAttributes,
-  PropsWithChildren,
-  useRef,
-  useState,
-} from "react";
-import { useFormState } from "react-dom";
-
-import { useFormSignUp } from "@/view/ui-logic/hooks/use-form-sign-up";
-import { FormStateTypes } from "@/view/ui-logic/types/form-state";
-import { Color } from "@/view/ui-logic/types/color-enum.type";
+import { useSignUpForm } from "@/view/ui-logic/hooks/use-sign-up-form";
+import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "@/view/components/global/button";
@@ -22,27 +12,8 @@ import { PadlockIcon } from "@/view/components/icons/padlock-icon";
 import { ProfileIcon } from "@/view/components/icons/profile-icon";
 import { IdIcon } from "@/view/components/icons/id-icon";
 
-type HTMLFormProps = DetailedHTMLProps<
-  FormHTMLAttributes<HTMLFormElement>,
-  HTMLFormElement
->;
-
-interface FormProps extends PropsWithChildren<Omit<HTMLFormProps, "action">> {
-  action: (
-    prevState: FormStateTypes,
-    formData: FormData
-  ) => Promise<FormStateTypes>;
-}
-
-export function SignUpForm({ action }: FormProps) {
-  const [state, formAction] = useFormState(action, {
-    data: null,
-    error: null,
-  });
-
-  const [showModal, setShowModal] = useState(false);
+export function SignUpForm() {
   const {
-    handleSubmit,
     register,
     errors,
     isSubmitting,
@@ -51,26 +22,15 @@ export function SignUpForm({ action }: FormProps) {
     emailWatch,
     passwordWatch,
     confirmPasswordWatch,
-  } = useFormSignUp();
-  const formRef = useRef<HTMLFormElement>(null);
-
-  function handleModal() {
-    setShowModal(!showModal);
-  }
-
-  function handleFormSubmit(formData: FormData) {
-    formAction(formData);
-  }
+    formRef,
+    showModal,
+    handleModal,
+    state,
+    handleSignUp,
+  } = useSignUpForm();
 
   return (
-    <form
-      ref={formRef}
-      action={formAction}
-      onSubmit={handleSubmit(() =>
-        handleFormSubmit(new FormData(formRef.current!))
-      )}
-      className="flex flex-col gap-10"
-    >
+    <form ref={formRef} action={handleSignUp} className="flex flex-col gap-10">
       <div className="space-y-4 text-gray-light">
         <div className="space-y-2 w-full">
           <label>Nome Completo</label>
