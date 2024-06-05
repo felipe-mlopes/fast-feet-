@@ -7,7 +7,7 @@ import { registerRecipient } from "@/models/recipient/recipients";
 
 import { prepareFormData } from "@/view/ui-logic/utils/prepare-form-data";
 import { useFormRegisterRecipient } from "@/view/ui-logic/hooks/use-form-register-recipient";
-import { Color } from "@/view/ui-logic/types/color-enum.type";
+import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
