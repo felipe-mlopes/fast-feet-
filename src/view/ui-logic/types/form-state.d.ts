@@ -1,6 +1,6 @@
 import { ZodIssue } from "zod"
 
-type ValidationError = Partial<Pick<ZodIssue, 'path' | 'message'>>
+export type ValidationError = Partial<Pick<ZodIssue, 'path' | 'message'>>
 
 export interface FormStateTypes {
     data?: string | null
