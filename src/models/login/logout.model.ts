@@ -1,11 +1,11 @@
 import { getSession } from "../auth/auth";
 
 interface ILoginModel {
-    handle(): Promise<boolean>
+    execute(): Promise<boolean>
 }
 
 export class LoginModel implements ILoginModel {
-    async handle(): Promise<boolean> {
+    async execute(): Promise<boolean> {
         const session = await getSession()
 
         if (session) {

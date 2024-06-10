@@ -9,11 +9,11 @@ interface LoginData {
 }
 
 interface ILoginModel {
-    handle({ email, password }: LoginData): Promise<boolean>
+    execute({ email, password }: LoginData): Promise<boolean>
 }
 
 export class LoginModel implements ILoginModel {
-    async handle({ email, password }: LoginData): Promise<boolean> {
+    async execute({ email, password }: LoginData): Promise<boolean> {
         const session = await getSession()
         
         const response = await api('/deliveryman/sessions', { 

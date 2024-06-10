@@ -9,11 +9,11 @@ interface SignInData {
 }
 
 interface ISignInModel {
-    handle({ cpf, password }: SignInData): Promise<boolean>
+    execute({ cpf, password }: SignInData): Promise<boolean>
 }
 
 export class SignInModel implements ISignInModel {
-    async handle({ cpf, password }: SignInData): Promise<boolean> {        
+    async execute({ cpf, password }: SignInData): Promise<boolean> {        
         const session = await getSession()
 
         const response = await api('/deliveryman/sessions', { 

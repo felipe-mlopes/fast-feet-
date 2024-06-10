@@ -8,11 +8,11 @@ interface SignUpData {
 }
 
 interface ISignUpModel {
-    handle({ name, email, cpf, password }: SignUpData): Promise<boolean>
+    execute({ name, email, cpf, password }: SignUpData): Promise<boolean>
 }
 
 export class SignUpModel implements ISignUpModel {
-    async handle({ name, email, cpf, password }: SignUpData): Promise<boolean> {
+    async execute({ name, email, cpf, password }: SignUpData): Promise<boolean> {
         const response = await api('/deliveryman', { 
             method: 'POST',
             headers: {
