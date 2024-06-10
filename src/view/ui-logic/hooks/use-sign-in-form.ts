@@ -3,10 +3,9 @@ import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { signInAction } from "@/models/actions/sign-in.action";
-
 import { FormSignInProps, formSchemaSignIn } from "@/presenter/validations/sign-in.validation";
 
+import { signInAction } from "@/view/ui-logic/actions/sign-in.action";
 import { cpfMask } from "@/view/ui-logic/utils/cpf-mask";
 
 export function useSignInForm() {   
