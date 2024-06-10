@@ -1,10 +1,11 @@
 'use server'
 
-import { LoginPresenter } from "@/presenter/login/login.presenter"
+import { LoginController } from "@/presenter/login/login.controller"
+
 import { FormStateTypes } from "@/view/ui-logic/types/form-state"
 
 export async function loginAction(_: FormStateTypes, formData: FormData): Promise<FormStateTypes> {
-    const loginPresenter = new LoginPresenter()
+    const loginController = new LoginController()
 
-    return await loginPresenter.handleFormSubmit(formData)
+    return await loginController.execute(formData)
 }
