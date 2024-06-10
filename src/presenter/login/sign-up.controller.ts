@@ -6,14 +6,14 @@ import { formSchemaSignUp } from "@/presenter/validations/sign-up.validation";
 
 import { FormStateTypes } from "@/view/ui-logic/types/form-state";
 
-export class SignUpPresenter {
+export class SignUpController {
     private signUpModel: SignUpModel;
 
     constructor() {
         this.signUpModel = new SignUpModel();
     }
 
-    async handleFormSubmit(formData: FormData): Promise<FormStateTypes> {
+    async execute(formData: FormData): Promise<FormStateTypes> {
         const rawFormData = Object.fromEntries(formData.entries());
         const result = formSchemaSignUp.safeParse(rawFormData)
 
