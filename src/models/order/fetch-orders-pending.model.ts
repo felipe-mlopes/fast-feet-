@@ -2,19 +2,19 @@ import { Order } from "../types/order"
 import { getSession } from "../auth/auth"
 import { api } from "../api"
 
-interface GetOrdersDoneResponse {
-    ordersDone: Order[] | null
+interface FetchOrdersPendingResponse {
+    ordersPending: Order[] | null
 }
 
-interface IGetOrdersDoneModel {
-    handle(city: string): Promise<GetOrdersDoneResponse>
+interface IFetchOrdersPendingModel {
+    handle(city: string): Promise<FetchOrdersPendingResponse>
 }
 
-export class GetOrdersDoneModel implements IGetOrdersDoneModel {
-    async handle(city: string): Promise<GetOrdersDoneResponse> {
+export class FetchOrdersPendingModel implements IFetchOrdersPendingModel {
+    async handle(city: string): Promise<FetchOrdersPendingResponse> {
         const { token } = await getSession()
 
-        const response = await api(`/orders/done?city=${city}`, {
+        const response = await api(`/orders/pending?city=${city}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,12 +26,12 @@ export class GetOrdersDoneModel implements IGetOrdersDoneModel {
             const data = await response.json()
 
             return {
-                ordersDone: data.orders
+                ordersPending: data.orders
             }
         }
 
         return {
-            ordersDone: null
+            ordersPending: null
         }
     }
 }
