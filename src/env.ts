@@ -3,7 +3,6 @@ import { z } from 'zod'
 const envSchema = z.object({
   API_BASE_URL: z.string().url(),
   SESSION_SECRET: z.string(),
-  OPENCAGE_API_KEY: z.string(),
   EMAILJS_SERVICE_ID: z.string(),
   EMAILJS_TEMPLATE_ID: z. string(),
   EMAILJS_PUBLIC_KEY: z.string(),
