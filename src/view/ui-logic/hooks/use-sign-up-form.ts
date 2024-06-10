@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSignUpProps, formSchemaSignUp } from "@/presenter/validations/sign-up.validation";
 
 import { cpfMask } from "@/view/ui-logic/utils/cpf-mask";
-import { signUpAction } from "@/models/actions/sign-up.action";
+import { signUpAction } from "@/view/ui-logic/actions/sign-up.action";
 
 export function useSignUpForm() {
     const [state, handleSignUp] = useFormState(signUpAction, {
