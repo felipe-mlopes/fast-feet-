@@ -2,11 +2,11 @@ import { getSession } from "../auth/auth"
 import { api } from "../api"
 
 interface IEditOrderStatusToPicknUpModel {
-    handle(orderId: string): Promise<boolean>
+    execute(orderId: string): Promise<boolean>
 }
 
 export class EditOrderStatusToPicknUpModel implements IEditOrderStatusToPicknUpModel {
-    async handle(orderId: string): Promise<boolean> {
+    async execute(orderId: string): Promise<boolean> {
         const { token } = await getSession()
 
         const response = await api(`/orders/${orderId}/picknup`, {

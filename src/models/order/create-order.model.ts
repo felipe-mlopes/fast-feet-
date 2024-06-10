@@ -8,16 +8,16 @@ interface CreateOrderResquest {
 }
 
 interface ICreateOrderModel {
-    handle({ recipientEmail, title }: CreateOrderResquest): Promise<boolean>
+    execute({ recipientEmail, title }: CreateOrderResquest): Promise<boolean>
 }
 
 export class CreateOrderModel implements ICreateOrderModel {
     constructor(private getRecipientByEmail: GetRecipientByEmailModel) {}
 
-    async handle({ recipientEmail, title }: CreateOrderResquest): Promise<boolean> {
+    async execute({ recipientEmail, title }: CreateOrderResquest): Promise<boolean> {
         const { token } = await getSession()
 
-        const { recipient } = await this.getRecipientByEmail.handle(recipientEmail)
+        const { recipient } = await this.getRecipientByEmail.execute(recipientEmail)
 
         if (!recipient) {
             return Promise.resolve(false)

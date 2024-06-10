@@ -2,11 +2,11 @@ import { getSession } from "../auth/auth"
 import { api } from "../api"
 
 interface IUploadAttachmentModel {
-    handle(file: File, orderId: string): Promise<boolean>
+    execute(file: File, orderId: string): Promise<boolean>
 }
 
 export class UploadAttachmentModel implements IUploadAttachmentModel {
-    async handle(file: File, orderId: string): Promise<boolean> {
+    async execute(file: File, orderId: string): Promise<boolean> {
         const { token } = await getSession()
 
         const response = await api(`orders/${orderId}/attachment`, {

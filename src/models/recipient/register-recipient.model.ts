@@ -12,12 +12,12 @@ interface RegisterRecipientResquest {
 }
 
 interface IRegisterRecipientModel {
-    handle({ clientName, clientEmail, zipcode, address, neighborhood, city, state }: RegisterRecipientResquest): Promise<boolean>
+    execute({ clientName, clientEmail, zipcode, address, neighborhood, city, state }: RegisterRecipientResquest): Promise<boolean>
 }
 
 export class RegisterRecipientModel implements IRegisterRecipientModel {
 
-    async handle({ clientName, clientEmail, zipcode, address, neighborhood, city, state }: RegisterRecipientResquest): Promise<boolean> {
+    async execute({ clientName, clientEmail, zipcode, address, neighborhood, city, state }: RegisterRecipientResquest): Promise<boolean> {
         const { token } = await getSession()
 
         const response = await api('/recipients', {

@@ -2,11 +2,11 @@ import { api } from "../api"
 import { getSession } from "../auth/auth"
 
 interface IEditOrderStatusToDoneModel {
-    handle(orderId: string): Promise<boolean>
+    execute(orderId: string): Promise<boolean>
 }
 
 export class EditOrderStatusToDoneModel implements IEditOrderStatusToDoneModel {
-    async handle(orderId: string): Promise<boolean> {
+    async execute(orderId: string): Promise<boolean> {
         const { token } = await getSession()
 
         const response = await api(`/orders/${orderId}/done`, {

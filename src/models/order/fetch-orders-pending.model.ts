@@ -7,11 +7,11 @@ interface FetchOrdersPendingResponse {
 }
 
 interface IFetchOrdersPendingModel {
-    handle(city: string): Promise<FetchOrdersPendingResponse>
+    execute(city: string): Promise<FetchOrdersPendingResponse>
 }
 
 export class FetchOrdersPendingModel implements IFetchOrdersPendingModel {
-    async handle(city: string): Promise<FetchOrdersPendingResponse> {
+    async execute(city: string): Promise<FetchOrdersPendingResponse> {
         const { token } = await getSession()
 
         const response = await api(`/orders/pending?city=${city}`, {

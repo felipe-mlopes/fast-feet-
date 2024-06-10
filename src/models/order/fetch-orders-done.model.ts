@@ -7,11 +7,11 @@ interface FetchOrdersDoneResponse {
 }
 
 interface IFetchOrdersDoneModel {
-    handle(city: string): Promise<FetchOrdersDoneResponse>
+    execute(city: string): Promise<FetchOrdersDoneResponse>
 }
 
 export class FetchOrdersDoneModel implements IFetchOrdersDoneModel {
-    async handle(city: string): Promise<FetchOrdersDoneResponse> {
+    async execute(city: string): Promise<FetchOrdersDoneResponse> {
         const { token } = await getSession()
 
         const response = await api(`/orders/done?city=${city}`, {

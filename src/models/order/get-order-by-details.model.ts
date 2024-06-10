@@ -7,11 +7,11 @@ interface GetOrderByDetailsResponse {
 }
 
 interface IGetOrderByDetailsModel {
-    handle(orderId: string): Promise<GetOrderByDetailsResponse>
+    execute(orderId: string): Promise<GetOrderByDetailsResponse>
 }
 
 export class GetOrderByDetailsModel implements IGetOrderByDetailsModel {
-    async handle(orderId: string): Promise<GetOrderByDetailsResponse> {
+    async execute(orderId: string): Promise<GetOrderByDetailsResponse> {
         const { token } = await getSession()
 
         const response = await api(`/orders/${orderId}`, {

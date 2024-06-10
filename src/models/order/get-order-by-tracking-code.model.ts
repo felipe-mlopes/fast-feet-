@@ -6,11 +6,11 @@ interface GetOrderByTrackingCodeResponse {
 }
 
 interface IGetOrderByTrackingCodeModel {
-    handle(trackingCode: string): Promise<GetOrderByTrackingCodeResponse>
+    execute(trackingCode: string): Promise<GetOrderByTrackingCodeResponse>
 }
 
 export class GetOrderByTrackingCodeModel implements IGetOrderByTrackingCodeModel {
-    async handle(trackingCode: string): Promise<GetOrderByTrackingCodeResponse> {
+    async execute(trackingCode: string): Promise<GetOrderByTrackingCodeResponse> {
         const response = await api(`/recipient-query?trackingCode=${trackingCode}`, {
             method: 'GET',
             headers: {

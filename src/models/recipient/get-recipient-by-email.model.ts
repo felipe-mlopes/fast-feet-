@@ -7,11 +7,11 @@ interface GetRecipientByEmailResponse {
 }
 
 interface IFetchRecipientEmailsBySearchModel {
-    handle(email: string): Promise<GetRecipientByEmailResponse>
+    execute(email: string): Promise<GetRecipientByEmailResponse>
 }
 
 export class GetRecipientByEmailModel implements IFetchRecipientEmailsBySearchModel {
-    async handle(email: string): Promise<GetRecipientByEmailResponse> {
+    async execute(email: string): Promise<GetRecipientByEmailResponse> {
         const { token } = await getSession()
 
         const response = await api(`/recipient?recipientEmail=${email}`, {
