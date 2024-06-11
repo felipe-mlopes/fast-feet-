@@ -21,12 +21,12 @@ export class GetOrderByDetailsModel implements IGetOrderByDetailsModel {
                 'Authorization': `Bearer ${token}`
             }
         })
-        
+
         if (response.ok) {
             const data = await response.json()
 
             return {
-                orderByDetails: data.orders
+                orderByDetails: data.order
             }
         }
 
