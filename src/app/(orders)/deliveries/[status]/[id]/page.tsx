@@ -1,10 +1,9 @@
 import Link from "next/link";
 import dayjs from "dayjs";
 
-import { getOrderByDetails } from "@/models/order/orders";
-
 import { Order } from "@/models/types/order";
 
+import { getOrderByDetailsAction } from "@/view/ui-logic/actions/get-order-by-details.action";
 import { statusEdit } from "@/view/ui-logic/utils/transform-status";
 import { zipcodeMask } from "@/view/ui-logic/utils/zipcode-mask";
 
@@ -21,7 +20,11 @@ export default async function DeliveryDetails({
 }: {
   params: { status: string; id: string };
 }) {
-  const { order } = await getOrderByDetails(params.id);
+  const { data, error } = await getOrderByDetailsAction(params.id);
+
+  if (error) {
+    return;
+  }
 
   const {
     status,
@@ -34,7 +37,7 @@ export default async function DeliveryDetails({
     createdAt,
     picknUpAt,
     deliveryAt,
-  } = order as Order;
+  } = data as Order;
 
   const transformedStatus = statusEdit(status);
   const transformedZipcode = zipcodeMask(recipientZipcode);
