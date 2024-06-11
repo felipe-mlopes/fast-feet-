@@ -23,14 +23,13 @@ export class SignInController {
 
         const { cpf, password } = result.data;
 
-        const isAuthenticated = await this.signInModel.handle({
+        const isAuthenticated = await this.signInModel.execute({
             cpf,
             password,
         });
 
         if (isAuthenticated) {
             redirect("/deliveries/pending");
-            // return { data: "success", error: null };
         } else {
             return { data: null, error: [{ path: [], message: "Authentication failed" }] };
         }
