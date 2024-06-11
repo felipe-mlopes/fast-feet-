@@ -18,7 +18,7 @@ export class GetOrderByDetailsController {
     }
 
     async handle(id: string): Promise<GetOrderByDetailsControllerResponse> {
-        const result = setIdSchema.safeParse(id)
+        const result = setIdSchema.safeParse({ orderId: id })
 
         if (!result.success) {
             console.error(result.error.issues)
