@@ -22,7 +22,7 @@ export class GetOrderByTrackingCodeModel implements IGetOrderByTrackingCodeModel
             const data = await response.json()
 
             return {
-                orderByTrackingCode: data.orders
+                orderByTrackingCode: data.order
             }
         }
 
