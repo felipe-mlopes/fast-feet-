@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -7,11 +8,17 @@ import { RecipientEmail } from "@/models/types/recipient-email";
 
 import { FormCreateOrderProps, formSchemaCreateOrder } from "@/presenter/validations/create-order.validation";
 
-export function useFormCreateOrder() {
+import { createOrderAction } from "@/view/ui-logic/actions/create-order.action";
+
+export function useCreateOrderForm() {
+  const [state, handleCreateOrderForm] = useFormState(createOrderAction, {
+    data: null,
+    error: null,
+  });
+
     const {
-        handleSubmit,
         register,
-        formState: { isSubmitSuccessful, isSubmitting, errors },
+        formState: { isSubmitting, errors },
         setValue,
         watch,
       } = useForm<FormCreateOrderProps>({
@@ -20,13 +27,23 @@ export function useFormCreateOrder() {
         resolver: zodResolver(formSchemaCreateOrder),
       });
 
-      const [emailsSearched, setEmailsSearched] = useState<RecipientEmail[]>([])
-    
       const titleWatch = watch('title')
       const emailWatch = watch('email')
-    
-      const emailSearched = String(emailWatch)
       
+      const emailSearched = String(emailWatch)
+
+      const [emailsSearched, setEmailsSearched] = useState<RecipientEmail[]>([])
+      const [isSelectIconOpen, setIsSelectIconOpen] = useState(false);
+      const [showOptions, setShowOptions] = useState(true);
+    
+      const formRef = useRef<HTMLFormElement>(null);
+    
+      function handleSelectClick(option: string) {
+        setValue("email", option);
+        setIsSelectIconOpen(!isSelectIconOpen);
+        setShowOptions(!showOptions);
+      }
+
       const handleFetchRecipientEmails = useCallback(
         async (search: string) => {
           const { recipients } = await fetchRecipientEmailsBySearch(search)
@@ -45,13 +62,17 @@ export function useFormCreateOrder() {
       }, [emailWatch,emailSearched, handleFetchRecipientEmails]);
     
       return {
-        handleSubmit,
         register,
         errors,
         isSubmitting,
-        setValue,
         titleWatch,
         emailWatch,
-        emailsSearched
+        emailsSearched,
+        formRef,
+        isSelectIconOpen,
+        showOptions,
+        handleSelectClick,
+        state,
+        handleCreateOrderForm
       }
 }
