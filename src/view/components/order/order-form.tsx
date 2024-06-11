@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useFormState } from "react-dom";
-
-import { createOrder } from "@/models/order/orders";
-
-import { useFormCreateOrder } from "@/view/ui-logic/hooks/use-form-create-order";
+import { useCreateOrderForm } from "@/view/ui-logic/hooks/use-create-order-form";
 import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
@@ -16,44 +11,25 @@ import { ProfileIcon } from "../icons/profile-icon";
 import { ArrowSelectIcon } from "../icons/arrow-select-icon";
 
 export function OrderForm() {
-  const [state, formAction] = useFormState(createOrder, {
-    data: null,
-    error: null,
-  });
-
-  const [isSelectIconOpen, setIsSelectIconOpen] = useState(false);
-  const [showOptions, setShowOptions] = useState(true);
-
   const {
-    handleSubmit,
     register,
     errors,
     isSubmitting,
-    setValue,
     titleWatch,
     emailWatch,
     emailsSearched,
-  } = useFormCreateOrder();
-
-  const formRef = useRef<HTMLFormElement>(null);
-
-  function handleFormSubmit(formData: FormData) {
-    formAction(formData);
-  }
-
-  function handleSelectClick(option: string) {
-    setValue("email", option);
-    setIsSelectIconOpen(!isSelectIconOpen);
-    setShowOptions(!showOptions);
-  }
+    formRef,
+    isSelectIconOpen,
+    handleSelectClick,
+    showOptions,
+    state,
+    handleCreateOrderForm,
+  } = useCreateOrderForm();
 
   return (
     <form
       ref={formRef}
-      action={formAction}
-      onSubmit={handleSubmit(() =>
-        handleFormSubmit(new FormData(formRef.current!))
-      )}
+      action={handleCreateOrderForm}
       className="flex flex-col gap-10"
     >
       <div className="space-y-4 text-gray-light">
