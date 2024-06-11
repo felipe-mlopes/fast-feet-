@@ -1,27 +1,15 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { FormHTMLAttributes } from "react";
+import { useGetOrderByTrackingCodeForm } from "@/view/ui-logic/hooks/use-get-order-by-tracking-code-form";
 
-import { useTrackingCode } from "@/view/ui-logic/hooks/use-form-tracking-code";
-
-interface TrackInputProps extends FormHTMLAttributes<HTMLFormElement> {}
-
-export function TrackInput({ ...props }: TrackInputProps) {
-  const { register, trackingCodeWatch, handleSubmit, errors } =
-    useTrackingCode();
-
-  const router = useRouter();
-
-  function handleRedirectToOrder() {
-    router.push(`/order/${trackingCodeWatch}`);
-  }
+export function TrackInput() {
+  const { register, reset, errors, handleOrderByTrackingCodeForm } =
+    useGetOrderByTrackingCodeForm();
 
   return (
     <form
-      onSubmit={handleSubmit(handleRedirectToOrder)}
+      action={handleOrderByTrackingCodeForm}
       className="flex flex-col md:flex-row items-end gap-6 px-4 py-3 absolute xl:relative -bottom-2 xl:bottom-0 z-50 bg-gray-light rounded shadow-card"
-      {...props}
     >
       <div className="flex flex-col md:flex-row gap-3">
         <div>
