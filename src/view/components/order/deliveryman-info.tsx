@@ -1,22 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
-
 import { useLocation } from "@/view/ui-logic/hooks/use-location";
 
 import { PinIcon } from "@/view/components/icons/pin-icon";
 
 export function DeliverymanInfo() {
   const { location } = useLocation();
-  const path = usePathname();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (location) {
-      router.push(`${path}?city=${location}`);
-    }
-  }, [location, router, path]);
 
   return (
     <div className="flex justify-between items-center">
