@@ -9,7 +9,7 @@ interface EditOrderStatusToDoneControllerResponse {
     error?: ValidationError[] | null
 }
 
-export class editOrderStatusToPicknUpController {
+export class EditOrderStatusToPicknUpController {
     private editOrderStatusToPicknUpModel: EditOrderStatusToPicknUpModel
 
     constructor() {
