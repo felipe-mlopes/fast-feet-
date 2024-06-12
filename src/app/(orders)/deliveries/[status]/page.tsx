@@ -1,5 +1,6 @@
-import { getSession } from "@/models/auth/auth";
 import { logoutAction } from "@/models/login/login";
+
+import { useGetToken } from "@/view/ui-logic/hooks/use-get-token";
 
 import { DeliverymanInfo } from "@/view/components/order/deliveryman-info";
 import { ButtonStatus } from "@/view/components/deliveries/button-status";
@@ -13,10 +14,7 @@ export default async function Deliveries({
   params: { status: "pending" | "done" };
   searchParams: { city: string };
 }) {
-  const { token } = await getSession();
-
-  const arrayToken = token?.split(".")!;
-  const tokenPayload = JSON.parse(atob(arrayToken[1]));
+  const { token, tokenPayload } = await useGetToken();
 
   return (
     <div className="flex flex-col justify-between items-center relative min-h-screen lg:grid lg:grid-col-2 lg:grid-row-3 lg:justify-normal">
