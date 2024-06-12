@@ -4,7 +4,7 @@ import { Order } from "@/models/types/order"
 
 import { GetOrderByTrackingCodeController } from "@/presenter/order/get-order-by-tracking-code.controller"
 
-import { FormStateTypes, ValidationError } from "@/view/ui-logic/types/form-state"
+import { ValidationError } from "@/view/ui-logic/types/form-state"
 
 interface GetOrderByTrackingCodeActionResponse {
     data?: Order | null
@@ -15,8 +15,6 @@ export async function getOrderByTrackingCodeAction(state: GetOrderByTrackingCode
     const getOrderByTrackingCodeController = new GetOrderByTrackingCodeController()
 
     const result = await getOrderByTrackingCodeController.handle(formData)
-
-    console.log(result)
 
     if (result.error) {
         return {
