@@ -17,8 +17,8 @@ export class GetCityByCoordinatesController {
     }
 
     async handle(lat: string, lon: string): Promise<GetCityByCoordinatesControllerResponse> {
-        const result = getCoordinatesSchema.safeParse({ lat, lon })
-
+        const result = getCoordinatesSchema.safeParse({ latitude: lat, longitude: lon })
+        
         if (!result.success) {
             console.error(result.error.issues)
             return { error: result.error.issues }
