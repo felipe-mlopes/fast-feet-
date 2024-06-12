@@ -1,6 +1,8 @@
-import { getCurrentPosition } from "@/view/ui-logic/utils/geolocation";
-import { getCityByCoordinates } from "@/view/ui-logic/utils/get-city-by-coordinates";
+import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+
+import { getCurrentPosition } from "@/view/ui-logic/utils/geolocation";
+import { getCityByCoordinatesAction } from "@/view/ui-logic/actions/get-city-by-coordinates.action";
 
 export function useLocation() {
     const [location, setLocation] = useState("");
@@ -13,16 +15,23 @@ export function useLocation() {
       const latitude = String(lat);
       const longitude = String(lng);
   
-      const coordinates = await getCityByCoordinates(latitude, longitude);
+      const coordinates = await getCityByCoordinatesAction(latitude, longitude);
   
-      if (coordinates) {
-        setLocation(coordinates.city);
+      if (coordinates.data) {
+        setLocation(coordinates.data);
       }
     }, []);
+
+    const path = usePathname();
+    const router = useRouter();
   
     useEffect(() => {
       handleGetLocation();
-    }, [handleGetLocation]);
+
+      if (location) {
+        router.push(`${path}?city=${location}`);
+      }
+    }, [handleGetLocation, location, router, path]);
 
     return {
         location
