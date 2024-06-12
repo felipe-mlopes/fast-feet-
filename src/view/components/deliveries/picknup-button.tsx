@@ -1,11 +1,11 @@
 "use client";
 
-import { HTMLAttributes, useState } from "react";
+import { HTMLAttributes } from "react";
 
-import { editOrderStatusToPicknUp } from "@/models/order/orders";
+import { useEditOrderStatusToPicknUp } from "@/view/ui-logic/hooks/use-edit-order-status-to-picknup";
 
-import { Button } from "../global/button";
-import { Modal } from "../global/modal";
+import { Button } from "@/view/components/global/button";
+import { Modal } from "@/view/components/global/modal";
 
 interface PicknUpButtonProps extends HTMLAttributes<HTMLDivElement> {
   buttonContent: string;
@@ -21,23 +21,12 @@ export function PicknUpButton({
   orderId,
   ...props
 }: PicknUpButtonProps) {
-  const [isModalSuccessOpen, setIsModalSuccessOpen] = useState(false);
-  const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
-
-  const handleModalClose = () => {
-    setIsModalErrorOpen(false);
-    setIsModalSuccessOpen(false);
-  };
-
-  async function handleSetChangeOrderStatus() {
-    const response = await editOrderStatusToPicknUp(orderId);
-
-    if (!response) {
-      return setIsModalErrorOpen(!isModalErrorOpen);
-    }
-
-    setIsModalSuccessOpen(!isModalSuccessOpen);
-  }
+  const {
+    isModalSuccessOpen,
+    isModalErrorOpen,
+    handleModalClose,
+    handleSetChangeOrderStatus,
+  } = useEditOrderStatusToPicknUp(orderId);
 
   return (
     <div {...props}>
