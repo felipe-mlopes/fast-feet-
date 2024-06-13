@@ -18,7 +18,7 @@ export class FetchOrdersPendingController {
     }
 
     async handle(location: string): Promise<FetchOrdersPendingControllerResponse> {
-        const result = setLocationSchema.safeParse(location)
+        const result = setLocationSchema.safeParse({ city: location })
 
         if (!result.success) {
             console.error(result.error.issues)
