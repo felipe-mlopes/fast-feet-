@@ -1,55 +1,31 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-
 import { Order } from "@/models/types/order";
-import { getOrdersDone } from "@/models/order/orders";
+
+import { useFetchOrdersDone } from "@/view/ui-logic/hooks/use-fetch-orders-done";
 
 import { Card } from "./card";
 
 interface OrdersDoneWrapperProps {
-  city: string;
   search: string;
 }
 
-export function OrdersDoneWrapper({ city, search }: OrdersDoneWrapperProps) {
-  const [orders, setOrders] = useState<Order[]>([]);
-
-  const deliverymanCity = city && city.toLowerCase();
-
-  const handleFetchOrders = useCallback(async () => {
-    const { ordersDone } = await getOrdersDone(deliverymanCity);
-
-    if (!ordersDone) return;
-
-    setOrders(ordersDone);
-  }, [deliverymanCity]);
-
-  useEffect(() => {
-    handleFetchOrders();
-  }, [handleFetchOrders]);
-
-  const ordersFiltered = orders.filter((order) => {
-    if (!!search) {
-      return order.recipientNeighborhood.includes(search);
-    } else {
-      return orders;
-    }
-  });
+export function OrdersDoneWrapper({ search }: OrdersDoneWrapperProps) {
+  const { ordersDoneFiltered } = useFetchOrdersDone(search);
 
   return (
     <>
       <div className="flex items-center justify-center gap-5 text-ligth-slate-gray">
         <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
         <p className="text-nowrap">
-          {ordersFiltered.length > 1
-            ? `${ordersFiltered.length} entregas`
-            : `${ordersFiltered.length} entrega`}
+          {ordersDoneFiltered.length > 1
+            ? `${ordersDoneFiltered.length} entregas`
+            : `${ordersDoneFiltered.length} entrega`}
         </p>
         <span className="content=[''] w-1/3 h-[1px] bg-bluish-gray" />
       </div>
       <div className="flex flex-col items-center justify-center gap-4 pt-4 md:flex-row md:flex-wrap md:gap-6">
-        {ordersFiltered.map((order: Order) => {
+        {ordersDoneFiltered.map((order: Order) => {
           return (
             <Card
               key={order.id}
