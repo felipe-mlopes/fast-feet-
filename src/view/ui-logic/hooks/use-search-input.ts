@@ -1,3 +1,4 @@
+import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -12,8 +13,11 @@ export function useSearchInput() {
 
     const searchWatch = watch('search')
 
+    const params = useParams();
+
     return {
         register,
         searchWatch,
+        params
     }
 }
