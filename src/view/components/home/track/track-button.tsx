@@ -1,21 +1,15 @@
 "use client";
 
-import { useWindowSize } from "@/view/ui-logic/hooks/useWindowSize";
-import { useState } from "react";
+import { useTrackModal } from "@/view/ui-logic/hooks/use-track-modal";
+import { useWindowSize } from "@/view/ui-logic/hooks/use-window-size";
+
 import { TrackModal } from "./track-modal";
 
 export function TrackButton() {
-  const [showModalTrack, setShowModalTrack] = useState(false);
+  const { showModalTrack, handleOpenModalTrack, handleCloseModalTrack } =
+    useTrackModal();
 
   const { width } = useWindowSize();
-
-  function handleOpenModalTrack() {
-    setShowModalTrack(true);
-  }
-
-  function handleCloseModalTrack() {
-    setShowModalTrack(false);
-  }
 
   return (
     <div className="relative md:absolute md:bottom-2 md:z-50 lg:bottom-24 xl:relative">
