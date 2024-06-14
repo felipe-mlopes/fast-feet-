@@ -1,6 +1,7 @@
 "use client";
 
-import { CloseIcon } from "../../icons/close-icon";
+import { CloseIcon } from "@/view/components/icons/close-icon";
+
 import { TrackInput } from "./track-input";
 
 interface TrackModalProps {
@@ -23,7 +24,7 @@ export function TrackModal({ isOpen, onClose }: TrackModalProps) {
           </button>
         </header>
         <main className="flex items-center">
-          <TrackInput className="relative p-8 rounded w-full bg-gray-light space-y-8" />
+          <TrackInput />
         </main>
       </div>
     </div>
