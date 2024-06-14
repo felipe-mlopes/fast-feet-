@@ -9,7 +9,7 @@ interface EditOrderStatusToDoneControllerResponse {
     error?: ValidationError[] | null
 }
 
-export class editOrderStatusToDoneController {
+export class EditOrderStatusToDoneController {
     private editOrderStatusToDoneModel: EditOrderStatusToDoneModel
 
     constructor() {
