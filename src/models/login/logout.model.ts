@@ -1,10 +1,10 @@
 import { getSession } from "../auth/auth";
 
-interface ILoginModel {
+interface ILogoutModel {
     execute(): Promise<boolean>
 }
 
-export class LoginModel implements ILoginModel {
+export class LogoutModel implements ILogoutModel {
     async execute(): Promise<boolean> {
         const session = await getSession()
 
