@@ -1,5 +1,4 @@
-import { logoutAction } from "@/models/login/login";
-
+import { logoutAction } from "@/view/ui-logic/actions/logout.action";
 import { useGetToken } from "@/view/ui-logic/hooks/use-get-token";
 
 import { DeliverymanInfo } from "@/view/components/order/deliveryman-info";
