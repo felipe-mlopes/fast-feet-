@@ -1,8 +1,7 @@
-import { revalidatePath } from "next/cache";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-export function UseCamera() {
+export function useCamera() {
 const [mediaStream, setMediaStream] = useState<MediaStream | null>();
 const path = usePathname()
 
