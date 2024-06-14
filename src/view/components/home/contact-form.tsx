@@ -1,18 +1,15 @@
 "use client";
 
-import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 
 import { formSchemaContact } from "@/presenter/validations/send-contact.validation";
 
-import { useFormContact } from "@/view/ui-logic/hooks/use-form-contact";
+import { useContactForm } from "@/view/ui-logic/hooks/use-contact-form";
 
 import { Button } from "../global/button";
 
 export function ContactForm() {
-  const { register, handleSubmit, reset, errors } = useFormContact();
-
-  const formRef = useRef<HTMLFormElement>(null);
+  const { register, handleSubmit, reset, errors, formRef } = useContactForm();
 
   function handleFormSubmit(formData: FormData) {
     const rawFormData = Object.fromEntries(formData.entries());
