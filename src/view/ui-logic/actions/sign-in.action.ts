@@ -7,5 +7,5 @@ import { FormStateTypes } from "@/view/ui-logic/types/form-state"
 export async function signInAction(_: FormStateTypes, formData: FormData): Promise<FormStateTypes> {
     const signInPresenter = new SignInController()
 
-    return await signInPresenter.execute(formData)
+    return await signInPresenter.handle(formData)
 }
