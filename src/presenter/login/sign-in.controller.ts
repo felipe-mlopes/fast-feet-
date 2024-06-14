@@ -13,7 +13,7 @@ export class SignInController {
         this.signInModel = new SignInModel();
     }
 
-    async execute(formData: FormData): Promise<FormStateTypes> {
+    async handle(formData: FormData): Promise<FormStateTypes> {
         const rawFormData = Object.fromEntries(formData.entries());
         const result = formSchemaSignIn.safeParse(rawFormData);
 

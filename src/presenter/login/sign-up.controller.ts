@@ -13,7 +13,7 @@ export class SignUpController {
         this.signUpModel = new SignUpModel();
     }
 
-    async execute(formData: FormData): Promise<FormStateTypes> {
+    async handle(formData: FormData): Promise<FormStateTypes> {
         const rawFormData = Object.fromEntries(formData.entries());
         const result = formSchemaSignUp.safeParse(rawFormData)
 
@@ -23,7 +23,7 @@ export class SignUpController {
 
         const { name, email, cpf, password } = result.data;
 
-        const isRegistered = await this.signUpModel.handle({
+        const isRegistered = await this.signUpModel.execute({
             name,
             email,
             cpf,

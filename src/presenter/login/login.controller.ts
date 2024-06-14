@@ -13,7 +13,7 @@ export class LoginController {
         this.loginModel = new LoginModel();
     }
 
-    async execute(formData: FormData): Promise<FormStateTypes> {
+    async handle(formData: FormData): Promise<FormStateTypes> {
         const rawFormData = Object.fromEntries(formData.entries());
         const result = formSchemaLogin.safeParse(rawFormData);
 
@@ -23,7 +23,7 @@ export class LoginController {
 
         const { email, password } = result.data;
 
-        const isAuthenticated = await this.loginModel.handle({
+        const isAuthenticated = await this.loginModel.execute({
             email,
             password,
         });
