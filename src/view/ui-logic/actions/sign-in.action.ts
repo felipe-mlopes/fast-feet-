@@ -1,6 +1,6 @@
 'use server'
 
-import { SignInController } from "@/presenter/login/sign-in.controller"
+import { SignInController } from "@/presenter/controllers/login/sign-in.controller"
 
 import { FormStateTypes } from "@/view/ui-logic/types/form-state"
 

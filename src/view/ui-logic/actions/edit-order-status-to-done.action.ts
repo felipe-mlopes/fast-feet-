@@ -1,6 +1,6 @@
 'use server'
 
-import { EditOrderStatusToDoneController } from "@/presenter/order/edit-order-status-to-done.controller"
+import { EditOrderStatusToDoneController } from "@/presenter/controllers/order/edit-order-status-to-done.controller"
 
 export async function editOrderStatusToDoneAction(orderId: string) {
     const editOrderStatusToDoneController = new EditOrderStatusToDoneController()

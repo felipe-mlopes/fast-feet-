@@ -2,7 +2,7 @@
 
 import { Order } from "@/models/types/order"
 
-import { GetOrderByTrackingCodeController } from "@/presenter/order/get-order-by-tracking-code.controller"
+import { GetOrderByTrackingCodeController } from "@/presenter/controllers/order/get-order-by-tracking-code.controller"
 
 import { ValidationError } from "@/view/ui-logic/types/form-state"
 

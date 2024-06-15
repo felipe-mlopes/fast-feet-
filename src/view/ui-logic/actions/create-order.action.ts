@@ -1,6 +1,6 @@
 'use server'
 
-import { CreateOrderController } from "@/presenter/order/create-order.controller"
+import { CreateOrderController } from "@/presenter/controllers/order/create-order.controller"
 
 import { FormStateTypes } from "@/view/ui-logic/types/form-state"
 

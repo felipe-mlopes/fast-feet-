@@ -1,6 +1,6 @@
 'use server'
 
-import { GetCityByCoordinatesController } from "@/presenter/order/get-city-by-coordinates.controller"
+import { GetCityByCoordinatesController } from "@/presenter/controllers/order/get-city-by-coordinates.controller"
 
 export async function getCityByCoordinatesAction(latitude: string, longitude: string) {
     const getCityByCoordinatesController = new GetCityByCoordinatesController()

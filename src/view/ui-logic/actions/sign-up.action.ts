@@ -1,6 +1,6 @@
 'use server'
 
-import { SignUpController } from "@/presenter/login/sign-up.controller";
+import { SignUpController } from "@/presenter/controllers/login/sign-up.controller";
 
 import { FormStateTypes } from "@/view/ui-logic/types/form-state";
 

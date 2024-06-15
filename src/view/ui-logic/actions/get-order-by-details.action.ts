@@ -1,6 +1,6 @@
 'use server'
 
-import { GetOrderByDetailsController } from "@/presenter/order/get-order-by-details.controller"
+import { GetOrderByDetailsController } from "@/presenter/controllers/order/get-order-by-details.controller"
 
 export async function getOrderByDetailsAction(orderId: string) {
     const getOrderByDetailsController = new GetOrderByDetailsController()

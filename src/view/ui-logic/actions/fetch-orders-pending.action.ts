@@ -1,6 +1,6 @@
 'use server'
 
-import { FetchOrdersPendingController } from "@/presenter/order/fetch-orders-pending.controller"
+import { FetchOrdersPendingController } from "@/presenter/controllers/order/fetch-orders-pending.controller"
 
 export async function fetchOrdersPendingAction(city: string) {
     const fetchhOrdersPendingController = new FetchOrdersPendingController()

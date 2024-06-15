@@ -1,6 +1,6 @@
 'use server'
 
-import { EditOrderStatusToPicknUpController } from "@/presenter/order/edit-order-status-to-pickn-up.controller"
+import { EditOrderStatusToPicknUpController } from "@/presenter/controllers/order/edit-order-status-to-pickn-up.controller"
 
 export async function editOrderStatusToPicknUpAction(orderId: string) {
     const editOrderStatusToPicknUpController = new EditOrderStatusToPicknUpController()
