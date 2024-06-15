@@ -1,60 +1,22 @@
 "use client";
 
-import emailjs from "@emailjs/browser";
-
-import { formSchemaContact } from "@/presenter/validations/send-contact.validation";
-
 import { useContactForm } from "@/view/ui-logic/hooks/use-contact-form";
 
-import { Button } from "../global/button";
+import { Button } from "@/view/components/global/button";
 
 export function ContactForm() {
-  const { register, handleSubmit, reset, errors, formRef } = useContactForm();
+  const { formRef, register, reset, errors, state, handleSendContactForm } =
+    useContactForm();
 
-  function handleFormSubmit(formData: FormData) {
-    const rawFormData = Object.fromEntries(formData.entries());
-    const result = formSchemaContact.safeParse(rawFormData);
-
-    if (!result.success) {
-      return { error: result.error.issues };
-    }
-
-    const { name, contact, email, description } = result.data;
-
-    const templateEmailParams = {
-      from_name: `${contact} | ${name}`,
-      email,
-      message: description,
-    };
-
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        templateEmailParams,
-        {
-          publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-        }
-      )
-      .then(
-        () => {
-          alert("E-mail enviado com sucesso!");
-          reset();
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-          alert(error.text);
-          reset();
-        }
-      );
+  if (state.data) {
+    alert("E-mail enviado");
+    reset();
   }
 
   return (
     <form
       ref={formRef}
-      onSubmit={handleSubmit(() =>
-        handleFormSubmit(new FormData(formRef.current!))
-      )}
+      action={handleSendContactForm}
       className="flex flex-col gap-6 w-full md:w-[30rem]"
     >
       <div className="flex flex-col items-center gap-4 w-full">
