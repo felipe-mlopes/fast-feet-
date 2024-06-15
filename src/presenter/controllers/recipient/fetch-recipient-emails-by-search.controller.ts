@@ -2,7 +2,7 @@ import { FetchRecipientEmailsBySearchModel } from "@/models/recipient/fetch-reci
 import { RecipientEmail } from "@/models/types/recipient-email";
 
 import { ValidationError } from "@/view/ui-logic/types/form-state";
-import { recipientEmailSchema } from "../validations/recipient-email.validation";
+import { recipientEmailSchema } from "../../validations/recipient-email.validation";
 
 interface FetchRecipientEmailsBySearchControllerResponse {
     data?: RecipientEmail[] | null
