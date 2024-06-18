@@ -2,7 +2,7 @@
 
 import { useSearchInput } from "@/view/ui-logic/hooks/use-search-input";
 
-import SearchInput from "../global/search-input";
+import SearchInput from "@/view/components/global/search-input";
 import { OrdersPendingWrapper } from "./orders-pending-wrapper";
 import { OrdersDoneWrapper } from "./orders-done-wrapper";
 

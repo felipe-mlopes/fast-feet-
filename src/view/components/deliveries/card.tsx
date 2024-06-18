@@ -7,8 +7,8 @@ import { transformStatus } from "@/view/ui-logic/utils/transform-status";
 
 import { StatusSteps } from "./status-steps";
 
-import { ArrowIcon } from "../icons/arrow-icon";
-import { PackageIcon } from "../icons/package-icon";
+import { ArrowIcon } from "@/view/components/icons/arrow-icon";
+import { PackageIcon } from "@/view/components/icons/package-icon";
 
 export function Card({ id, title, createdAt, status }: Order) {
   const createAtOnData = dayjs(createdAt).format("DD/MM/YYYY");
