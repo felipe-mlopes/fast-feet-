@@ -32,13 +32,7 @@ export class CreateOrderController {
 
         const { email, title } = result.data
 
-        const recipient = await this.getRecipientEmailModel.execute(email)
-
-        if (!recipient) {
-            return { data: null, error: [{ path: [], message: "Recipient failed." }] }
-        }
-
-        const isCreatedOrder = await this.createOrderModel.execute({ recipientEmail: recipient.recipient?.id!, title })
+        const isCreatedOrder = await this.createOrderModel.execute({ recipientEmail: email, title })
 
         if (isCreatedOrder) {
             redirect("/admin");
