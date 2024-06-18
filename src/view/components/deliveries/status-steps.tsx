@@ -1,22 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useStatusSteps } from "@/view/ui-logic/hooks/use-status-steps";
 
 interface StatusStepsProps {
   currentStatus: string;
 }
 
 export function StatusSteps({ currentStatus }: StatusStepsProps) {
-  const steps = ["aguardando", "retirado", "entregue"];
-
-  const [currentStep, setCurrentStep] = useState(0);
-
-  useEffect(() => {
-    const status = ["WAITING", "PICKN_UP", "DONE"];
-    const whichStep = status.findIndex((item) => item === currentStatus);
-
-    setCurrentStep(whichStep);
-  }, [currentStatus]);
+  const { steps, currentStep } = useStatusSteps(currentStatus);
 
   return (
     <div className="flex justify-between">
