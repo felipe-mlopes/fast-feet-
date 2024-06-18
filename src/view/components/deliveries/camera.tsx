@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-
-import { UseCamera } from "@/view/ui-logic/hooks/use-camera";
+import { useCamera } from "@/view/ui-logic/hooks/use-camera";
 
 export function Camera() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const { mediaStream } = UseCamera();
+  const { mediaStream, videoRef } = useCamera();
 
   if (
     mediaStream &&
