@@ -3,12 +3,10 @@ import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { fetchRecipientEmailsBySearch } from "@/models/recipient/recipients";
-import { RecipientEmail } from "@/models/types/recipient-email";
-
 import { FormCreateOrderProps, formSchemaCreateOrder } from "@/presenter/validations/create-order.validation";
 
 import { createOrderAction } from "@/view/ui-logic/actions/create-order.action";
+import { fetchRecipientEmailsBySearchAction } from "@/view/ui-logic/actions/fetch-recipient-emails-by-search.action";
 
 export function useCreateOrderForm() {
   const [state, handleCreateOrderForm] = useFormState(createOrderAction, {
@@ -32,7 +30,7 @@ export function useCreateOrderForm() {
       
       const emailSearched = String(emailWatch)
 
-      const [emailsSearched, setEmailsSearched] = useState<RecipientEmail[]>([])
+      const [emailsSearched, setEmailsSearched] = useState<string[]>([])
       const [isSelectIconOpen, setIsSelectIconOpen] = useState(false);
       const [showOptions, setShowOptions] = useState(true);
     
@@ -46,11 +44,11 @@ export function useCreateOrderForm() {
 
       const handleFetchRecipientEmails = useCallback(
         async (search: string) => {
-          const { recipients } = await fetchRecipientEmailsBySearch(search)
+          const { data, error } = await fetchRecipientEmailsBySearchAction(search)
 
-          if (!recipients) return
+          if (error) return
 
-          setEmailsSearched(recipients)
+          setEmailsSearched(data!)
         },
         []
       );
