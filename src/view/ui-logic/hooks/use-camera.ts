@@ -1,8 +1,11 @@
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useCamera() {
 const [mediaStream, setMediaStream] = useState<MediaStream | null>();
+
+const videoRef = useRef<HTMLVideoElement>(null);
+
 const path = usePathname()
 
   const handleMedia = useCallback(async () => {
@@ -36,6 +39,7 @@ const path = usePathname()
   }, [handleMedia, path, mediaStream]);
 
   return {
-    mediaStream
+    mediaStream,
+    videoRef
   }
 }
