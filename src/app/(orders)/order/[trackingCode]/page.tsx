@@ -1,17 +1,7 @@
-import { getOrderByTrackingCode } from "@/models/order/orders";
-
-export default async function TrackingCode({
-  params,
-}: {
-  params: { trackingCode: string };
-}) {
-  const { order } = await getOrderByTrackingCode(params.trackingCode);
-
+export default function TrackingCode() {
   return (
     <>
-      {!order
-        ? "Não existe pedido com o código informado."
-        : JSON.stringify(order)}
+      <div>Tracking Code Page</div>
     </>
   );
 }
