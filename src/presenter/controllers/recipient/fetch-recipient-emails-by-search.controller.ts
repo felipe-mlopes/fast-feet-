@@ -1,11 +1,10 @@
 import { FetchRecipientEmailsBySearchModel } from "@/models/recipient/fetch-recipient-emails-by-search.model";
-import { RecipientEmail } from "@/models/types/recipient-email";
 
 import { ValidationError } from "@/view/ui-logic/types/form-state";
 import { recipientEmailSchema } from "../../validations/recipient-email.validation";
 
 interface FetchRecipientEmailsBySearchControllerResponse {
-    data?: RecipientEmail[] | null
+    data?: string[] | null
     error?: ValidationError[] | null
 }
 
@@ -27,9 +26,9 @@ export class FetchRecipientEmailsBySearchController {
         const { email } = result.data
 
         const recipientEmails = await this.fetchRecipientEmailsBySearchModel.execute(email)
-
+        
         if (recipientEmails) {
-            return { data: recipientEmails.recipientEmails && [], error: null }
+            return { data: recipientEmails.recipientEmails, error: null }
         } else {
             return { data: null, error: [{ path: [], message: "Fetch orders failed." }] }
         }
