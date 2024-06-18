@@ -27,9 +27,9 @@ export class RegisterRecipientController {
             return { error: result.error.issues }
         }
 
-        const { clientName, clientEmail, address, neighborhood, city, state, zipcode } = result.data
+        const { clientName, clientEmail, address_street, address_number, address_complement, neighborhood, city, state, zipcode } = result.data
 
-        const addressFormat = address.street + ', ' + address.number + ' ' + address.complement
+        const addressFormat = address_street + ', ' + address_number + ' ' + address_complement
 
         const isRegisteredRecipient = await this.registerRecipientModel.execute({
             clientName,
