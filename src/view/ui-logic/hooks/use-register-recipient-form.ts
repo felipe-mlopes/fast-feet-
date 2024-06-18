@@ -44,7 +44,7 @@ export function useRegisterRecipientForm() {
     
       const handleSetData = useCallback(
         (data: AddressProps) => {
-          setValue("address.street", data.logradouro);
+          setValue("address_street", data.logradouro);
           setValue("neighborhood", data.bairro);
           setValue("city", data.localidade);
           setValue("state", data.uf);
