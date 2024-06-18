@@ -18,6 +18,6 @@ export async function sendContactAction(_: SendContactProps, formData: FormData)
     if (result) {
         return { data: result.data, error: null }
     } else {
-        return { data: null, error: [{ message: 'deu ruim' }] }
+        return { data: null, error: [{ message: 'Send email failed.' }] }
     }
 }
