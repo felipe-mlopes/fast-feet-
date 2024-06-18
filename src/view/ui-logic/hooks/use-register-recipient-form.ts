@@ -1,9 +1,11 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { useFormState } from "react-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { FormRegisterRecipientProps, formSchemaRegisterRecipient } from "@/presenter/validations/register-recipient.validation";
 
+import { registerRecipientAction } from "@/view/ui-logic/actions/register-recipient.action";
 import { getAddressByZipcode } from "@/view/ui-logic/utils/get-address-by-zipcode";
 
 type AddressProps = {
@@ -15,9 +17,13 @@ type AddressProps = {
   uf: string;
 };
 
-export function useFormRegisterRecipient() {
+export function useRegisterRecipientForm() {
+  const [state, handleRegisterRecipient] = useFormState(registerRecipientAction, {
+    data: null,
+    error: null,
+  });
+
     const {
-        handleSubmit,
         register,
         formState: { isSubmitSuccessful, isSubmitting, errors },
         getValues,
@@ -33,6 +39,8 @@ export function useFormRegisterRecipient() {
         getValues();
     
       const zipCode = watch("zipcode");
+
+      const formRef = useRef<HTMLFormElement>(null);
     
       const handleSetData = useCallback(
         (data: AddressProps) => {
@@ -63,10 +71,11 @@ export function useFormRegisterRecipient() {
       }, [handleFetchAddress, setValue, zipCode]);
     
       return {
-        handleSubmit,
         values,
         register,
         errors,
-        isSubmitting
+        isSubmitting,
+        formRef,
+        handleRegisterRecipient
       }
 }
