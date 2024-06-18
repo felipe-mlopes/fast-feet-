@@ -83,10 +83,10 @@ export function OrderForm() {
                   return (
                     <li
                       key={idx}
-                      onClick={() => handleSelectClick(option.recipient.email)}
+                      onClick={() => handleSelectClick(option)}
                       className="p-1.5 hover:bg-orange-light hover:opacity-90 hover:rounded hover:cursor-pointer"
                     >
-                      {option.recipient.email}
+                      {option}
                     </li>
                   );
                 })}
