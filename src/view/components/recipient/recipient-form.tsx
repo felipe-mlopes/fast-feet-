@@ -1,45 +1,29 @@
 "use client";
 
-import { useRef } from "react";
-import { useFormState } from "react-dom";
-
-import { registerRecipient } from "@/models/recipient/recipients";
-
-import { prepareFormData } from "@/view/ui-logic/utils/prepare-form-data";
-import { useFormRegisterRecipient } from "@/view/ui-logic/hooks/use-form-register-recipient";
+import { useRegisterRecipientForm } from "@/view/ui-logic/hooks/use-register-recipient-form";
 import { Color } from "@/view/ui-logic/types/color-enum.types";
 
-import Input from "../global/input";
-import { Button } from "../global/button";
+import Input from "@/view/components/global/input";
+import { Button } from "@/view/components/global/button";
 
-import { ProfileIcon } from "../icons/profile-icon";
-import { MailIcon } from "../icons/mail-icon";
-import { AddressIcon } from "../icons/address-icon";
+import { ProfileIcon } from "@/view/components/icons/profile-icon";
+import { MailIcon } from "@/view/components/icons/mail-icon";
+import { AddressIcon } from "@/view/components/icons/address-icon";
 
 export function RecipientForm() {
-  const [state, formAction] = useFormState(registerRecipient, {
-    data: null,
-    error: null,
-  });
-
-  const { handleSubmit, values, register, errors, isSubmitting } =
-    useFormRegisterRecipient();
-
-  const formRef = useRef<HTMLFormElement>(null);
-
-  function handleFormSubmit(formData: FormData) {
-    const data = prepareFormData(formData);
-
-    formAction(data);
-  }
+  const {
+    values,
+    register,
+    errors,
+    isSubmitting,
+    formRef,
+    handleRegisterRecipient,
+  } = useRegisterRecipientForm();
 
   return (
     <form
       ref={formRef}
-      action={formAction}
-      onSubmit={handleSubmit(() =>
-        handleFormSubmit(new FormData(formRef.current!))
-      )}
+      action={handleRegisterRecipient}
       className="flex flex-col gap-10"
     >
       <div className="space-y-4 text-gray-light">
@@ -102,20 +86,20 @@ export function RecipientForm() {
         </div>
         <div className="space-y-2 w-full">
           <label htmlFor="address-street">Endereço</label>
-          <Input type="text" {...register("address.street")}>
+          <Input type="text" {...register("address_street")}>
             <AddressIcon
               color={
-                !!values.address
-                  ? errors.address?.street && values.address.street
+                !!values.address_street
+                  ? errors.address_street && values.address_street
                     ? Color.Error
                     : Color.Ok
                   : Color.Default
               }
             />
           </Input>
-          {errors.address?.street && (
+          {errors.address_street && (
             <span className="pt-1 text-xs font-bold text-red-400">
-              {errors.address?.street?.message}
+              {errors.address_street?.message}
             </span>
           )}
         </div>
@@ -125,7 +109,7 @@ export function RecipientForm() {
             <Input
               type="number"
               hasIcon={false}
-              {...register("address.number")}
+              {...register("address_number")}
             />
           </div>
           <div className="space-y-2 grow min-w-40">
@@ -133,13 +117,13 @@ export function RecipientForm() {
             <Input
               type="text"
               hasIcon={false}
-              {...register("address.complement")}
+              {...register("address_complement")}
             />
           </div>
         </div>
-        {errors.address?.number && (
+        {errors.address_number && (
           <span className="pt-1 text-xs font-bold text-red-400">
-            {errors.address?.number?.message}
+            {errors.address_number?.message}
           </span>
         )}
         <div className="space-y-2 w-full">
