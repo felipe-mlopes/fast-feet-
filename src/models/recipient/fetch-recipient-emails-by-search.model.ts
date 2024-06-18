@@ -1,9 +1,9 @@
-import { RecipientEmail } from "../types/recipient-email"
-import { getSession } from "../auth/auth"
-import { api } from "../api"
+import { getSession } from "@/models//auth/auth"
+import { api } from "@/models//api"
+import { RecipientEmail } from "@/models//types/recipient-email"
 
 interface FetchRecipientEmailsBySearchResponse {
-    recipientEmails: RecipientEmail | null
+    recipientEmails: string[] | null
 }
 
 interface IFetchRecipientEmailsBySearchModel {
@@ -22,11 +22,13 @@ export class FetchRecipientEmailsBySearchModel implements IFetchRecipientEmailsB
             }
         })
 
-        const data = await response.json()
-
+        const data: RecipientEmail = await response.json()
+        
+        const transformedData = data.recipients.map(item => item.email)
+                
         if (response.ok) {
             return {
-                recipientEmails: data.recipientEmails
+                recipientEmails: transformedData
             }
         }
 
