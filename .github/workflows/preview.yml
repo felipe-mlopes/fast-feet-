@@ -3,6 +3,8 @@ name: Vercel Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  API_BASE_URL: ${{ secrets.API_BASE_URL }}
+  SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 
 on:
   push:
