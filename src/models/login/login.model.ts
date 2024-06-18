@@ -16,7 +16,7 @@ export class LoginModel implements ILoginModel {
     async execute({ email, password }: LoginData): Promise<boolean> {
         const session = await getSession()
         
-        const response = await api('/deliveryman/sessions', { 
+        const response = await api('/account/sessions', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
