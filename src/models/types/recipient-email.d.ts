@@ -1,5 +1,5 @@
 export interface RecipientEmail {
-    recipient: {
+    recipients: {
         email: string
-    }
+    }[]
 }
