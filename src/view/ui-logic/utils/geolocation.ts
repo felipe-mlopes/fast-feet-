@@ -1,14 +1,25 @@
+interface GetCurrentPositionResponse {
+  data?: null | { lat: number; lng: number }
+  error?: null | GeolocationPositionError
+}
+
 export function getCurrentPosition(
     options?: PositionOptions
-  ): Promise<{ lat: number; lng: number }> {
-    return new Promise((resolve, reject) => {
+  ): Promise<GetCurrentPositionResponse> {
+    return new Promise((resolve) => {
       navigator.geolocation.getCurrentPosition(
         (position) =>
           resolve({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
+            data: {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+            error: null,
           }),
-        (error) => reject(error),
+        (error) => resolve({
+          data: null,
+          error,
+        }),
         options
       );
     });
