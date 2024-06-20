@@ -6,11 +6,19 @@ import { getCityByCoordinatesAction } from "@/view/ui-logic/actions/get-city-by-
 
 export function useLocation() {
     const [location, setLocation] = useState("");
+    const [error, setError] = useState("")
 
     const handleGetLocation = useCallback(async () => {
-      const { lat, lng } = await getCurrentPosition({
+      const result = await getCurrentPosition({
         enableHighAccuracy: true,
       });
+
+      if (result.error) {
+        setError(result.error.message)
+        return
+      }
+
+      const { lat, lng } = result.data!
   
       const latitude = String(lat);
       const longitude = String(lng);
@@ -31,9 +39,13 @@ export function useLocation() {
       if (location) {
         router.push(`${path}?city=${location}`);
       }
-    }, [handleGetLocation, location, router, path]);
+
+      if (error) {
+        alert('Favor permitir a sua localização no navegador!')
+      }
+    }, [handleGetLocation, location, error, router, path]);
 
     return {
-        location
+        location,
     }
 }
