@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Condensed } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="pt-br" className={(inter.className, roboto.variable)}>
       <body className="flex flex-col justify-between gap-24 mt-12 bg-indigo-blue">
         {children}
+        <Analytics />
       </body>
     </html>
   );
