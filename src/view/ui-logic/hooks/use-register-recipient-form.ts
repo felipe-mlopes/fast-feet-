@@ -8,6 +8,8 @@ import { FormRegisterRecipientProps, formSchemaRegisterRecipient } from "@/prese
 import { registerRecipientAction } from "@/view/ui-logic/actions/register-recipient.action";
 import { getAddressByZipcode } from "@/view/ui-logic/utils/get-address-by-zipcode";
 
+import { zipcodeMask } from "../utils/zipcode-mask";
+
 type AddressProps = {
   bairro: string;
   cep: string;
@@ -53,9 +55,8 @@ export function useRegisterRecipientForm() {
       );
     
       const handleFetchAddress = useCallback(
-        async (zipcode: number) => {
-          const zipCodeTransformed = String(zipcode);
-          const { addressFull } = await getAddressByZipcode(zipCodeTransformed);
+        async (zipcode: string) => {
+          const { addressFull } = await getAddressByZipcode(zipcode);
     
           handleSetData(addressFull);
         },
@@ -63,12 +64,15 @@ export function useRegisterRecipientForm() {
       );
     
       useEffect(() => {
-        setValue("zipcode", zipCode);
-        const zipCodeAtt = String(zipCode);
+        if(zipCode !== undefined) {
+          setValue("zipcode", zipcodeMask(zipCode));
+        }
+
+        const transformedZipCode = zipCode?.replace(/\D/g, '')
     
-        if (zipCodeAtt.length !== 8) return;
-        handleFetchAddress(zipCode);
-      }, [handleFetchAddress, setValue, zipCode]);
+        if (transformedZipCode?.length !== 8) return;
+        handleFetchAddress(transformedZipCode);
+      }, [handleFetchAddress, setValue, getValues, zipCode]);
     
       return {
         values,
