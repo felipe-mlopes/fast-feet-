@@ -1,8 +1,6 @@
-interface SvgProps {
-  color?: string;
-}
+import { SVGProps } from "react";
 
-export function OrderIcon({ color }: SvgProps) {
+export function OrderIcon(props: SVGProps<SVGPathElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -10,7 +8,7 @@ export function OrderIcon({ color }: SvgProps) {
       height="24"
       viewBox="0 0 24 24"
     >
-      <g fill="none" stroke={color} strokeWidth="2">
+      <g fill="none" strokeWidth="2" {...props}>
         <rect width="14" height="17" x="5" y="4" rx="2" />
         <path strokeLinecap="round" d="M9 9h6m-6 4h6m-6 4h4" />
       </g>
