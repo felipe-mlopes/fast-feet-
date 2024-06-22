@@ -7,8 +7,6 @@ import { PinIcon } from "@/view/components/icons/pin-icon";
 export function DeliverymanInfo() {
   const { location } = useLocation();
 
-  console.log(location);
-
   return (
     <div className="flex justify-between items-center">
       <h3 className="text-[2rem] text-white">Entregas</h3>
