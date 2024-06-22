@@ -1,7 +1,6 @@
 "use client";
 
 import { useRegisterRecipientForm } from "@/view/ui-logic/hooks/use-register-recipient-form";
-import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "@/view/components/global/input";
 import { Button } from "@/view/components/global/button";
@@ -31,12 +30,12 @@ export function RecipientForm() {
           <label htmlFor="clientName">Nome Completo</label>
           <Input type="text" {...register("clientName")}>
             <ProfileIcon
-              color={
+              className={
                 !!values.clientName
                   ? errors.clientName && values.clientName
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -50,12 +49,12 @@ export function RecipientForm() {
           <label htmlFor="clientEmail">E-mail</label>
           <Input type="email" {...register("clientEmail")}>
             <MailIcon
-              color={
+              className={
                 !!values.clientEmail
                   ? errors.clientEmail && values.clientEmail
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -67,14 +66,14 @@ export function RecipientForm() {
         </div>
         <div className="space-y-2 w-full">
           <label htmlFor="zipcode">CEP</label>
-          <Input {...register("zipcode")}>
+          <Input type="text" maxLength={9} {...register("zipcode")}>
             <AddressIcon
-              color={
+              className={
                 !!values.zipcode
                   ? errors.zipcode && values.zipcode
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -88,12 +87,12 @@ export function RecipientForm() {
           <label htmlFor="address-street">Endereço</label>
           <Input type="text" {...register("address_street")}>
             <AddressIcon
-              color={
+              className={
                 !!values.address_street
                   ? errors.address_street && values.address_street
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -130,12 +129,12 @@ export function RecipientForm() {
           <label htmlFor="neighborhood">Bairro</label>
           <Input type="text" {...register("neighborhood")}>
             <AddressIcon
-              color={
+              className={
                 !!values.neighborhood
                   ? errors.neighborhood && values.neighborhood
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -150,12 +149,12 @@ export function RecipientForm() {
             <label htmlFor="city">Cidade</label>
             <Input type="text" {...register("city")}>
               <AddressIcon
-                color={
+                className={
                   !!values.city
                     ? errors.city && values.city
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
+                      ? "fill-red-500"
+                      : "fill-indigo-blue"
+                    : "fill-orange-light"
                 }
               />
             </Input>

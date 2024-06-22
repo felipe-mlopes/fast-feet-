@@ -7,7 +7,6 @@ import {
 } from "react";
 
 import { useSignInForm } from "@/view/ui-logic/hooks/use-sign-in-form";
-import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -56,8 +55,12 @@ export function SignInForm({ children }: SignInFormProps) {
           {...register("cpf")}
         >
           <ProfileIcon
-            color={
-              !!cpfWatch ? (errors.cpf ? Color.Error : Color.Ok) : Color.Default
+            className={
+              !!cpfWatch
+                ? errors.cpf
+                  ? "fill-red-500"
+                  : "fill-indigo-blue"
+                : "fill-orange-light"
             }
           />
         </Input>
@@ -74,16 +77,20 @@ export function SignInForm({ children }: SignInFormProps) {
           {...register("password")}
         >
           <PadlockIcon
-            color={
+            className={
               !!passwordWatch
                 ? errors.password
-                  ? Color.Error
-                  : Color.Ok
-                : Color.Default
+                  ? "fill-red-500"
+                  : "fill-indigo-blue"
+                : "fill-orange-light"
             }
           />
           {
-            <button onClick={toggleShowPassword} className="cursor-pointer">
+            <button
+              onClick={toggleShowPassword}
+              type="button"
+              className="cursor-pointer"
+            >
               {showPassword ? <PasswordShowIcon /> : <PasswordHiddenIcon />}
             </button>
           }

@@ -1,7 +1,6 @@
 "use client";
 
 import { useCreateOrderForm } from "@/view/ui-logic/hooks/use-create-order-form";
-import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -22,7 +21,6 @@ export function OrderForm() {
     isSelectIconOpen,
     handleSelectClick,
     showOptions,
-    state,
     handleCreateOrderForm,
   } = useCreateOrderForm();
 
@@ -41,12 +39,12 @@ export function OrderForm() {
             {...register("title")}
           >
             <OrderIcon
-              color={
+              className={
                 !!titleWatch
                   ? errors.title
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "stroke-red-500"
+                    : "stroke-indigo-blue"
+                  : "stroke-orange-light"
               }
             />
           </Input>
@@ -62,12 +60,12 @@ export function OrderForm() {
           <div className="flex flex-col justify-between gap-4 relative w-full p-4 rounded bg-gray-light">
             <div className="flex gap-4 items-center w-full">
               <ProfileIcon
-                color={
+                className={
                   !!emailWatch
                     ? errors.email
-                      ? Color.Error
-                      : Color.Ok
-                    : Color.Default
+                      ? "fill-red-500"
+                      : "fill-indigo-blue"
+                    : "fill-orange-light"
                 }
               />
               <span className="border-[1px] bg-bluish-gray rounded w-[1px] h-6" />

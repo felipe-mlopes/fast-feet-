@@ -1,7 +1,6 @@
 "use client";
 
 import { useSignUpForm } from "@/view/ui-logic/hooks/use-sign-up-form";
-import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "@/view/components/global/button";
@@ -36,12 +35,12 @@ export function SignUpForm() {
           <label>Nome Completo</label>
           <Input type="text" {...register("name")}>
             <ProfileIcon
-              color={
+              className={
                 !!nameWatch
                   ? errors.name
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -55,12 +54,12 @@ export function SignUpForm() {
           <label>E-mail</label>
           <Input type="email" {...register("email")}>
             <MailIcon
-              color={
+              className={
                 !!emailWatch
                   ? errors.email
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -74,12 +73,12 @@ export function SignUpForm() {
           <label>CPF</label>
           <Input type="text" {...register("cpf")}>
             <IdIcon
-              color={
+              className={
                 !!cpfWatch
                   ? errors.cpf
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "stroke-red-500"
+                    : "stroke-indigo-blue"
+                  : "stroke-orange-light"
               }
             />
           </Input>
@@ -93,12 +92,12 @@ export function SignUpForm() {
           <label>Senha</label>
           <Input type="password" {...register("password")}>
             <PadlockIcon
-              color={
+              className={
                 !!passwordWatch
                   ? errors.password
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>
@@ -112,12 +111,12 @@ export function SignUpForm() {
           <label>Confirme sua Senha</label>
           <Input type="password" {...register("confirmPassword")}>
             <PadlockIcon
-              color={
+              className={
                 !!confirmPasswordWatch
                   ? errors.confirmPassword
-                    ? Color.Error
-                    : Color.Ok
-                  : Color.Default
+                    ? "fill-red-500"
+                    : "fill-indigo-blue"
+                  : "fill-orange-light"
               }
             />
           </Input>

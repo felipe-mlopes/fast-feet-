@@ -7,7 +7,6 @@ import {
 } from "react";
 
 import { useLoginForm } from "@/view/ui-logic/hooks/use-login-form";
-import { Color } from "@/view/ui-logic/types/color-enum.types";
 
 import Input from "../global/input";
 import { Button } from "../global/button";
@@ -55,12 +54,12 @@ export function LoginForm({ children }: LoginFormProps) {
           {...register("email")}
         >
           <ProfileIcon
-            color={
+            className={
               !!emailWatch
                 ? errors.email
-                  ? Color.Error
-                  : Color.Ok
-                : Color.Default
+                  ? "fill-red-500"
+                  : "fill-indigo-blue"
+                : "fill-orange-light"
             }
           />
         </Input>
@@ -77,16 +76,20 @@ export function LoginForm({ children }: LoginFormProps) {
           {...register("password")}
         >
           <PadlockIcon
-            color={
+            className={
               !!passwordWatch
                 ? errors.password
-                  ? Color.Error
-                  : Color.Ok
-                : Color.Default
+                  ? "fill-red-500"
+                  : "fill-indigo-blue"
+                : "fill-orange-light"
             }
           />
           {
-            <button onClick={toggleShowPassword} className="cursor-pointer">
+            <button
+              onClick={toggleShowPassword}
+              type="button"
+              className="cursor-pointer"
+            >
               {showPassword ? <PasswordShowIcon /> : <PasswordHiddenIcon />}
             </button>
           }
