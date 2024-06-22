@@ -6,12 +6,11 @@ import React, {
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasIcon?: boolean;
-  inputType?: string;
   onShowPasswordToggle?: () => void;
 }
 
 const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { hasIcon = true, inputType, onShowPasswordToggle, children, ...props },
+  { hasIcon = true, onShowPasswordToggle, children, ...props },
   ref
 ) => {
   const [prefix, suffix] = React.Children.toArray(children);
