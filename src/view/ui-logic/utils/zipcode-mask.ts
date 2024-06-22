@@ -1,8 +1,7 @@
-export function zipcodeMask(code: number): string {
-    const zipcode = code.toString()
-
-    const parte1 = zipcode.substring(0, zipcode.length - 3);
-    const parte2 = zipcode.substring(zipcode.length - 3);
+export function zipcodeMask(value: string): string {
+    const numericValue = value.replace(/\D/g, '');
     
-    return `${parte1}-${parte2}`;
+    const maskedValue = numericValue.replace(/(\d{5})(\d{3})/, '$1-$2')
+    
+    return maskedValue
   }
