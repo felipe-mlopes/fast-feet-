@@ -5,7 +5,7 @@ export type FormRegisterRecipientProps = z.infer<typeof formSchemaRegisterRecipi
 export const formSchemaRegisterRecipient = z.object({
     clientName: z.string().trim().min(4, 'Favor informar um nome válido.'),
     clientEmail: z.string().trim().email({ message: 'Favor informar um e-mail válido.' }),
-    zipcode: z.coerce.number().refine((cep) => String(cep).length === 8, "CEP deve ter 8 dígitos"),
+    zipcode: z.string().refine((cep) => cep.length === 9, "CEP deve ter 8 dígitos").refine((cep) => /^\d{5}-\d{3}$/.test(cep), { message: "CEP inválido" }),
     address_street: z.string().trim().min(3, 'Favor informar um endereço válido.'),
     address_number: z.string().trim().min(1, 'Favor informar um número válido.'),
     address_complement: z.string().trim(),
