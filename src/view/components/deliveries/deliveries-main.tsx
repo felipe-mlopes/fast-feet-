@@ -6,7 +6,7 @@ import SearchInput from "@/view/components/global/search-input";
 import { OrdersPendingWrapper } from "./orders-pending-wrapper";
 import { OrdersDoneWrapper } from "./orders-done-wrapper";
 
-export function DeliveriesMain() {
+export function DeliveriesMain({ city }: { city: string }) {
   const { register, searchWatch, params } = useSearchInput();
 
   return (
@@ -15,9 +15,11 @@ export function DeliveriesMain() {
         <SearchInput placeholder="Filtrar por bairro" {...register("search")} />
       </section>
       {params.status === "pending" && (
-        <OrdersPendingWrapper search={searchWatch} />
+        <OrdersPendingWrapper city={city} search={searchWatch} />
       )}
-      {params.status === "done" && <OrdersDoneWrapper search={searchWatch} />}
+      {params.status === "done" && (
+        <OrdersDoneWrapper city={city} search={searchWatch} />
+      )}
     </main>
   );
 }
