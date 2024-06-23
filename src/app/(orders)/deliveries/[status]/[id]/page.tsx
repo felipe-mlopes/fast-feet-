@@ -40,7 +40,7 @@ export default async function DeliveryDetails({
   } = data as Order;
 
   const transformedStatus = statusEdit(status);
-  const transformedZipcode = zipcodeMask(recipientZipcode);
+  const transformedZipcode = zipcodeMask(recipientZipcode.toString());
   const createAtOnData = dayjs(createdAt).format("DD/MM/YYYY");
   const picknUpAtOnData = !!picknUpAt
     ? dayjs(picknUpAt).format("DD/MM/YYYY")
