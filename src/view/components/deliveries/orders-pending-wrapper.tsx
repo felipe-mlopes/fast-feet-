@@ -7,11 +7,15 @@ import { useFetchOrdersPending } from "@/view/ui-logic/hooks/use-fetch-orders-pe
 import { Card } from "./card";
 
 interface OrdersPendingWrapperProps {
+  city: string;
   search: string;
 }
 
-export function OrdersPendingWrapper({ search }: OrdersPendingWrapperProps) {
-  const { ordersPendingFiltered } = useFetchOrdersPending(search);
+export function OrdersPendingWrapper({
+  city,
+  search,
+}: OrdersPendingWrapperProps) {
+  const { ordersPendingFiltered } = useFetchOrdersPending(city, search);
 
   return (
     <>

@@ -7,11 +7,12 @@ import { useFetchOrdersDone } from "@/view/ui-logic/hooks/use-fetch-orders-done"
 import { Card } from "./card";
 
 interface OrdersDoneWrapperProps {
+  city: string;
   search: string;
 }
 
-export function OrdersDoneWrapper({ search }: OrdersDoneWrapperProps) {
-  const { ordersDoneFiltered } = useFetchOrdersDone(search);
+export function OrdersDoneWrapper({ city, search }: OrdersDoneWrapperProps) {
+  const { ordersDoneFiltered } = useFetchOrdersDone(city, search);
 
   return (
     <>
