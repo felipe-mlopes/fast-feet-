@@ -1,15 +1,11 @@
-import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { Order } from "@/models/types/order";
 
 import { fetchOrdersPendingAction } from "@/view/ui-logic/actions/fetch-orders-pending.action";
 
-export function useFetchOrdersPending(search: string) {
+export function useFetchOrdersPending(city: string, search: string) {
 const [orders, setOrders] = useState<Order[]>([]);
-
-  const searchParams = useSearchParams();
-  const city = searchParams.get("city");
 
   const deliverymanCity = city && city.toLowerCase();
 

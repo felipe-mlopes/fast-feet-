@@ -1,15 +1,11 @@
-import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 import { Order } from "@/models/types/order";
 
 import { fetchOrdersDoneAction } from "@/view/ui-logic/actions/fetch-orders-done.action";
 
-export function useFetchOrdersDone(search: string) {
+export function useFetchOrdersDone(city: string, search: string) {
 const [orders, setOrders] = useState<Order[]>([]);
-
-  const searchParams = useSearchParams();
-  const city = searchParams.get("city");
 
   const deliverymanCity = city && city.toLowerCase();
 
