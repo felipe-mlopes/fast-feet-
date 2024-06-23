@@ -1,6 +1,8 @@
+'use server'
+
 import { getSession } from "@/models/auth/auth";
 
-export async function useGetToken() {
+export async function getTokenAction() {
 const { token } = await getSession();
 
   const arrayToken = token?.split(".")!;
