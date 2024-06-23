@@ -30,6 +30,8 @@ export class RegisterRecipientController {
         const { clientName, clientEmail, address_street, address_number, address_complement, neighborhood, city, state, zipcode } = result.data
 
         const addressFormat = address_street + ', ' + address_number + ' ' + address_complement
+        const transformedZipCode = zipcode.replace(/\D/g, '')
+        const zipcodeFormat = parseInt(transformedZipCode)
 
         const isRegisteredRecipient = await this.registerRecipientModel.execute({
             clientName,
@@ -38,7 +40,7 @@ export class RegisterRecipientController {
             neighborhood,
             city,
             state,
-            zipcode
+            zipcode: zipcodeFormat
         })
 
         if (isRegisteredRecipient) {
