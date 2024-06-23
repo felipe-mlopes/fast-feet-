@@ -1,7 +1,9 @@
 import { logoutAction } from "@/view/ui-logic/actions/logout.action";
-import { useGetToken } from "@/view/ui-logic/hooks/use-get-token";
 
-import { DeliverymanInfo } from "@/view/components/order/deliveryman-info";
+import { getTokenAction } from "@/view/ui-logic/actions/get-token.action";
+import { getCityLocationAction } from "@/view/ui-logic/actions/get-city-location.action";
+
+import { DeliverymanInfo } from "@/view/components/deliveries/deliveryman-info";
 import { ButtonStatus } from "@/view/components/deliveries/button-status";
 
 import { ExistIcon } from "@/view/components/icons/exist-icon";
@@ -11,9 +13,9 @@ export default async function Deliveries({
   params,
 }: {
   params: { status: "pending" | "done" };
-  searchParams: { city: string };
 }) {
-  const { token, tokenPayload } = await useGetToken();
+  const { token, tokenPayload } = await getTokenAction();
+  const { location } = await getCityLocationAction();
 
   return (
     <div className="flex flex-col justify-between items-center relative min-h-screen lg:grid lg:grid-col-2 lg:grid-row-3 lg:justify-normal">
@@ -29,9 +31,9 @@ export default async function Deliveries({
             </button>
           </form>
         </div>
-        <DeliverymanInfo />
+        <DeliverymanInfo city={location?.value ?? ""} />
       </header>
-      <DeliveriesMain />
+      <DeliveriesMain city={location?.value ?? ""} />
       <ButtonStatus status={params.status} />
     </div>
   );
