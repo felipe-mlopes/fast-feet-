@@ -9,6 +9,8 @@ export async function setCityLocationAction(latitude: string, longitude: string)
 
     const coordinates = await getCityByCoordinatesAction(latitude, longitude);
 
+    console.log(coordinates)
+
     if (coordinates.data) {
         cookieStore.set('city', coordinates.data)
     }
