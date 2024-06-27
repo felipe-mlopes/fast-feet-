@@ -1,62 +1,50 @@
-import { useRef, useState } from "react";
-
-import { useCamera } from "@/view/ui-logic/hooks/use-camera";
+import { usePathname } from "next/navigation";
+import { useRef, useState, useCallback, useEffect } from "react";
+import Webcam from "react-webcam";
 
 export function useUploadForm() {
-	const videoRef = useRef<HTMLVideoElement>(null);
-  const photoRef = useRef<HTMLCanvasElement>(null);
-
-  const [hasPhoto, setHasPhoto] = useState(false);
-
-  const { mediaStream } = useCamera();
-
-  if (
-    mediaStream &&
-    mediaStream instanceof MediaStream &&
-    videoRef.current &&
-    !videoRef.current.srcObject
-  ) {
-    videoRef.current.srcObject = mediaStream;
+  const videoConstraints = {
+    width: {
+      max: 1980,
+      ideal: 1024,
+    }, 
+    height: {
+      max: 1080,
+      ideal: 768,
+    }, 
+    facingMode: 'user'
   }
 
-  function handleCanPlay() {
-    videoRef.current?.play();
-  }
+  const [isCaptureEnable, setCaptureEnable] = useState<boolean>(false)
+  const [url, setUrl] = useState<string | null>(null)
 
-  function handleTakePhoto() {
-    const width = 414;
-    const height = width / (16 / 9);
+  const webcamRef = useRef<Webcam>(null)
 
-    let video = videoRef.current!;
-    let photo = photoRef.current!;
+  const handleCapturePhoto = useCallback(() => {
+    const imageSrc = webcamRef.current?.getScreenshot()
 
-    let photoWidth = photo.width!;
-    let photoHeight = photo.height!;
-
-    photoWidth = width;
-    photoHeight = height;
-
-    let ctx = photo?.getContext("2d");
-    ctx?.drawImage(video, 0, 0, photoWidth, photoHeight);
-
-    setHasPhoto(true);
-  }
+    if (imageSrc) {
+      setUrl(imageSrc)
+    }
+  }, [webcamRef])
 
   function handleCleanPhoto() {
-    let photo = photoRef.current!;
-    let ctx = photo?.getContext("2d");
-
-    ctx?.clearRect(0, 0, photo.width, photo.height);
-
-    setHasPhoto(false);
+    setUrl(null)
   }
 
+  const path = usePathname()
+
+  useEffect(() => {
+    if (path.includes('/upload')) {
+      setCaptureEnable(isCaptureEnable!)
+    } 
+  }, [path, isCaptureEnable]);
+
   return {
-    photoRef,
-    videoRef,
-    hasPhoto,
-    handleCanPlay,
-    handleTakePhoto,
+    videoConstraints,
+    webcamRef,
+    handleCapturePhoto,
+    url,
     handleCleanPhoto
   }
 }
