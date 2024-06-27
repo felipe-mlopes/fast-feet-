@@ -1,21 +1,8 @@
-import { redirect } from "next/navigation";
 import Link from "next/link";
-
-import { getSession } from "@/models/auth/auth";
 
 import { SignInForm } from "@/view/components/login/signin-form";
 
 export default async function SignIn() {
-  const { role } = await getSession();
-
-  if (role === "ADMIN") {
-    return redirect("/admin");
-  }
-
-  if (role === "DELIVERYMAN") {
-    return redirect("/deliveries/pending");
-  }
-
   return (
     <main className="flex flex-col gap-16 md:flex-row md:justify-between md:items-center md:pt-40 xl:justify-evenly">
       <div className="flex flex-col gap-4">
