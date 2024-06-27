@@ -46,7 +46,7 @@ export function MenuMain({ onClose }: MenuMainProps) {
       </li>
       <li className="flex gap-2">
         <Link
-          href={"/admin/login"}
+          href={"/login"}
           className="flex items-center gap-2 lg:items-end lg:gap-1 md:hover:text-orange-light md:hover:stroke-orange-light"
         >
           <IdIcon color="#F7F5FA" />
