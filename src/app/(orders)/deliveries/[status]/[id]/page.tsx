@@ -125,10 +125,10 @@ export default async function DeliveryDetails({
         </div>
         {status === "WAITING" && (
           <PicknUpButton
-            className="pt-40"
             buttonContent="Retirar pacote"
             modalContent="Pacote retirado."
             orderId={params.id}
+            className="w-[23rem] absolute bottom-80 right-1/2 translate-x-1/2 md:px-[8.25rem] py-[1.125rem] rounded whitespace-nowrap text-center bg-orange-light text-purple-dark hover:bg-orange-300 font-medium disabled:opacity-50"
           />
         )}
         {status === "PICKN_UP" && (
