@@ -7,7 +7,7 @@ import { useEditOrderStatusToPicknUp } from "@/view/ui-logic/hooks/use-edit-orde
 import { Button } from "@/view/components/global/button";
 import { Modal } from "@/view/components/global/modal";
 
-interface PicknUpButtonProps extends HTMLAttributes<HTMLDivElement> {
+interface PicknUpButtonProps extends HTMLAttributes<HTMLButtonElement> {
   buttonContent: string;
   modalContent: string;
   isDisable?: boolean;
@@ -29,12 +29,12 @@ export function PicknUpButton({
   } = useEditOrderStatusToPicknUp(orderId);
 
   return (
-    <div {...props}>
+    <>
       <Button
         content={buttonContent}
         disabled={isDisable}
         onClick={handleSetChangeOrderStatus}
-        className="w-full md:px-[8.25rem] py-[1.125rem] rounded whitespace-nowrap text-center bg-orange-light text-purple-dark hover:bg-orange-300 font-medium disabled:opacity-50"
+        {...props}
       />
       <Modal
         type={isModalSuccessOpen ? "package" : "error"}
@@ -42,6 +42,6 @@ export function PicknUpButton({
         isOpen={isModalErrorOpen || isModalSuccessOpen}
         onClose={handleModalClose}
       />
-    </div>
+    </>
   );
 }
